@@ -1,9 +1,11 @@
+import { ADD_CLASS } from '../actions/index'
+
 const initialState = {
     classes: [
         {
             className: 'CrossFit Monday',
-            type: 'CrossFit',
-            startTime: '11:45PM',
+            classType: 'CrossFit',
+            startTime: '12:45',
             durationMinutes: 45,
             intensity: 'high',
             location: 'Studio Los Feliz',
@@ -13,11 +15,12 @@ const initialState = {
             ],
             date: '2019-12-12',
             instructor: 'joeinstructor',
+            id: null,
         },
         {
             className: 'Yoga Tues',
-            type: 'Yoga',
-            startTime: '12:45PM',
+            classType: 'Yoga',
+            startTime: '12:45',
             durationMinutes: 30,
             intensity: 'low',
             location: 'Studio Los Feliz',
@@ -42,6 +45,14 @@ const initialState = {
 export const classReducer = (state = initialState, action) => {
     console.log(state, action);
     switch (action.type) {
+        case ADD_CLASS:
+            return {
+                ...state,
+                classes: [
+                    ...state.classes,
+                    action.payload
+                ]
+            };
         default:
             return state
     }

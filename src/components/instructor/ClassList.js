@@ -30,7 +30,8 @@ const ClassList = props => {
                             <td>{c.intensity}</td>
                             <td>{c.location}</td>
                             <td>{c.maxClassSize}</td>
-                            <td>{c.maxClassSize - c.clients.length}</td>
+                            {/* <td>{c.maxClassSize - c.clients.length}</td> */}
+                            <td>{c.maxClassSize}</td>
                             <td>{c.date}</td>
                             <td>{c.instructor}</td>
                             <td><button>Edit</button></td>
@@ -44,7 +45,8 @@ const ClassList = props => {
 
 const mapStateToProps = state => {
     return {
-        classes: state.classes
+        classes: state.classes,
+
     }
 }
 
