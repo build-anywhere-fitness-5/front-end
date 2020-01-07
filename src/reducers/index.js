@@ -77,15 +77,15 @@ export const classReducer = (state = initialState, action) => {
         classes: state.classes.filter(c => c.id !== action.payload)
       };
     case EDIT_CLASS:
-      console.log(state, action);
+      // console.log(state, action);
       return {
         ...state,
-        classes: [
-          ...state.classes.filter(item => {
-            return item.id !== action.payload.id
-          }),
-          action.payload
-        ]
+        classes: state.classes.map(item => {
+          if (item.id === action.payload.id) {
+            return { ...action.payload }
+          }
+          return item
+        })
       }
     default:
       return state;

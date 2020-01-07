@@ -26,7 +26,7 @@ const EditClass = props => {
 
     useEffect(() => {
         setEditClass(props.classes.find(c => c.id === +props.match.params.classID))
-    }, [+props.match.params.classID])
+    }, [props.match.params.classID, props.classes])
 
     const classEditing = +props.match.params.classID
 
