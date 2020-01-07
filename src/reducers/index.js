@@ -2,7 +2,8 @@ import {
   ADD_CLASS,
   SCHEDULE_CLASS,
   UNSCHEDULE_CLASS,
-  DELETE_CLASS
+  DELETE_CLASS,
+  EDIT_CLASS
 } from "../actions/index";
 
 const initialState = {
@@ -75,6 +76,17 @@ export const classReducer = (state = initialState, action) => {
         ...state,
         classes: state.classes.filter(c => c.id !== action.payload)
       };
+    case EDIT_CLASS:
+      // console.log(state, action);
+      return {
+        ...state,
+        classes: state.classes.map(item => {
+          if (item.id === action.payload.id) {
+            return { ...action.payload }
+          }
+          return item
+        })
+      }
     default:
       return state;
   }

@@ -4,8 +4,9 @@ import ClientLogin from './components/Clients/ClientLogin'
 import ClientHome from './components/Clients/ClientHome'
 
 import InstructorDashboard from './components/instructor/InstructorDashboard';
-import CreateClass from './components/instructor/CreateClass'
-import InstructorClass from './components/instructor/InstructorClass'
+import CreateClass from './components/instructor/CreateClass';
+import ViewClass from './components/instructor/ViewClass';
+import EditClass from './components/instructor/EditClass';
 
 import { Route } from "react-router-dom";
 
@@ -46,8 +47,11 @@ function App() {
 
       <Route path="/client/home" component={ClientHome} />
 
-      <Route path='/instructor/classes/:id' render={props => {
-        return <InstructorClass {...props} />
+      <Route exact path='/instructor/classes/:classID' render={props => {
+        return <ViewClass {...props} />
+      }} />
+      <Route path='/instructor/classes/edit/:classID' render={props => {
+        return <EditClass {...props} />
       }} />
 
       <Route exact path="/instructor" component={InstructorDashboard} />
