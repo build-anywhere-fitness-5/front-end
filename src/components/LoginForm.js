@@ -15,6 +15,7 @@ const LoginForm = () => {
         setUserInfo({...userInfo, [event.target.name]: event.target.value});
     }
 
+    // validate form fields and POST information to database
     function handleLogin(event) {
 
         event.preventDefault();
@@ -31,11 +32,11 @@ const LoginForm = () => {
                 
                 <label htmlFor="email">Email:</label>
                 <input name="email" type="email" onChange={handleChange} />
-                <p className="formError" id="emailError"></p>
+                <p className="formError" id="emailErrors"></p>
 
                 <label htmlFor="password">Password:</label>
                 <input name="password" type="password" onChange={handleChange} />
-                <p className="formError" id="passwordError"></p>
+                <p className="formError" id="passwordErrors"></p>
 
                 <button type="submit">Log In</button>
 

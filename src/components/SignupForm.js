@@ -12,6 +12,17 @@ const SignupForm = ({role}) => {
             instructorCode: "",
         });
     
+    // store error info in state variables
+    const [errorInfo, setErrorInfo] = useState(
+        {
+            firstNameErrors: [],
+            lastNameErrors: [],
+            emailErrors: [],
+            passwordErrors: [],
+            instructorCodeErrors: [],
+        });
+
+
     // update what the user has typed into state upon change
     function handleChange(event) {
         setUserInfo({...userInfo, [event.target.name]: event.target.value});
@@ -22,24 +33,69 @@ const SignupForm = ({role}) => {
     
         event.preventDefault();
 
-        console.log(userInfo);
-    
-        document.getElementById("firstNameError").textContent = "First name entered";
-        document.getElementById("lastNameError").textContent = "Last name entered";
-        document.getElementById("passwordError").textContent = "Password entered";
-        document.getElementById("emailError").textContent = "Email entered";
-        document.getElementById("passwordError").textContent = "Password entered";
+        // set up criteria for valid form input
+        const criteria = {
+            firstName: [
+                [/[a-zA-Z]/, "First name must consist of letters only."],
+                [/.{2,}/, "First name must be longer than 2 letters."]
+            ],
+            lastName: [
+                [/[a-zA-Z]/, "Last name must consist of letters only."],
+                [/.{2,}/, "Last name must be longer than 2 letters."]
+            ],
+            email: [
+                [/[0-9a-zA-Z._]+@+\1.\1/, "Email must be in the format of you@domain.extension ."]
+            ],
+            password: [
+                [/[^0-9]+/, "Password must a digit."],
+                [/[^a-z]+/, "Password must a lowercase letter."],
+                [/[^A-Z]+/, "Password must an lowercase letter."],
+                [/[^0-9a-zA-Z]+/, "Password must contain non-alphanumeric characters."],
+                [/.{8,}/, "Password must be longer than 8 characters."]
+            ],
+            instructorCode: [
+                [/^123$/, "Invalid instructor code."]
+            ],
+        }
 
-        if (role == "instructor")
-            {
-                document.getElementById("instructorCodeError").textContent = "Instructor Code entered";
-            }
+         // filter errors by checking each input against the specified regex expression
+         // keep the ones that don't match
+        function findErrors(category) {
+
+            let input = userInfo[category];
+
+            console.log(input.match(/[a-zA-Z]/))
+
+            let errorsFound = criteria[category].filter(errorType => !userInfo[category].match(errorType[1]))
+
+            console.log(errorsFound);
+
+            setErrorInfo({...errorInfo, [category]: errorsFound});
+        }
+
+        findErrors("firstName");
+        findErrors("lastName");
+        findErrors("email");
+        findErrors("password");
+
+        if (role === "instructor")
+            { findErrors("instructorCode"); }
+
+        console.log(errorInfo);
     
-        // setUsername()
+        // document.getElementById("firstNameError").textContent = "First name entered";
+        // document.getElementById("lastNameError").textContent = "Last name entered";
+        // document.getElementById("passwordError").textContent = "Password entered";
+        // document.getElementById("emailError").textContent = "Email entered";
+        // document.getElementById("passwordError").textContent = "Password entered";
+
+        // if (role == "instructor")
+        //     {
+        //         document.getElementById("instructorCodeError").textContent = "Instructor Code entered";
+        //     }
     
     }
     
-
     const signupWelcomeText = "Sign up as " + ((role === "instructor") ? "an instructor" : "a client");
 
     return (
@@ -50,19 +106,19 @@ const SignupForm = ({role}) => {
                 
                 <label htmlFor="firstName">First Name:</label>
                 <input name="firstName" type="text" onChange={handleChange} />
-                <p className="formError" id="firstNameError"></p>
+                <p className="formError" id="firstNameErrors"></p>
 
                 <label htmlFor="lastName">Last Name:</label>
                 <input name="lastName" type="text" onChange={handleChange} />
-                <p className="formError" id="lastNameError"></p>
+                <p className="formError" id="lastNameErrors"></p>
 
                 <label htmlFor="Email">Email:</label>
                 <input name="email" type="text" onChange={handleChange} />
-                <p className="formError" id="emailError"></p>
+                <p className="formError" id="emailErrors"></p>
 
                 <label htmlFor="Password">Password:</label>
                 <input name="password" type="password" onChange={handleChange} />
-                <p className="formError" id="passwordError"></p>
+                <p className="formError" id="passwordErrors"></p>
 
                 {/* Show input for instructor code if user is an instructor */}
                 {
