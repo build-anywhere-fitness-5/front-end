@@ -4,6 +4,7 @@
 import React, { useEffect, useState } from "react";
 import SearchForm from "./SearchForm";
 import { connect } from "react-redux";
+import { scheduleClass, unscheduleClass } from "../../actions/index";
 const ClientHome = props => {
   const [query, setQuery] = useState("");
   const [filteredClass, setFilteredClass] = useState(props.classes);
@@ -11,7 +12,6 @@ const ClientHome = props => {
     setQuery(event.target.value);
     console.log(event);
   };
-
   useEffect(() => {
     console.log(filteredClass);
     let filterClasses = props.classes.filter(c => {
@@ -37,18 +37,18 @@ const ClientHome = props => {
     flexDirection: "row",
     margin: "0 auto",
     flexWrap: "wrap",
-    justifyContent: 'center'
+    justifyContent: "center"
   };
-  const divStyle2 ={
-    width: '25%'
-  }
+  const divStyle2 = {
+    width: "25%"
+  };
 
   return (
     <div>
       <SearchForm handleInputChange={handleInputChange} query={query} />
       <div style={divStyle}>
         {filteredClass.map((item, index) => (
-          <div style={divStyle2}>
+          <div key={index} style={divStyle2}>
             <h1>Name: {item.className}</h1>
             <h1>Date: {item.date}</h1>
             <h1>Start: {item.startTime}</h1>
@@ -61,10 +61,9 @@ const ClientHome = props => {
             <h1>Instructor: {item.instructor}</h1>
             <button
               onClick={() => {
-                setFilteredClass(
-                  filteredClass.filter(filtered => {
-                    return !filtered.scheduled;
-                  })
+                props.scheduleClass(item);
+                setFilteredClass(filteredClass =>
+                  filteredClass.filter((item, i) => i !== index)
                 );
               }}
             >
@@ -73,13 +72,52 @@ const ClientHome = props => {
           </div>
         ))}
       </div>
+      <div>
+        {props.scheduledClasses.length != 0 ? (
+          <div>
+            {props.scheduledClasses.map((item, index) => (
+              <div key={index} style={divStyle2}>
+                <h1>Name: {item.className}</h1>
+                <h1>Date: {item.date}</h1>
+                <h1>Start: {item.startTime}</h1>
+                <h1>Duration: {item.durationMinutes} Minutes</h1>
+                <h1>Type: {item.classType}</h1>
+                <h1>Intensity: {item.intensity}</h1>
+                <h1>Attending: {item.clients.length}</h1>
+                <h1>Max Participants: {item.maxClassSize}</h1>
+                <h1>Location: {item.location}</h1>
+                <h1>Instructor: {item.instructor}</h1>{" "}
+                {console.log(props.scheduledClasses)}
+                <button
+                  onClick={() => {
+                    // setFilteredClass(
+                    //   filteredClass.filter(filtered => {
+                    //     return !filtered.scheduled;
+                    //   })
+
+                    props.unscheduleClass(item);
+                    setFilteredClass([...filteredClass, item]);
+                  }}
+                >
+                  Unschedule Class{" "}
+                </button>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <h1>Not Rendering</h1>
+        )}
+      </div>
     </div>
   );
 };
 
 const mapStateToProps = state => {
   return {
-    classes: state.classes
+    classes: state.classes,
+    scheduledClasses: state.scheduledClasses
   };
 };
-export default connect(mapStateToProps, {})(ClientHome);
+export default connect(mapStateToProps, { scheduleClass, unscheduleClass })(
+  ClientHome
+);
