@@ -2,7 +2,7 @@ export const ADD_CLASS = 'ADD_CLASS';
 export const ADDTO_CLASS = 'ADDTO_CLASS';
 export const SCHEDULE_CLASS = 'SCHEDULE_CLASS';
 export const UNSCHEDULE_CLASS = 'UNSCHEDULE_CLASS';
-
+export const EDIT_CLASS = 'EDIT_CLASS';
 export const DELETE_CLASS = 'DELETE_CLASS';
 
 export const addClass = newClass => {
@@ -10,15 +10,18 @@ export const addClass = newClass => {
 }
 
 export const addToClass = addToClass => {
-    return {type: ADDTO_CLASS, payload: addToClass}
+    return { type: ADDTO_CLASS, payload: addToClass }
 }
 export const scheduleClass = scheduleClass => {
-    return {type: SCHEDULE_CLASS, payload: scheduleClass}
+    return { type: SCHEDULE_CLASS, payload: scheduleClass }
 }
 export const unscheduleClass = unscheduleClass => {
-    return {type: UNSCHEDULE_CLASS, payload: unscheduleClass}
+    return { type: UNSCHEDULE_CLASS, payload: unscheduleClass }
 }
 export const deleteClass = id => {
     return { type: DELETE_CLASS, payload: id }
 }
 
+export const editClass = editClass => {
+    return { type: EDIT_CLASS, payload: editClass }
+}
