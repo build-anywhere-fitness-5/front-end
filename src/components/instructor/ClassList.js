@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { deleteClass } from '../../actions';
+import { Link } from 'react-router-dom'
 
 const ClassList = props => {
 
@@ -19,14 +20,14 @@ const ClassList = props => {
                         <th>Open spots</th>
                         <th>Date</th>
                         <th>Instructor</th>
-                        <th></th>
-                        <th></th>
+
+
                     </tr>
                 </thead>
                 <tbody>
                     {props.classes.map(c => (
                         <tr key={c.id}>
-                            <td>{c.className}</td>
+                            <td><Link to={`/instructor/classes/${c.id}`}>{c.className}</Link></td>
                             <td>{c.type}</td>
                             <td>{c.startTime}</td>
                             <td>{c.durationMinutes}</td>
@@ -36,15 +37,6 @@ const ClassList = props => {
                             <td>{c.maxClassSize - c.clients.length}</td>
                             <td>{c.date}</td>
                             <td>{c.instructor}</td>
-
-                            <td><button onClick={e => {
-                                // console.log('click')
-                                e.preventDefault()
-                                props.deleteClass(c.id)
-                            }
-                            }>
-                                delete
-              </button></td>
                         </tr>
                     ))}
                 </tbody>

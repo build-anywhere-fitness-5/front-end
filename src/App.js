@@ -5,7 +5,7 @@ import ClientHome from './components/Clients/ClientHome'
 
 import InstructorDashboard from './components/instructor/InstructorDashboard';
 import CreateClass from './components/instructor/CreateClass'
-import InstructorClass from './components/instructor/InstructorClass'
+import ViewClass from './components/instructor/ViewClass'
 
 import { Route } from "react-router-dom";
 
@@ -46,8 +46,8 @@ function App() {
 
       <Route path="/client/home" component={ClientHome} />
 
-      <Route path='/instructor/classes/:id' render={props => {
-        return <InstructorClass {...props} />
+      <Route path='/instructor/classes/:classID' render={props => {
+        return <ViewClass {...props} />
       }} />
 
       <Route exact path="/instructor" component={InstructorDashboard} />
