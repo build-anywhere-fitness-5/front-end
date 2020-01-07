@@ -47,10 +47,10 @@ const SignupForm = ({role}) => {
                 [/[0-9a-zA-Z._]+@+\1.\1/, "Email must be in the format of you@domain.extension"]
             ],
             password: [
-                [/[^0-9]+/, "Password must contain a digit."],
-                [/[^a-z]+/, "Password must contain a lowercase letter."],
-                [/[^A-Z]+/, "Password must an lowercase letter."],
-                [/[^0-9a-zA-Z]+/, "Password must contain non-alphanumeric characters."],
+                [/(?=[0-9])/, "Password must contain a digit."],
+                [/(?=[a-z])/, "Password must contain a lowercase letter."],
+                [/(?=[A-Z])/, "Password must an uppercase letter."],
+                [/(?=[^0-9a-zA-Z])/, "Password must contain non-alphanumeric characters."],
                 [/.{8,}/, "Password must be longer than 8 characters."]
             ],
             instructorCode: [
