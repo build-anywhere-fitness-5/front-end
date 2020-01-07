@@ -3,20 +3,26 @@ import React, {useState} from "react";
 
 const LoginForm = () => {
 
-    const [username, setUsername] = useState();
-    const [password, setPassword] = useState();
+    // store user info in state variables
+    const [userInfo, setUserInfo] = useState(
+        {
+            email: "",
+            password: ""
+        });
     
-    function handleLogin(event) {
-    
-        event.preventDefault();
-    
-        document.getElementById("emailError").textContent = "Email entered";
-        document.getElementById("passwordError").textContent = "Password entered";
-    
-        // setUsername()
-    
+    // update what the user has typed into state upon change
+    function handleChange(event) {
+        setUserInfo({...userInfo, [event.target.name]: event.target.value});
     }
-    
+
+    function handleLogin(event) {
+
+        event.preventDefault();
+
+        console.log("Logging in with", userInfo);
+
+    }
+
 
     return (
         <>
@@ -24,11 +30,11 @@ const LoginForm = () => {
             <form name="login" onSubmit={handleLogin}>
                 
                 <label htmlFor="email">Email:</label>
-                <input name="email" type="email" />
+                <input name="email" type="email" onChange={handleChange} />
                 <p className="formError" id="emailError"></p>
 
                 <label htmlFor="password">Password:</label>
-                <input name="password" type="password" />
+                <input name="password" type="password" onChange={handleChange} />
                 <p className="formError" id="passwordError"></p>
 
                 <button type="submit">Log In</button>

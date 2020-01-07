@@ -5,8 +5,6 @@ import ClientHome from './components/Clients/ClientHome'
 import InstructorDashboard from './components/instructor/InstructorDashboard';
 import CreateClass from './components/instructor/CreateClass'
 
-import { Route } from "react-router-dom";
-
 import SignupLoginLinks from "./components/SignupLoginLinks";
 import LoginForm from "./components/LoginForm";
 import SignupForm from "./components/SignupForm";
@@ -17,6 +15,7 @@ import './App.css';
 function App() {
   return (
     <div className="App">
+      <header>
         <h1>Anywhere Fitness</h1>
         <Route exact path="/">
           <SignupLoginLinks />
