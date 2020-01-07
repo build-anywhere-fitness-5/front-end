@@ -59,7 +59,6 @@ const ClientHome = props => {
             <h1>Max Participants: {item.maxClassSize}</h1>
             <h1>Location: {item.location}</h1>
             <h1>Instructor: {item.instructor}</h1>
-            <h1>Scheduled: {item.scheduled.toString()}</h1>
             <button
               onClick={() => {
                 props.scheduleClass(item);
@@ -87,8 +86,7 @@ const ClientHome = props => {
                 <h1>Attending: {item.clients.length}</h1>
                 <h1>Max Participants: {item.maxClassSize}</h1>
                 <h1>Location: {item.location}</h1>
-                <h1>Instructor: {item.instructor}</h1>
-                <h1>Scheduled: {item.scheduled.toString()}</h1>
+                <h1>Instructor: {item.instructor}</h1>{" "}
                 {console.log(props.scheduledClasses)}
                 <button
                   onClick={() => {

@@ -1,4 +1,9 @@
-import { ADD_CLASS, SCHEDULE_CLASS, UNSCHEDULE_CLASS } from "../actions/index";
+import {
+  ADD_CLASS,
+  SCHEDULE_CLASS,
+  UNSCHEDULE_CLASS,
+  DELETE_CLASS
+} from "../actions/index";
 
 const initialState = {
   classes: [
@@ -13,8 +18,8 @@ const initialState = {
       clients: ["susieclient"],
       date: "2019-12-12",
       instructor: "joeinstructor",
-      id: null,
-      scheduled: false
+      id: 1
+      // id is a placeholder for now, I assume the API will generate that for us
     },
     {
       className: "Yoga Tues",
@@ -27,7 +32,8 @@ const initialState = {
       clients: ["susieclient"],
       date: "2019-12-12",
       instructor: "joeinstructor",
-      scheduled: false
+      id: 2
+      // id is a placeholder for now, I assume the API will generate that for us
     }
   ],
   passes: [
@@ -38,7 +44,7 @@ const initialState = {
       classesRemaining: 5
     }
   ],
-  scheduledClasses: [],
+  scheduledClasses: []
 };
 
 export const classReducer = (state = initialState, action) => {
@@ -54,12 +60,20 @@ export const classReducer = (state = initialState, action) => {
         ...state,
         scheduledClasses: [...state.scheduledClasses, action.payload]
       };
-      case UNSCHEDULE_CLASS:
+    case UNSCHEDULE_CLASS:
       return {
         ...state,
-        scheduledClasses: [...state.scheduledClasses.filter((item, index) => {
-            return item != action.payload
-        })]
+        scheduledClasses: [
+          ...state.scheduledClasses.filter((item, index) => {
+            return item != action.payload;
+          })
+        ]
+      };
+    case DELETE_CLASS:
+      console.log(state, action);
+      return {
+        ...state,
+        classes: state.classes.filter(c => c.id !== action.payload)
       };
     default:
       return state;
