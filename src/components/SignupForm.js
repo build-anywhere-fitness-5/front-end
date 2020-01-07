@@ -1,4 +1,5 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
+import axios from "axios";
 
 const SignupForm = ({role}) => {
 
@@ -58,17 +59,25 @@ const SignupForm = ({role}) => {
             ],
         }
 
-         // filter errors by checking each input against the specified regex expression
-         // keep the ones that don't match
+        // keep track of whether errors have occured
+        let inputsHaveErrors = false;
+
+        // filter errors by checking each input against the specified regex expression
         function findErrors(category) {
 
             // let input = userInfo[category];
 
-            // after filtering, map over arrays and keep only the error messages
+            // after filtering, map over arrays and keep the fields that don't match the regex
+            // then keep only the messages
             let errorsFound = criteria[category].filter(errorType => !userInfo[category].match(errorType[0]) ).map(errorType => errorType[1]);
 
-            console.log(errorsFound);
+            // keep track of error so that no database request is made if there is an error
+            inputsHaveErrors = true;
 
+            // display error messages to user
+            document.getElementById(category + "Errors").innerHTML = errorsFound.join("<br>");
+
+            // store error info in state
             setErrorInfo({...errorInfo, [category]: errorsFound});
         }
 
@@ -80,18 +89,13 @@ const SignupForm = ({role}) => {
         if (role === "instructor")
             { findErrors("instructorCode"); }
 
-        console.log(errorInfo);
-    
-        // document.getElementById("firstNameError").textContent = "First name entered";
-        // document.getElementById("lastNameError").textContent = "Last name entered";
-        // document.getElementById("passwordError").textContent = "Password entered";
-        // document.getElementById("emailError").textContent = "Email entered";
-        // document.getElementById("passwordError").textContent = "Password entered";
-
-        // if (role == "instructor")
-        //     {
-        //         document.getElementById("instructorCodeError").textContent = "Instructor Code entered";
-        //     }
+        // if there are no errors, make a POST request to the database
+        if (!inputsHaveErrors)
+        {
+            axios.post("http://example.com", userInfo)
+            .then(respone => console.log("User info successfully added to database."))
+            .catch(respone => console.log("There was an error adding the user info to the database."));
+        }
     
     }
     
