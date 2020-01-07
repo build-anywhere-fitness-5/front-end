@@ -11,9 +11,11 @@ const InstructorDashboard = props => {
             <ClassList />
 
             <h2>Pass list:</h2>
-            <PassList />
+            <PassList/>
 
             <Link to='/instructor/createclass/'> <button>Create class</button></Link>
+            <Link to='/instructor/createpass/'> <button>Create pass</button></Link>
+
         </div>
     )
 }
