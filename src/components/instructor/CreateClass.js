@@ -20,7 +20,8 @@ const CreateClass = props => {
         intensity: '',
         location: '',
         maxClassSize: 0,
-        date: ''
+        date: '',
+        clients: []
     });
 
     console.log(newClass);
@@ -36,7 +37,7 @@ const CreateClass = props => {
     const handleSubmit = e => {
         e.preventDefault()
         props.addClass(newClass);
-        // props.history.push(`/`);
+        props.history.push(`/instructor/`);
     }
 
     return (

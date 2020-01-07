@@ -1,4 +1,4 @@
-import { ADD_CLASS } from '../actions/index'
+import { ADD_CLASS, DELETE_CLASS } from '../actions/index'
 
 const initialState = {
     classes: [
@@ -15,7 +15,8 @@ const initialState = {
             ],
             date: '2019-12-12',
             instructor: 'joeinstructor',
-            id: null,
+            id: 1,
+            // id is a placeholder for now, I assume the API will generate that for us
         },
         {
             className: 'Yoga Tues',
@@ -30,6 +31,8 @@ const initialState = {
             ],
             date: '2019-12-12',
             instructor: 'joeinstructor',
+            id: 2,
+            // id is a placeholder for now, I assume the API will generate that for us
         }
     ],
     passes: [
@@ -52,6 +55,12 @@ export const classReducer = (state = initialState, action) => {
                     ...state.classes,
                     action.payload
                 ]
+            };
+        case DELETE_CLASS:
+            console.log(state, action)
+            return {
+                ...state,
+                classes: state.classes.filter(c => c.id !== action.payload)
             };
         default:
             return state
