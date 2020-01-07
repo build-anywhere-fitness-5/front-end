@@ -3,78 +3,83 @@
 
 import React, { useEffect, useState } from "react";
 import SearchForm from "./SearchForm";
-const initialState = {
-    classes: [
-        {
-            className: 'CrossFit Monday',
-            type: 'CrossFit',
-            startTime: '11:45PM',
-            durationMinutes: 45,
-            intensity: 'high',
-            location: 'Studio Los Feliz',
-            maxClassSize: 10,
-            clients: [
-                'susieclient'
-            ],
-            date: '2019-12-12',
-            instructor: 'joeinstructor',
-        }
-    ],
-    passes: [
-        {
-            className: 'CrossFit',
-            instructor: 'joeinstructor',
-            client: 'susieclient',
-            classesRemaining: 5
-        }
-    ]
-}
-const ClientHome = () => {
+import { connect } from "react-redux";
+const ClientHome = props => {
   const [query, setQuery] = useState("");
-  const [classes, setClass] = useState(initialState.classes);
+  const [filteredClass, setFilteredClass] = useState(props.classes);
   const handleInputChange = event => {
     setQuery(event.target.value);
+    console.log(event);
   };
 
   useEffect(() => {
-    console.log(classes);
-    let filterClasses = initialState.classes.filter(contact => {
+    console.log(filteredClass);
+    let filterClasses = props.classes.filter(c => {
       return (
-        contact.className.toLowerCase().includes(query.toLowerCase()) ||
-        contact.type.toLowerCase().includes(query.toLowerCase()) ||
-        contact.startTime.toLowerCase().includes(query.toLowerCase()) ||
-        contact.intensity.toLowerCase().includes(query.toLowerCase()) ||
-        contact.date.toLowerCase().includes(query.toLowerCase()) ||
-        contact.location.toLowerCase().includes(query.toLowerCase())
+        c.className.toLowerCase().includes(query.toLowerCase()) ||
+        c.classType.toLowerCase().includes(query.toLowerCase()) ||
+        c.startTime.toLowerCase().includes(query.toLowerCase()) ||
+        c.intensity.toLowerCase().includes(query.toLowerCase()) ||
+        c.date.toLowerCase().includes(query.toLowerCase()) ||
+        c.location.toLowerCase().includes(query.toLowerCase())
       );
-
     });
-    setClass(filterClasses);
+    setFilteredClass(filterClasses);
     console.log(filterClasses);
-    console.log(classes);
+    console.log(filteredClass);
   }, [query]);
 
   console.log(query);
-  console.log(classes);
+  console.log(filteredClass);
+  const divStyle = {
+    display: "flex",
+    width: "100%",
+    flexDirection: "row",
+    margin: "0 auto",
+    flexWrap: "wrap",
+    justifyContent: 'center'
+  };
+  const divStyle2 ={
+    width: '25%'
+  }
+
   return (
     <div>
       <SearchForm handleInputChange={handleInputChange} query={query} />
-      {classes.map((item, index) => (
-        <div>
-          <h1>Name: {item.className}</h1>
-          <h1>Date: {item.date}</h1>
-          <h1>Start: {item.startTime}</h1>
-          <h1>Duration: {item.durationMinutes} Minutes</h1>
-          <h1>Type: {item.type}</h1>
-          <h1>Intensity: {item.intensity}</h1>
-          <h1>Attending: {item.attending}</h1>
-          <h1>Max Participants: {item.maxCap}</h1>
-          <h1>Location: {item.location}</h1>
-          <h1>Instructor: {item.instructor}</h1>
-          <button>Schedule Class</button>
-        </div>
-      ))}
+      <div style={divStyle}>
+        {filteredClass.map((item, index) => (
+          <div style={divStyle2}>
+            <h1>Name: {item.className}</h1>
+            <h1>Date: {item.date}</h1>
+            <h1>Start: {item.startTime}</h1>
+            <h1>Duration: {item.durationMinutes} Minutes</h1>
+            <h1>Type: {item.classType}</h1>
+            <h1>Intensity: {item.intensity}</h1>
+            <h1>Attending: {item.clients.length}</h1>
+            <h1>Max Participants: {item.maxClassSize}</h1>
+            <h1>Location: {item.location}</h1>
+            <h1>Instructor: {item.instructor}</h1>
+            <button
+              onClick={() => {
+                setFilteredClass(
+                  filteredClass.filter(filtered => {
+                    return !filtered.scheduled;
+                  })
+                );
+              }}
+            >
+              Schedule Class
+            </button>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
-export default ClientHome;
+
+const mapStateToProps = state => {
+  return {
+    classes: state.classes
+  };
+};
+export default connect(mapStateToProps, {})(ClientHome);
