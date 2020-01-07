@@ -36,19 +36,19 @@ const SignupForm = ({role}) => {
         // set up criteria for valid form input
         const criteria = {
             firstName: [
-                [/[a-zA-Z]/, "First name must consist of letters only."],
+                [/^[a-zA-Z]+$/, "First name must consist of letters only."],
                 [/.{2,}/, "First name must be longer than 2 letters."]
             ],
             lastName: [
-                [/[a-zA-Z]/, "Last name must consist of letters only."],
+                [/^[a-zA-Z]+$/, "Last name must consist of letters only."],
                 [/.{2,}/, "Last name must be longer than 2 letters."]
             ],
             email: [
-                [/[0-9a-zA-Z._]+@+\1.\1/, "Email must be in the format of you@domain.extension ."]
+                [/[0-9a-zA-Z._]+@+\1.\1/, "Email must be in the format of you@domain.extension"]
             ],
             password: [
-                [/[^0-9]+/, "Password must a digit."],
-                [/[^a-z]+/, "Password must a lowercase letter."],
+                [/[^0-9]+/, "Password must contain a digit."],
+                [/[^a-z]+/, "Password must contain a lowercase letter."],
                 [/[^A-Z]+/, "Password must an lowercase letter."],
                 [/[^0-9a-zA-Z]+/, "Password must contain non-alphanumeric characters."],
                 [/.{8,}/, "Password must be longer than 8 characters."]
@@ -62,11 +62,10 @@ const SignupForm = ({role}) => {
          // keep the ones that don't match
         function findErrors(category) {
 
-            let input = userInfo[category];
+            // let input = userInfo[category];
 
-            console.log(input.match(/[a-zA-Z]/))
-
-            let errorsFound = criteria[category].filter(errorType => !userInfo[category].match(errorType[1]))
+            // after filtering, map over arrays and keep only the error messages
+            let errorsFound = criteria[category].filter(errorType => !userInfo[category].match(errorType[0]) ).map(errorType => errorType[1]);
 
             console.log(errorsFound);
 
@@ -127,7 +126,7 @@ const SignupForm = ({role}) => {
                         <>
                             <label htmlFor="instructorCode">Instructor Code:</label>
                             <input name="instructorCode" type="text" onChange={handleChange} />
-                            <p className="formError" id="instructorCodeError"></p>
+                            <p className="formError" id="instructorCodeErrors"></p>
                         </>
                     )
                 }
