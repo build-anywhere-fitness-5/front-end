@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { connect } from 'react-redux';
@@ -13,7 +13,7 @@ import { addUser } from '../actions/index';
 
 const SignupForm = props => {
 
-    const history = props.history
+    let history = useHistory();
     const role = props.role
 
     const nameList = "Michael Christopher Matthew Joshua Jacob Nicholas Andrew Daniel Tyler Joseph Brandon David James Ryan John Zachary Justin William Anthony Robert Jessica Ashley Emily Sarah Samantha Amanda Brittany Elizabeth Taylor Megan Hannah Kayla Lauren Stephanie Rachel Jennifer Nicole Alexis Victoria Amber".split(" ");
@@ -137,6 +137,11 @@ const SignupForm = props => {
 
                             props.addUser(loginResponse.data.user);
                             console.log(loginResponse);
+
+
+                            if (props.user.roleId === 1) { history.push("/instructor"); }
+
+                            else if (props.user.roleId === 2) { history.push("/client"); }
 
                         }
                         )

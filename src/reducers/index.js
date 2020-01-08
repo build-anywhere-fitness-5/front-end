@@ -7,7 +7,6 @@ import {
   EDIT_PASS,
   DELETE_PASS,
   EDIT_CLASS,
-  LOGOUT,
   ADD_CATEGORY,
   DELETE_CATEGORY,
   EDIT_CATEGORY,
@@ -17,9 +16,9 @@ import {
   FETCHCAT_SUCCESS,
   FETCH_CLASSES,
   FETCHCLASS_SUCCESS,
-  REMOVE_USER,
   ADD_STUDIO_CLASS,
-  ADD_USER
+  ADD_USER,
+  REMOVE_USER
 } from "../actions/index";
 
 const initialState = {
@@ -93,35 +92,24 @@ const initialState = {
   ],
   categories: [],
   scheduledClasses: [],
-  instructor: true,
-  signedIn: true,
-  user: {
-    id: 3,
-    firstName: null,
-    lastName: null,
-    email: null,
-    username: "don",
-    created_at: "2019-10-20T22:59:45.794Z",
-    updated_at: "2019-10-20T22:59:45.794Z",
-    roleId: 1
-  }
+  user: ''
 };
 
 export const classReducer = (state = initialState, action) => {
   console.log(state, action);
   switch (action.type) {
     case FETCHCAT_SUCCESS:
-    return {
-      ...state,
-      categories: action.payload
+      return {
+        ...state,
+        categories: action.payload
 
-    }
+      }
     case FETCHCLASS_SUCCESS:
-    return {
-      ...state,
-      classes: action.payload
+      return {
+        ...state,
+        classes: action.payload
 
-    }
+      }
     case ADD_CLASS:
       return {
         ...state,
@@ -171,30 +159,30 @@ export const classReducer = (state = initialState, action) => {
           return item;
         })
       };
-      case ADD_CATEGORY:
-        return {
-          ...state,
-          categories: [...state.categories, action.payload]
-        };
-      case DELETE_CATEGORY:
-        return {
-          ...state,
-          categories: [
-            ...state.categories.filter((item, index) => {
-              return item !== action.payload;
-            })
-          ]
-        };
-      case EDIT_CATEGORY:
-        return {
-          ...state,
-          categories: state.categories.map(item => {
-            if (item.id === action.payload.id) {
-              return action.payload;
-            }
-            return item;
+    case ADD_CATEGORY:
+      return {
+        ...state,
+        categories: [...state.categories, action.payload]
+      };
+    case DELETE_CATEGORY:
+      return {
+        ...state,
+        categories: [
+          ...state.categories.filter((item, index) => {
+            return item !== action.payload;
           })
-        };
+        ]
+      };
+    case EDIT_CATEGORY:
+      return {
+        ...state,
+        categories: state.categories.map(item => {
+          if (item.id === action.payload.id) {
+            return action.payload;
+          }
+          return item;
+        })
+      };
     case EDIT_CLASS:
       // console.log(state, action);
       return {
