@@ -3,12 +3,11 @@ import { Route, Redirect } from 'react-router-dom';
 import {connect} from 'react-redux'
 
 const PrivateRoute = ({ component: Component, ...rest}) => {
-    console.log(props.roleId)
     return (
         <Route
             {...rest}
             render={props => {
-                if (sessionStorage.getItem('token') && props.roleId != 0) {
+                if (sessionStorage.getItem('token') != 0) {
                     //render component from props
                     return <Component {...props} />;
                 } else {
@@ -19,10 +18,4 @@ const PrivateRoute = ({ component: Component, ...rest}) => {
     );
 }
 
-const mapStateToProps = state => {
-    return {
-        roleId: state.user.roleId
-    }
-}
-
-export default connect(mapStateToProps, { })(PrivateRoute);
+export default PrivateRoute 
