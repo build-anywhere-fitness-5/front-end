@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from "react";
+import { withRouter } from "react-router-dom";
 import axios from "axios";
 
-const SignupForm = ({role}) => {
+const SignupForm = ({role, history}) => {
 
     // store user info in state variables
     const [userInfo, setUserInfo] = useState(
@@ -92,13 +93,36 @@ const SignupForm = ({role}) => {
         // if there are no errors, make a POST request to the database
         if (!inputsHaveErrors)
         {
-            axios.post("http://example.com", userInfo)
-            .then(respone => console.log("User info successfully added to database."))
-            .catch(respone => console.log("There was an error adding the user info to the database."));
+            axios.post("http://www.example.com", userInfo)
+            .then(response => {
+
+                console.log("User info successfully added to database.");
+
+                history.push("http://www.example.com");
+
+                })
+            .catch(response => {
+                
+                console.log("There was an error adding the user info to the database.");
+
+                history.push("http://www.example.com");
+                
+                });
         }
-    
+
     }
     
+
+    
+    let test = 5;
+
+    let original = [1, 2, 100];
+
+    console.log(...original, test)
+
+    
+
+
     const signupWelcomeText = "Sign up as " + ((role === "instructor") ? "an instructor" : "a client");
 
     return (
@@ -142,4 +166,4 @@ const SignupForm = ({role}) => {
     )
 }
 
-export default SignupForm;
+export default withRouter(SignupForm);
