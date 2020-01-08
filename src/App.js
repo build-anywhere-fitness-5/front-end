@@ -1,6 +1,7 @@
 import React from "react";
 import { Route } from "react-router-dom";
 
+import Dashboard from "./components/Dashboard";
 import ClientLogin from "./components/Clients/ClientLogin";
 import ClientHome from "./components/Clients/ClientHome";
 
@@ -39,6 +40,10 @@ function App() {
 
       <Route exact path="/signup/instructor">
         <SignupForm role="instructor" />
+      </Route>
+
+      <Route exact path="/dashboard">
+        <Dashboard />
       </Route>
 
       <Route path="/client" component={ClientHome} />

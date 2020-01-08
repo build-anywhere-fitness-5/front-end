@@ -10,14 +10,20 @@ import { StyledSignupLoginButton } from "./StyledSignupLoginButton";
 
 const SignupForm = ({role, history}) => {
 
+    const nameList = "Michael Christopher Matthew Joshua Jacob Nicholas Andrew Daniel Tyler Joseph Brandon David James Ryan John Zachary Justin William Anthony Robert Jessica Ashley Emily Sarah Samantha Amanda Brittany Elizabeth Taylor Megan Hannah Kayla Lauren Stephanie Rachel Jennifer Nicole Alexis Victoria Amber".split(" ");
+    const randFirstName = nameList[Math.floor(Math.random() * nameList.length)];
+
+    const letters = "ABCDEEFGHIJKLMNOPQRSTUVWXYZ";
+    const randLastName = letters[Math.floor(Math.random() * letters.length)] + ".";
+
     // store user info in state variables
     const [userInfo, setUserInfo] = useState(
         {
-            username: "",
-            firstName: "Alvin",
-            lastName: "Lin",
-            email: "alvin@fitnessanywhere.com",
-            password: "aQ!12345",
+            username: role + (Math.floor(Math.random() * 100)),
+            firstName: randFirstName,
+            lastName: randLastName,
+            email: (role === "instructor") ? randFirstName.toLowerCase() + "@fitnessanywhere.com" : randFirstName.toLowerCase() + "." + randLastName[0].toLowerCase() + "@gmail.com",
+            password: "password",
             instructorCode: "123",
             roleId: (role === "instructor") ? 1 : 2
         });
@@ -43,6 +49,8 @@ const SignupForm = ({role, history}) => {
     // validate form fields and POST information to database
     function handleSignup(event) {
     
+        console.log("button clicked");
+
         event.preventDefault();
 
         // set up criteria for valid form input
@@ -80,8 +88,6 @@ const SignupForm = ({role, history}) => {
         // filter errors by checking each input against the specified regex expression
         function findErrors(category) {
 
-            // let input = userInfo[category];
-
             // after filtering, map over arrays and keep the fields that don't match the regex
             // then keep only the messages
             let errorsFound = criteria[category].filter(errorType => !userInfo[category].match(errorType[0]) ).map(errorType => errorType[1]);
@@ -94,6 +100,8 @@ const SignupForm = ({role, history}) => {
 
             // store error info in state
             setErrorInfo({...errorInfo, [category]: errorsFound});
+
+            console.log(errorInfo);
         }
 
         findErrors("username");
@@ -105,41 +113,55 @@ const SignupForm = ({role, history}) => {
         if (role === "instructor")
             { findErrors("instructorCode"); }
 
+        console.log("errors?", inputsHaveErrors, errorInfo);
+
         // if there are no errors, make a POST request to the database
-        if (!inputsHaveErrors)
+        // if (!inputsHaveErrors)
+        if (1)
         {
-            // useEffect(() => 
-            // {
-                axios.post("https://github.com/build-week-apis/anywhere-fitness/api/auth", userInfo)
-                .then(response => {
+            console.log("Attempting to connect to database...");
+            console.log("Note: if username is taken, you will get a 400 response code.")
 
-                    console.log("Signup status: Database accessed.");
-                    console.log("Errors received from database: ", response.message);
+            axios.post("https://lambda-anywhere-fitness.herokuapp.com/api/auth/register", {username: userInfo.username, password: userInfo.password, roleId: userInfo.roleId})
+            
+            .then(response => {
 
-                    if (response.message === "Username is already taken")
-                        {
-                            setErrorInfo({ ...errorInfo, signupErrors: response.message});
-                        }
-                    else
-                        {
-                            // get user roleId (instructor is 1, client is 2) and redirect to either instructor or client dashboard
-                            if (userInfo.roleId === 1)
-                                { history.push("/instructor"); }
+                axios.post("https://lambda-anywhere-fitness.herokuapp.com/api/auth/login", {username: userInfo.username, password: userInfo.password, roleId: userInfo.roleId})
+                .then(loginResponse => {
 
-                            else if (userInfo.roleId === 2)
-                                { history.push("/client"); }
+                        console.log(loginResponse);
 
-                        }
+                    }
+                )
 
-                    })
-                .catch(response => {
-                    
-                    console.log("Couldn't access database.");
+                console.log("Signup status: Database accessed.");
+                console.log("Messages received from database: ", response, response);
 
-                    setErrorInfo({ ...errorInfo, signupErrors: "Couldn't access database."});
+                // not working right now
+                if (response.message === "Username is already taken")
+                    {
+                        console.log("Username is already taken", response);
+                        setErrorInfo({ ...errorInfo, signupErrors: response});
+                    }
+                else
+                    {
+                        // get user roleId (instructor is 1, client is 2) and redirect to either instructor or client dashboard
+                        if (userInfo.roleId === 1)
+                            { history.push("/instructor"); }
 
-                    });
-            // }, []);
+                        else if (userInfo.roleId === 2)
+                            { history.push("/client"); }
+
+                    }
+
+                })
+            .catch(response => {
+                
+                console.log("Couldn't access database.", response, response.message);
+
+                setErrorInfo({ ...errorInfo, signupErrors: "Couldn't access database."});
+
+                });
         }
 
     }
@@ -184,6 +206,10 @@ const SignupForm = ({role, history}) => {
                 }
 
                 <StyledSignupLoginButton type="submit">Sign Up</StyledSignupLoginButton>
+
+                <p>
+                    Default password is "password".
+                </p>
 
             </form>
         
