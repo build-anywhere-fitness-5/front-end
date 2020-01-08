@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
 
-const LoginForm = () => {
+const LoginForm = ({ history }) => {
 
     // store user info in state variables
     const [userInfo, setUserInfo] = useState(
@@ -29,24 +29,32 @@ const LoginForm = () => {
 
         event.preventDefault();
 
-        console.log("Logging in with", userInfo);
+        if (!userInfo.email.match(/^[\w\.-]+@[\w\.-]+.\w+$/))
+        {
+            const errorMessage = "Not a correctly-formatted email address.";
+
+            setErrorInfo({...errorInfo, email: errorMessage});
+
+            document.getElementById("emailErrors").textContent = errorMessage;
+
+        }
 
         // if there are no errors, make a POST request to the database
-        if (!inputsHaveErrors)
+        else
         {
             axios.post("http://www.example.com", userInfo)
             .then(response => {
 
                 console.log("Login status: Database accessed.");
 
-                history.push("http://www.example.com");
+                history.push("/");
 
                 })
             .catch(response => {
                 
                 console.log("Login status: Error accessing database.");
 
-                history.push("http://www.example.com");
+                history.push("/");
                 
                 });
         }

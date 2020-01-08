@@ -98,14 +98,14 @@ const SignupForm = ({role, history}) => {
 
                 console.log("User info successfully added to database.");
 
-                history.push("http://www.example.com");
+                history.push("/");
 
                 })
             .catch(response => {
                 
                 console.log("There was an error adding the user info to the database.");
 
-                history.push("http://www.example.com");
+                history.push("/");
                 
                 });
         }
