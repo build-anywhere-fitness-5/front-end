@@ -1,10 +1,5 @@
-<<<<<<< HEAD
 import React, {useState, useEffect} from "react";
 import { useHistory } from "react-router-dom";
-=======
-import React, { useState, useEffect } from "react";
-import { withRouter } from "react-router-dom";
->>>>>>> c1bc938b85934fe4cb1f5b77d7098cff176d89f7
 import axios from "axios";
 
 import { StyledImgDiv } from "./StyledImgDiv";
@@ -24,13 +19,13 @@ const LoginForm = () => {
             password: ""
         });
 
-    // store error info in state variables
-    const [errorInfo, setErrorInfo] = useState(
+    // store error info in an object
+    const errorInfo = 
         {
-            usernameErrors: [],
-            passwordErrors: [],
-            loginErrors: []
-        });
+            username: [],
+            password: [],
+            login: []
+        };
 
 
     // update what the user has typed into state upon change
@@ -52,11 +47,14 @@ const LoginForm = () => {
                 console.log("Errors received from database: ", response);
 
                 if (response.message === "Username is not in the system.") {
-                    // update error message to display to user
+
+                    errorInfo.loginErrors.push("Username not found.")
+
                 }
                 else if (response.message === "Incorrect Password") {
-                    // update error message to display to user
-                    // setErrorInfo({ ...errorInfo, loginErrors: response.message});
+
+                    errorInfo.loginErrors.push("Password is incorrect.")
+
                 }
                 else {
                     // get authentication token
@@ -80,8 +78,8 @@ const LoginForm = () => {
             .catch(response => {
 
                 console.log("Couldn't access database: ", response);
-
-                // setErrorInfo({ ...errorInfo, loginErrors: "Couldn't access database."});
+                errorInfo.login.push("Couldn't access database.")
+                document.getElementById("loginErrors").textContent = "Couldn't access database.";
 
             });
 
@@ -89,9 +87,7 @@ const LoginForm = () => {
 
 
     // format errors for display
-    // console.log("errorInfo:", errorInfo.loginErrors.length, errorInfo)
-    let formattedErrors = "";
-    // let formattedErrors = (errorInfo.loginErrors.length > 1) ? errorInfo.loginErrors.join("<br>") : "";
+    const formattedErrors = errorInfo.login.join("<br>");
 
     return (
         <StyledLoginSignupContainer>
@@ -114,10 +110,11 @@ const LoginForm = () => {
 
                 </form>
 
-                {/* <p className="loginErrors" id="loginErrors">{formattedErrors}</p> */}
                 <p>
                     Upon logging in, all users will redirect to the instructor dashboard for now.
-            </p>
+                </p>
+
+                <p className="loginErrors" id="loginErrors">{formattedErrors}</p>
 
             </StyledFormDiv>
         </StyledLoginSignupContainer>

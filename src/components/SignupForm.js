@@ -34,17 +34,17 @@ const SignupForm = props => {
             roleId: (role === "instructor") ? 1 : 2
         });
 
-    // store error info in state variables
-    const [errorInfo, setErrorInfo] = useState(
+    // store error info in an object
+    const errorInfo =
         {
-            usernameErrors: [],
-            firstNameErrors: [],
-            lastNameErrors: [],
-            emailErrors: [],
-            passwordErrors: [],
-            instructorCodeErrors: [],
-            signupErrors: []
-        });
+            username: [],
+            firstName: [],
+            lastName: [],
+            email: [],
+            password: [],
+            instructorCode: [],
+            signup: []
+        };
 
 
     // update what the user has typed into state upon change
@@ -54,8 +54,6 @@ const SignupForm = props => {
 
     // validate form fields and POST information to database
     function handleSignup(event) {
-
-        console.log("button clicked");
 
         event.preventDefault();
 
@@ -79,7 +77,7 @@ const SignupForm = props => {
             password: [
                 [/(?=[0-9])/, "Password must contain a digit."],
                 [/(?=[a-z])/, "Password must contain a lowercase letter."],
-                [/(?=[A-Z])/, "Password must an uppercase letter."],
+                [/(?=[A-Z])/, "Password must contain an uppercase letter."],
                 [/(?=[^0-9a-zA-Z])/, "Password must contain non-alphanumeric characters."],
                 [/.{8,}/, "Password must be longer than 8 characters."]
             ],
@@ -105,9 +103,7 @@ const SignupForm = props => {
             document.getElementById(category + "Errors").innerHTML = errorsFound.join("<br>");
 
             // store error info in state
-            setErrorInfo({ ...errorInfo, [category]: errorsFound });
-
-            console.log(errorInfo);
+            errorInfo[category] = errorsFound;
         }
 
         findErrors("username");
@@ -117,8 +113,6 @@ const SignupForm = props => {
         findErrors("password");
 
         if (role === "instructor") { findErrors("instructorCode"); }
-
-        console.log("errors?", inputsHaveErrors, errorInfo);
 
         // if there are no errors, make a POST request to the database
         // if (!inputsHaveErrors)
@@ -144,8 +138,11 @@ const SignupForm = props => {
 
                     // not working right now
                     if (response.message === "Username is already taken") {
+
                         console.log("Username is already taken", response);
-                        setErrorInfo({ ...errorInfo, signupErrors: response });
+                        errorInfo.signup.push("Username is already taken.")
+                        document.getElementById("loginErrors").textContent = "Couldn't access database.";
+                        
                     }
                     else {
                         // get user roleId (instructor is 1, client is 2) and redirect to either instructor or client dashboard
@@ -159,8 +156,10 @@ const SignupForm = props => {
                 .catch(response => {
 
                     console.log("Couldn't access database.", response, response.message);
-
-                    setErrorInfo({ ...errorInfo, signupErrors: "Couldn't access database." });
+                    errorInfo.signup.push("Couldn't access database. Username may have been taken.")
+                    document.getElementById("signupErrors").textContent = "Couldn't access database. Username may have been taken.";
+                    
+                    console.log(errorInfo.signup);
 
                 });
         }
@@ -210,7 +209,9 @@ const SignupForm = props => {
 
                     <p>
                         Default password is "password".
-                </p>
+                    </p>
+
+                    <p className="signupErrors" id="signupErrors"></p>
 
                 </form>
 
