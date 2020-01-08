@@ -110,10 +110,6 @@ const LoginForm = () => {
 
                 </form>
 
-                <p>
-                    Upon logging in, all users will redirect to the instructor dashboard for now.
-                </p>
-
                 <p className="loginErrors" id="loginErrors">{formattedErrors}</p>
 
             </StyledFormDiv>
