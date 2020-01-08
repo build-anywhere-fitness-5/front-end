@@ -1,7 +1,6 @@
 import React from "react";
 import { Route } from "react-router-dom";
 
-import Dashboard from "./components/Dashboard";
 import ClientLogin from "./components/Clients/ClientLogin";
 import ClientHome from "./components/Clients/ClientHome";
 
