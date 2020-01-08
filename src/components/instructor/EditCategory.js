@@ -7,7 +7,7 @@ import TextField from "@material-ui/core/TextField";
 
 import Button from "@material-ui/core/Button";
 import { connect } from "react-redux";
-import { editPass } from "../../actions/index";
+import { editCategory } from "../../actions/index";
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -46,65 +46,51 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const EditPass = props => {
+const EditCategory = props => {
   const classes = useStyles();
-  const [updatePass, setUpdatePass] = useState({
-    className: "",
-    client: "",
-    classesRemaining: 0,
-    instructor: ""
+  const [updateCategory, setUpdateCategory] = useState({
+    name: '',
+    category: '',
   });
 
   useEffect(() => {
-    console.log("PROPS.PASS CONSOLE LOG", props.pass, "INDEX", props.index);
-    setUpdatePass(props.pass);
+    console.log("PROPS.CATEGORY CONSOLE LOG", props.updateCategory, "INDEX", props.index);
+    setUpdateCategory(props.category);
   }, []);
 
   const submitHandler = event => {
     event.preventDefault();
-    console.log(props.pass.id);
-    props.editPass(updatePass);
+    console.log(props.category.id);
+    props.editCategory(updateCategory);
 
-    // console.log(updatePass, "Edit Form submit handler")
   };
 
   const changeHandler = event => {
-    setUpdatePass({ ...updatePass, [event.target.name]: event.target.value });
+    setUpdateCategory({ ...updateCategory, [event.target.name]: event.target.value });
   };
 
   return (
     <div style={{ width: '40%', height: '100%' }}>
       <form style={{ backgroundColor: "white"} } onSubmit={submitHandler}>
-        <h1>Update Your Pass</h1>
+        <h1>Edit This Category</h1>
         <TextField
-          label="Client"
+          label="name"
           variant="outlined"
           margin="normal"
           className={classes.textField}
           type="text"
-          name="client"
-          value={updatePass.client}
+          name="name"
+          value={updateCategory.name}
           onChange={changeHandler}
         />
         <TextField
-          label="Class"
+          label="Description"
           variant="outlined"
           margin="normal"
           className={classes.textField}
           type="text"
-          name="className"
-          value={updatePass.className}
-          onChange={changeHandler}
-        />
-
-        <TextField
-          label="Classes Remaining"
-          variant="outlined"
-          margin="normal"
-          className={classes.textField}
-          type="number"
-          name="classesRemaining"
-          value={updatePass.classesRemaining}
+          name="description"
+          value={updateCategory.description}
           onChange={changeHandler}
         />
 
@@ -114,7 +100,7 @@ const EditPass = props => {
           color="black"
           type="submit"
         >
-          Update your Pass
+          Edit Category
         </Button>
       </form>
     </div>
@@ -123,7 +109,7 @@ const EditPass = props => {
 
 const mapStateToProps = state => {
   return {
-    editPass: state.editPass
+    editCategory: state.editCategory
   };
 };
-export default connect(mapStateToProps, { editPass })(EditPass);
+export default connect(mapStateToProps, { editCategory })(EditCategory);

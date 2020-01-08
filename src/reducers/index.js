@@ -7,10 +7,18 @@ import {
   EDIT_PASS,
   DELETE_PASS,
   EDIT_CLASS,
-  REMOVE_USER,
-  ADD_STUDIO_CLASS,
+  LOGOUT,
+  ADD_CATEGORY,
+  DELETE_CATEGORY,
+  EDIT_CATEGORY,
   EDIT_STUDIO_CLASS,
   DELETE_STUDIO_CLASS,
+  FETCH_SUCCESS,
+  FETCHCAT_SUCCESS,
+  FETCH_CLASSES,
+  FETCHCLASS_SUCCESS,
+  REMOVE_USER,
+  ADD_STUDIO_CLASS,
   ADD_USER
 } from "../actions/index";
 
@@ -83,6 +91,7 @@ const initialState = {
       id: 2
     }
   ],
+  categories: [],
   scheduledClasses: [],
   instructor: true,
   signedIn: true,
@@ -92,6 +101,18 @@ const initialState = {
 export const classReducer = (state = initialState, action) => {
   console.log(state, action);
   switch (action.type) {
+    case FETCHCAT_SUCCESS:
+    return {
+      ...state,
+      categories: action.payload
+
+    }
+    case FETCHCLASS_SUCCESS:
+    return {
+      ...state,
+      classes: action.payload
+
+    }
     case ADD_CLASS:
       return {
         ...state,
@@ -136,20 +157,44 @@ export const classReducer = (state = initialState, action) => {
         ...state,
         passes: state.passes.map(item => {
           if (item.id === action.payload.id) {
-            return action.payload
+            return action.payload;
           }
-          return item
+          return item;
         })
-      }
+      };
+      case ADD_CATEGORY:
+        return {
+          ...state,
+          categories: [...state.categories, action.payload]
+        };
+      case DELETE_CATEGORY:
+        return {
+          ...state,
+          categories: [
+            ...state.categories.filter((item, index) => {
+              return item !== action.payload;
+            })
+          ]
+        };
+      case EDIT_CATEGORY:
+        return {
+          ...state,
+          categories: state.categories.map(item => {
+            if (item.id === action.payload.id) {
+              return action.payload;
+            }
+            return item;
+          })
+        };
     case EDIT_CLASS:
       // console.log(state, action);
       return {
         ...state,
         classes: state.classes.map(item => {
           if (item.id === action.payload.id) {
-            return { ...action.payload }
+            return { ...action.payload };
           }
-          return item
+          return item;
         })
       };
     case ADD_STUDIO_CLASS:
