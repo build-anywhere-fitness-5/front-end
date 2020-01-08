@@ -1,5 +1,3 @@
-import React from "react";
-
 import girlImg from "../images/girl.jpg";
 import styled from "styled-components";
 

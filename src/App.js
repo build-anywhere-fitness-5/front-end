@@ -44,6 +44,10 @@ function App() {
         <SignupForm role="instructor" />
       </Route>
 
+      <Route exact path="/dashboard">
+        <Dashboard />
+      </Route>
+
       <Route path="/client" component={ClientHome} />
 
       <Route path="/client/home" component={ClientHome} />
