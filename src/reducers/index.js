@@ -3,7 +3,10 @@ import {
   SCHEDULE_CLASS,
   UNSCHEDULE_CLASS,
   DELETE_CLASS,
-  EDIT_CLASS
+  ADD_PASS,
+  EDIT_PASS,
+  DELETE_PASS,
+  EDIT_CLASS,
 } from "../actions/index";
 
 const initialState = {
@@ -39,10 +42,25 @@ const initialState = {
   ],
   passes: [
     {
-      className: "CrossFit",
+      className: "Yoga",
       instructor: "joeinstructor",
+      client: "orangeclient",
+      classesRemaining: 9,
+      id: 0
+    },
+    {
+      className: "Jimmy",
+      instructor: "papainstructor",
       client: "susieclient",
-      classesRemaining: 5
+      classesRemaining: 2,
+      id: 1
+    },
+    {
+      className: "CrossFit",
+      instructor: "mommainstructor",
+      client: "willclient",
+      classesRemaining: 7,
+      id: 2
     }
   ],
   scheduledClasses: [],
@@ -68,7 +86,7 @@ export const classReducer = (state = initialState, action) => {
         ...state,
         scheduledClasses: [
           ...state.scheduledClasses.filter((item, index) => {
-            return item != action.payload;
+            return item !== action.payload;
           })
         ]
       };
@@ -78,7 +96,31 @@ export const classReducer = (state = initialState, action) => {
         ...state,
         classes: state.classes.filter(c => c.id !== action.payload)
       };
-    case EDIT_CLASS:
+    case ADD_PASS:
+      return {
+        ...state,
+        passes: [...state.passes, action.payload]
+      };
+    case DELETE_PASS:
+      return {
+        ...state,
+        passes: [
+          ...state.passes.filter((item, index) => {
+            return item !== action.payload;
+          })
+        ]
+      };
+    case EDIT_PASS:
+      return {
+        ...state,
+        passes: state.passes.map(item => {
+          if (item.id === action.payload.id) {
+            return  action.payload
+          }
+          return item
+        })
+      }
+      case EDIT_CLASS:
       // console.log(state, action);
       return {
         ...state,

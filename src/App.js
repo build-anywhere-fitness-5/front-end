@@ -1,10 +1,10 @@
-import React from 'react';
+import React from "react";
 
-import ClientLogin from './components/Clients/ClientLogin'
-import ClientHome from './components/Clients/ClientHome'
+import ClientLogin from "./components/Clients/ClientLogin";
+import ClientHome from "./components/Clients/ClientHome";
 
-import InstructorDashboard from './components/instructor/InstructorDashboard';
-import CreateClass from './components/instructor/CreateClass';
+import InstructorDashboard from "./components/instructor/InstructorDashboard";
+import CreateClass from "./components/instructor/CreateClass";
 import ViewClass from './components/instructor/ViewClass';
 import EditClass from './components/instructor/EditClass';
 
@@ -15,14 +15,13 @@ import LoginForm from "./components/LoginForm";
 import SignupForm from "./components/SignupForm";
 import Header from "./components/Header";
 
-import './App.css';
-
+import "./App.css";
+import CreatePass from "./components/instructor/CreatePass";
 
 function App() {
   return (
     <div className="App">
       <Header />
-
       <Route exact path="/">
         <SignupLoginLinks />
       </Route>
@@ -46,7 +45,6 @@ function App() {
       <Route path="/client" component={ClientHome} />
 
       <Route path="/client/home" component={ClientHome} />
-
       <Route exact path='/instructor/classes/:classID' render={props => {
         return <ViewClass {...props} />
       }} />
@@ -56,9 +54,9 @@ function App() {
 
       <Route exact path="/instructor" component={InstructorDashboard} />
       <Route exact path="/instructor/createclass" component={CreateClass} />
+      <Route exact path="/instructor/createpass" component={CreatePass} />
 
-
-    </div >
+    </div>
   );
 }
 
