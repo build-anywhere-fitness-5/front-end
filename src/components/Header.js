@@ -22,7 +22,23 @@ const Header = props => {
         <header>
             <nav>
                 <div className="logo">
-                    <Link to="/">Anywhere Fitness</Link>
+                    {props.user === '' &&
+                        <Link to="/">Anywhere Fitness</Link>
+                    }
+
+                    {props.user.roleId === 1 &&
+
+                        <Link to="/instructor">Anywhere Fitness</Link>
+                    }
+
+                    {props.user.roleId === 2 &&
+
+                        <Link to="/client/">Anywhere Fitness</Link>
+                    }
+
+
+
+
                 </div>
                 <ul>
                     {/* Only for those not signed in */}
