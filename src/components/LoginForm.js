@@ -1,10 +1,5 @@
-<<<<<<< HEAD
 import React, {useState, useEffect} from "react";
 import { useHistory } from "react-router-dom";
-=======
-import React, { useState, useEffect } from "react";
-import { withRouter } from "react-router-dom";
->>>>>>> c1bc938b85934fe4cb1f5b77d7098cff176d89f7
 import axios from "axios";
 
 import { StyledImgDiv } from "./StyledImgDiv";
