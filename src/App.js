@@ -20,6 +20,9 @@ import Header from "./components/Header";
 import "./App.css";
 import CreatePass from "./components/instructor/CreatePass";
 
+import PrivateRoute from './components/PrivateRoute';
+
+
 function App() {
   return (
     <div className="App">
@@ -36,38 +39,47 @@ function App() {
         <SignupForm role="client" />
       </Route>
 
-      <Route exact path="/signup/client">
+      <Route exact path="/signup/client" render={props => {
+        return <SignupForm {...props} role="client" />
+      }} />
+
+
+      {/* <Route exact path="/signup/client">
         <SignupForm role="client" />
-      </Route>
+      </Route> */}
 
       <Route exact path="/signup/instructor">
         <SignupForm role="instructor" />
       </Route>
 
+<<<<<<< HEAD
       <Route path="/client" component={ClientHome} />
+=======
+      <PrivateRoute path="/client" component={ClientHome} />
+>>>>>>> c1bc938b85934fe4cb1f5b77d7098cff176d89f7
 
-      <Route path="/client/home" component={ClientHome} />
+      <PrivateRoute path="/client/home" component={ClientHome} />
 
-      <Route exact path='/instructor/classes/:classID' render={props => {
+      <PrivateRoute exact path='/instructor/classes/:classID' render={props => {
         return <ViewClass {...props} />
       }} />
-      <Route path='/instructor/classes/edit/:classID' render={props => {
+      <PrivateRoute path='/instructor/classes/edit/:classID' render={props => {
         return <EditClass {...props} />
       }} />
 
-      <Route exact path='/instructor/studioclasses/:classID' render={props => {
+      <PrivateRoute exact path='/instructor/studioclasses/:classID' render={props => {
         return <ViewStudioClass {...props} />
       }} />
-      <Route path='/instructor/studioclasses/edit/:classID' render={props => {
+      <PrivateRoute path='/instructor/studioclasses/edit/:classID' render={props => {
         return <EditStudioClass {...props} />
       }} />
 
+      {/* <Route exact path='/logout' render={props => <LogOut {...props} />} /> */}
 
-
-      <Route exact path="/instructor" component={InstructorDashboard} />
-      <Route exact path="/instructor/createclass" component={CreateClass} />
-      <Route exact path="/instructor/createstudioclass" component={CreateStudioClass} />
-      <Route exact path="/instructor/createpass" component={CreatePass} />
+      <PrivateRoute exact path="/instructor" component={InstructorDashboard} />
+      <PrivateRoute exact path="/instructor/createclass" component={CreateClass} />
+      <PrivateRoute exact path="/instructor/createstudioclass" component={CreateStudioClass} />
+      <PrivateRoute exact path="/instructor/createpass" component={CreatePass} />
 
     </div>
   );

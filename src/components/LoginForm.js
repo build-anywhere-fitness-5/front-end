@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 import React, {useState, useEffect} from "react";
 import { useHistory } from "react-router-dom";
+=======
+import React, { useState, useEffect } from "react";
+import { withRouter } from "react-router-dom";
+>>>>>>> c1bc938b85934fe4cb1f5b77d7098cff176d89f7
 import axios from "axios";
 
 import { StyledImgDiv } from "./StyledImgDiv";
@@ -30,7 +35,7 @@ const LoginForm = () => {
 
     // update what the user has typed into state upon change
     function handleChange(event) {
-        setUserInfo({...userInfo, [event.target.name]: event.target.value});
+        setUserInfo({ ...userInfo, [event.target.name]: event.target.value });
     }
 
     // validate form fields and POST information to database
@@ -41,47 +46,42 @@ const LoginForm = () => {
         // make a POST request to the database
 
         axios.post("https://lambda-anywhere-fitness.herokuapp.com/api/auth/login", userInfo)
-        .then(response => {
+            .then(response => {
 
-            console.log("Login status: Database accessed.");
-            console.log("Errors received from database: ", response);
+                console.log("Login status: Database accessed.");
+                console.log("Errors received from database: ", response);
 
-            if (response.message === "Username is not in the system.")
-            {
-                // update error message to display to user
-            }
-            else if (response.message === "Incorrect Password")
-                {
+                if (response.message === "Username is not in the system.") {
+                    // update error message to display to user
+                }
+                else if (response.message === "Incorrect Password") {
                     // update error message to display to user
                     // setErrorInfo({ ...errorInfo, loginErrors: response.message});
                 }
-            else
-                {
+                else {
                     // get authentication token
                     // get user roleId (instructor is 1, client is 2) and redirect to either instructor or client dashboard
-                    axios.post("https://lambda-anywhere-fitness.herokuapp.com/api/auth/login", {username: userInfo.username, password: userInfo.password})
+                    axios.post("https://lambda-anywhere-fitness.herokuapp.com/api/auth/login", { username: userInfo.username, password: userInfo.password })
                         .then(loginResponse => {
 
-                        console.log(loginResponse);
+                            console.log(loginResponse);
 
-                    })
+                        })
 
                     let roleId = 1;
 
-                    if (roleId === 1)
-                    { history.push("/instructor"); }
-            
-                    else if (roleId === 2)
-                    { history.push("/client"); }
-            
+                    if (roleId === 1) { history.push("/instructor"); }
+
+                    else if (roleId === 2) { history.push("/client"); }
+
                 }
 
             })
-        .catch(response => {
-            
-            console.log("Couldn't access database: ", response);
+            .catch(response => {
 
-            // setErrorInfo({ ...errorInfo, loginErrors: "Couldn't access database."});
+                console.log("Couldn't access database: ", response);
+
+                // setErrorInfo({ ...errorInfo, loginErrors: "Couldn't access database."});
 
             });
 
@@ -100,25 +100,25 @@ const LoginForm = () => {
 
             <StyledFormDiv>
 
-            <h1>Log in</h1>
+                <h1>Log in</h1>
 
-            <form name="login" onSubmit={handleLogin}>
-                
-                <StyledInput name="username" type="text" placeholder="Username" value={userInfo.username} onChange={handleChange} />
-                <p className="formError" id="usernameErrors"></p>
+                <form name="login" onSubmit={handleLogin}>
 
-                <StyledInput name="password" type="password" placeholder="Password" value={userInfo.password} onChange={handleChange} />
-                <p className="formError" id="passwordErrors"></p>
+                    <StyledInput name="username" type="text" placeholder="Username" value={userInfo.username} onChange={handleChange} />
+                    <p className="formError" id="usernameErrors"></p>
 
-                <StyledSignupLoginButton type="submit">Log In</StyledSignupLoginButton>
+                    <StyledInput name="password" type="password" placeholder="Password" value={userInfo.password} onChange={handleChange} />
+                    <p className="formError" id="passwordErrors"></p>
 
-            </form>
+                    <StyledSignupLoginButton type="submit">Log In</StyledSignupLoginButton>
 
-            {/* <p className="loginErrors" id="loginErrors">{formattedErrors}</p> */}
-            <p>
-                Upon logging in, all users will redirect to the instructor dashboard for now.
+                </form>
+
+                {/* <p className="loginErrors" id="loginErrors">{formattedErrors}</p> */}
+                <p>
+                    Upon logging in, all users will redirect to the instructor dashboard for now.
             </p>
-        
+
             </StyledFormDiv>
         </StyledLoginSignupContainer>
     )
