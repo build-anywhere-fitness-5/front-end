@@ -33,7 +33,7 @@ const Header = props => {
                     }
 
                     {/* Only for instructors */}
-                    {props.user.roleId === 1 &&
+                    {localStorage.getItem('token') && props.user.roleId === 1 &&
                         <>
                             <li><NavLink to="/instructor/createpass">Create pass</NavLink></li>
                             <li><NavLink to="/instructor/createclass">Create class</NavLink></li>
@@ -41,7 +41,7 @@ const Header = props => {
                         </>
                     }
                     {/*Only for Clients */}
-                     {props.signedIn && /*!props.instructor && */
+                     {localStorage.getItem('token') && props.user.roleId === 2 &&
                         <>
                             <li><NavLink to="/client/">Home</NavLink></li>
                             <li><NavLink to="/client/schedule">Scheduled Classes</NavLink></li>
@@ -49,7 +49,7 @@ const Header = props => {
                     }
 
                     {/* Only for those signed in */}
-                    {props.user &&
+                    {props.user && 
                         <div className="logout">
                             <li><button onClick={handleLogout}>Logout</button></li>
                         </div>
