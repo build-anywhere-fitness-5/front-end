@@ -108,35 +108,38 @@ const SignupForm = ({role, history}) => {
         // if there are no errors, make a POST request to the database
         if (!inputsHaveErrors)
         {
-            axios.post("https://github.com/build-week-apis/anywhere-fitness/api/auth", userInfo)
-            .then(response => {
+            useEffect(() => 
+            {
+                axios.post("https://github.com/build-week-apis/anywhere-fitness/api/auth", userInfo)
+                .then(response => {
 
-                console.log("Signup status: Database accessed.");
-                console.log("Errors received from database: ", response.message);
+                    console.log("Signup status: Database accessed.");
+                    console.log("Errors received from database: ", response.message);
 
-                if (response.message === "Username is already taken")
-                    {
-                        setErrorInfo({ ...errorInfo, signupErrors: response.message});
-                    }
-                else
-                    {
-                        // get user roleId (instructor is 1, client is 2) and redirect to either instructor or client dashboard
-                        if (userInfo.roleId === 1)
-                            { history.push("/instructor"); }
+                    if (response.message === "Username is already taken")
+                        {
+                            setErrorInfo({ ...errorInfo, signupErrors: response.message});
+                        }
+                    else
+                        {
+                            // get user roleId (instructor is 1, client is 2) and redirect to either instructor or client dashboard
+                            if (userInfo.roleId === 1)
+                                { history.push("/instructor"); }
 
-                        else if (userInfo.roleId === 2)
-                            { history.push("/client"); }
+                            else if (userInfo.roleId === 2)
+                                { history.push("/client"); }
 
-                    }
+                        }
 
-                })
-            .catch(response => {
-                
-                console.log("Couldn't access database.");
+                    })
+                .catch(response => {
+                    
+                    console.log("Couldn't access database.");
 
-                setErrorInfo({ ...errorInfo, signupErrors: "Couldn't access database."});
+                    setErrorInfo({ ...errorInfo, signupErrors: "Couldn't access database."});
 
-                });
+                    });
+            }, []);
         }
 
     }

@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
 
@@ -37,7 +37,7 @@ const LoginForm = ({ history }) => {
         event.preventDefault();
 
         // if there are no errors, make a POST request to the database
-        if (1)
+        useEffect(() => 
         {
             axios.post("https://github.com/build-week-apis/anywhere-fitness/api/auth/login", userInfo)
             .then(response => {
@@ -70,7 +70,7 @@ const LoginForm = ({ history }) => {
                 setErrorInfo({ ...errorInfo, loginErrors: "Couldn't access database."});
 
                 });
-        }
+        }, []);
 
     }
 
