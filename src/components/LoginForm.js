@@ -37,8 +37,8 @@ const LoginForm = ({ history }) => {
         event.preventDefault();
 
         // if there are no errors, make a POST request to the database
-        useEffect(() => 
-        {
+        // useEffect(() => 
+        // {
             axios.post("https://github.com/build-week-apis/anywhere-fitness/api/auth/login", userInfo)
             .then(response => {
 
@@ -70,7 +70,7 @@ const LoginForm = ({ history }) => {
                 setErrorInfo({ ...errorInfo, loginErrors: "Couldn't access database."});
 
                 });
-        }, []);
+        // }, []);
 
     }
 
@@ -86,7 +86,7 @@ const LoginForm = ({ history }) => {
 
             <form name="login" onSubmit={handleLogin}>
                 
-                <StyledInput name="username" type="text" placeholder="username" onChange={handleChange} />
+                <StyledInput name="username" type="text" placeholder="Username" onChange={handleChange} />
                 <p className="formError" id="usernameErrors"></p>
 
                 <StyledInput name="password" type="password" placeholder="Password" onChange={handleChange} />

@@ -14,11 +14,11 @@ const SignupForm = ({role, history}) => {
     const [userInfo, setUserInfo] = useState(
         {
             username: "",
-            firstName: "",
-            lastName: "",
-            email: "",
-            password: "",
-            instructorCode: "",
+            firstName: "Alvin",
+            lastName: "Lin",
+            email: "alvin@fitnessanywhere.com",
+            password: "aQ!12345",
+            instructorCode: "123",
             roleId: (role === "instructor") ? 1 : 2
         });
     
@@ -108,8 +108,8 @@ const SignupForm = ({role, history}) => {
         // if there are no errors, make a POST request to the database
         if (!inputsHaveErrors)
         {
-            useEffect(() => 
-            {
+            // useEffect(() => 
+            // {
                 axios.post("https://github.com/build-week-apis/anywhere-fitness/api/auth", userInfo)
                 .then(response => {
 
@@ -139,7 +139,7 @@ const SignupForm = ({role, history}) => {
                     setErrorInfo({ ...errorInfo, signupErrors: "Couldn't access database."});
 
                     });
-            }, []);
+            // }, []);
         }
 
     }
@@ -157,19 +157,19 @@ const SignupForm = ({role, history}) => {
 
             <form name="login" onSubmit={handleSignup}>
                 
-                <StyledInput name="username" type="text" placeholder="Username" onChange={handleChange} />
+                <StyledInput name="username" type="text" placeholder="Username" value={userInfo.username} onChange={handleChange} />
                 <p className="formError" id="usernameErrors"></p>
 
-                <StyledInput name="firstName" type="text" placeholder="First name" onChange={handleChange} />
+                <StyledInput name="firstName" type="text" placeholder="First name" value={userInfo.firstName} onChange={handleChange} />
                 <p className="formError" id="firstNameErrors"></p>
 
-                <StyledInput name="lastName" type="text" placeholder="Last name" onChange={handleChange} />
+                <StyledInput name="lastName" type="text" placeholder="Last name" value={userInfo.lastName} onChange={handleChange} />
                 <p className="formError" id="lastNameErrors"></p>
 
-                <StyledInput name="email" type="email" placeholder="Email" onChange={handleChange} />
+                <StyledInput name="email" type="email" placeholder="Email" value={userInfo.email} onChange={handleChange} />
                 <p className="formError" id="emailErrors"></p>
 
-                <StyledInput name="password" type="password" placeholder="Password" onChange={handleChange} />
+                <StyledInput name="password" type="password" placeholder="Password" value={userInfo.password} onChange={handleChange} />
                 <p className="formError" id="passwordErrors"></p>
 
                 {/* Show input for instructor code if user is an instructor */}
@@ -177,7 +177,7 @@ const SignupForm = ({role, history}) => {
                     (role === "instructor") &&
                     (
                         <>
-                            <StyledInput name="instructorCode" type="text" placeholder="Instructor code" onChange={handleChange} />
+                            <StyledInput name="instructorCode" type="text" placeholder="Instructor code" value={userInfo.instructorCode} onChange={handleChange} />
                             <p className="formError" id="instructorCodeErrors"></p>
                         </>
                     )
