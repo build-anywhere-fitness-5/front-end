@@ -41,3 +41,15 @@ a {
   color: orange;
   text-decoration: none;
 }
+
+button {
+  color: #fff;
+  padding: .75em 1em;
+  font-weight: 500;
+  border-radius: .25em;
+  background-color: #3a8bce;
+  cursor: pointer;
+  border: 0;
+  font-size: .9em;
+  text-decoration: none;
+}
