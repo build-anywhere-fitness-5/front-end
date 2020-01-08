@@ -2,7 +2,6 @@ import React from 'react';
 import ClassList from './ClassList';
 import PassList from './PassList';
 import { Link } from 'react-router-dom';
-import CreateClass from './CreateClass';
 
 const InstructorDashboard = props => {
     return (

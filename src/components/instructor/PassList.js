@@ -2,9 +2,11 @@ import React from "react";
 import { connect } from "react-redux";
 import { deletePass, editPass } from "../../actions/index";
 import { Modal } from "@material-ui/core";
-import EditPass from './EditPass'
+import EditPass from "./EditPass";
 const PassList = props => {
   const [open, setOpen] = React.useState(false);
+  const [item, setItem] = React.useState();
+
   // const [openAccount, setOpenAccount] = React.useState(false);
   // const [postTool, setPostTool] = React.useState(false);
 
@@ -35,32 +37,41 @@ const PassList = props => {
                   // console.log('click')
                   e.preventDefault();
                   props.deletePass(pass);
-                  console.log(pass)
+                  console.log(pass);
                 }}
               >
                 delete
               </button>
-              <button onClick={e => {
-                props.editPass(pass);
-                 handleOpen()
-              }}>
-                {" "}
-                edit
-                {/* <Link to="/EditPost/:postID">Edit Post</Link> */}
-              </button>
-              <Modal
-                aria-labelledby="simple-modal-title"
-                aria-describedby="simple-modal-description"
-                open={open}
-                onClose={handleClose}
+              <button
+                onClick={e => {
+                  //   props.editPass(pass);
+                  // props.editPass(pass);
+
+                  // }}>
+                  //   {" "}
+                  //   edit
+                  //   {/* <Link to="/EditPost/:postID">Edit Post</Link> */}
+                  e.preventDefault();
+                  handleOpen();
+                  setItem(pass)
+
+                  console.log(pass);
+                }}
               >
-                <div>
-                    <EditPass key={index} pass={pass} />
-                    {console.log(pass, index)}
-                </div>
-              </Modal>
+                Edit
+              </button>
             </tr>
           ))}
+          <Modal
+            aria-labelledby="simple-modal-title"
+            aria-describedby="simple-modal-description"
+            open={open}
+            onClose={handleClose}
+          >
+            <div>
+              <EditPass {...props} pass={item} />
+            </div>
+          </Modal>
         </tbody>
       </table>
     </div>

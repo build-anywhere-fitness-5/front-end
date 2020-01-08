@@ -5,7 +5,8 @@ import {
   DELETE_CLASS,
   ADD_PASS,
   EDIT_PASS,
-  DELETE_PASS
+  DELETE_PASS,
+  EDIT_CLASS,
 } from "../actions/index";
 
 const initialState = {
@@ -41,24 +42,24 @@ const initialState = {
   ],
   passes: [
     {
-      className: "CrossFit",
+      className: "Yoga",
       instructor: "joeinstructor",
-      client: "susieclient",
-      classesRemaining: 5,
+      client: "orangeclient",
+      classesRemaining: 9,
       id: 0
     },
     {
-      className: "CrossFit",
-      instructor: "joeinstructor",
+      className: "Jimmy",
+      instructor: "papainstructor",
       client: "susieclient",
-      classesRemaining: 5,
+      classesRemaining: 2,
       id: 1
     },
     {
       className: "CrossFit",
-      instructor: "joeinstructor",
-      client: "johnclient",
-      classesRemaining: 5,
+      instructor: "mommainstructor",
+      client: "willclient",
+      classesRemaining: 7,
       id: 2
     }
   ],
@@ -111,6 +112,17 @@ export const classReducer = (state = initialState, action) => {
       return {
         ...state,
         passes: state.passes.map(item => {
+          if (item.id === action.payload.id) {
+            return  action.payload
+          }
+          return item
+        })
+      }
+      case EDIT_CLASS:
+      // console.log(state, action);
+      return {
+        ...state,
+        classes: state.classes.map(item => {
           if (item.id === action.payload.id) {
             return { ...action.payload }
           }

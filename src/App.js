@@ -5,7 +5,8 @@ import ClientHome from "./components/Clients/ClientHome";
 
 import InstructorDashboard from "./components/instructor/InstructorDashboard";
 import CreateClass from "./components/instructor/CreateClass";
-import InstructorClass from "./components/instructor/InstructorClass";
+import ViewClass from './components/instructor/ViewClass';
+import EditClass from './components/instructor/EditClass';
 
 import { Route } from "react-router-dom";
 
@@ -14,6 +15,7 @@ import LoginForm from "./components/LoginForm";
 import SignupForm from "./components/SignupForm";
 
 import "./App.css";
+import CreatePass from "./components/instructor/CreatePass";
 
 function App() {
   return (
@@ -43,22 +45,17 @@ function App() {
       <Route path="/client" component={ClientHome} />
 
       <Route path="/client/home" component={ClientHome} />
+      <Route exact path='/instructor/classes/:classID' render={props => {
+        return <ViewClass {...props} />
+      }} />
+      <Route path='/instructor/classes/edit/:classID' render={props => {
+        return <EditClass {...props} />
+      }} />
 
-      <Route
-        path="/instructor/classes/:id"
-        render={props => {
-          return <InstructorClass {...props} />;
-        }}
-      />
-
-      <Route
-        exact
-        path="/instructor"
-        render={props => {
-          return <InstructorDashboard {...props} />;
-        }}
-      />
+      <Route exact path="/instructor" component={InstructorDashboard} />
       <Route exact path="/instructor/createclass" component={CreateClass} />
+      <Route exact path="/instructor/createpass" component={CreatePass} />
+
     </div>
   );
 }

@@ -56,7 +56,7 @@ const EditPass = props => {
   });
 
   useEffect(() => {
-    console.log(props.pass);
+    console.log('PROPS.PASS CONSOLE LOG', props.pass, 'INDEX', props.index);
     setUpdatePass(props.pass);
   }, []);
 
