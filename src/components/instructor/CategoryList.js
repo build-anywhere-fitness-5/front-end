@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { deleteCategory, editCategory } from "../../actions/index";
+import { deleteCategory, editCategory, fetchCategory } from "../../actions/index";
 import { Modal } from "@material-ui/core";
 import styled from "styled-components";
-import EditPass from "./EditPass";
+import EditCategory from "./EditCategory";
 const StyledFormDiv = styled.div`
     background-color: white;
     display: flex;
@@ -20,6 +20,9 @@ const UserCard = styled.div`
 const CategoryList = props => {
   const [open, setOpen] = React.useState(false);
   const [item, setItem] = React.useState();
+  useEffect(() => {
+      props.fetchCategory()
+  }, [])
 
   // const [openAccount, setOpenAccount] = React.useState(false);
   // const [postTool, setPostTool] = React.useState(false);
@@ -47,13 +50,6 @@ const CategoryList = props => {
           </button>
           <button
             onClick={e => {
-              //   props.editPass(pass);
-              // props.editPass(pass);
-
-              // }}>
-              //   {" "}
-              //   edit
-              //   {/* <Link to="/EditPost/:postID">Edit Post</Link> */}
               e.preventDefault();
               handleOpen();
               setItem(category);
@@ -72,7 +68,7 @@ const CategoryList = props => {
         onClose={handleClose}
       >
         <div>
-          <EditPass {...props} pass={item} />
+          <EditCategory {...props} category={item} />
         </div>
       </Modal>
     </StyledFormDiv>
@@ -85,4 +81,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { deleteCategory, editCategory })(CategoryList);
+export default connect(mapStateToProps, { deleteCategory, editCategory, fetchCategory })(CategoryList);

@@ -11,9 +11,31 @@ import {
   ADD_CATEGORY,
   DELETE_CATEGORY,
   EDIT_CATEGORY,
+  ADD_STUDIO_CLASS,
+  EDIT_STUDIO_CLASS,
+  DELETE_STUDIO_CLASS,
+  FETCH_SUCCESS,
+  FETCHCAT_SUCCESS,
+  FETCH_CLASSES,
+  FETCHCLASS_SUCCESS,
 } from "../actions/index";
 
 const initialState = {
+  studioTwoClasses: [
+    {
+      id: 1,
+      title: "Yoga",
+      instructorId: 1,
+      categoryId: 1,
+      scheduleTime: '22:45',
+      address: null,
+      city: null,
+      state: null,
+      zipCode: null,
+      created_at: "2019-10-21T12:51:44.173Z",
+      updated_at: "2019-10-21T12:51:44.173Z"
+    }
+  ],
   classes: [
     {
       className: "CrossFit Monday",
@@ -67,15 +89,7 @@ const initialState = {
       id: 2
     }
   ],
-  categories: [
-    {
-      id: 1,
-      name: "Pilates",
-      description: null,
-      created_at: "2019-10-20T22:59:34.197Z",
-      updated_at: "2019-10-20T22:59:34.197Z"
-    }
-  ],
+  categories: [],
   scheduledClasses: [],
   instructor: true,
   signedIn: true
@@ -84,6 +98,18 @@ const initialState = {
 export const classReducer = (state = initialState, action) => {
   console.log(state, action);
   switch (action.type) {
+    case FETCHCAT_SUCCESS:
+    return {
+      ...state,
+      categories: action.payload
+
+    }
+    case FETCHCLASS_SUCCESS:
+    return {
+      ...state,
+      classes: action.payload
+
+    }
     case ADD_CLASS:
       return {
         ...state,
@@ -150,7 +176,7 @@ export const classReducer = (state = initialState, action) => {
       case EDIT_CATEGORY:
         return {
           ...state,
-          passes: state.categories.map(item => {
+          categories: state.categories.map(item => {
             if (item.id === action.payload.id) {
               return action.payload;
             }
@@ -167,6 +193,28 @@ export const classReducer = (state = initialState, action) => {
           }
           return item;
         })
+      };
+    case ADD_STUDIO_CLASS:
+      return {
+        ...state,
+        studioTwoClasses: [...state.studioTwoClasses, action.payload]
+      };
+    case EDIT_STUDIO_CLASS:
+      // console.log(state, action);
+      return {
+        ...state,
+        studioTwoClasses: state.studioTwoClasses.map(item => {
+          if (item.id === action.payload.id) {
+            return { ...action.payload }
+          }
+          return item
+        })
+      };
+    case DELETE_STUDIO_CLASS:
+      console.log(state, action);
+      return {
+        ...state,
+        studioTwoClasses: state.studioTwoClasses.filter(c => c.id !== action.payload)
       };
     case LOGOUT:
       return {

@@ -18,11 +18,21 @@ export const EDIT_CATEGORY = 'EDIT_CATEGORY';
 
 //Logout
 export const LOGOUT = 'LOGOUT';
+export const ADD_STUDIO_CLASS = 'ADD_STUDIO_CLASS';
+export const EDIT_STUDIO_CLASS = 'EDIT_STUDIO_CLASS';
+export const DELETE_STUDIO_CLASS = 'DELETE_STUDIO_CLASS';
 
+//Fetch Data
+export const START_FETCHING = 'START_FETCHING'
+export const FETCH_SUCCESS =  'FETCH_SUCCESS'
+export const FETCH_FAILURE ='FETCH_FAILURE'
+export const FETCHCAT_SUCCESS ='FETCHCAT_SUCCESS'
+export const FETCHCLASS_SUCCESS ='FETCHCLASS_SUCCESS'
 
 export const addClass = newClass => {
     return { type: ADD_CLASS, payload: newClass }
 }
+
 export const scheduleClass = scheduleClass => {
     return { type: SCHEDULE_CLASS, payload: scheduleClass }
 }
@@ -47,15 +57,42 @@ export const addCategory = id => dispatch => {
     // renter_id = who is renting the item
     axiosWithAuth()
     .post(`https://lambda-anywhere-fitness.herokuapp.com/api/category`, id)
-    .then(res => dispatch({ type: ADD_CATEGORY, payload: id })& console.log(res, "fetchAddRental"))
+    .then(res => dispatch({ type: ADD_CATEGORY, payload: id })& console.log(res, "addCategory"))
     .catch(res => dispatch({type: ADD_CATEGORY, payload: id}))
 }
-export const deleteCategory = id => {
-    return { type: DELETE_CATEGORY, payload: id }
+export const fetchCategory = () => dispatch => {
+    dispatch({ type: START_FETCHING });
+    axiosWithAuth()
+        .get(
+            "https://lambda-anywhere-fitness.herokuapp.com/api/category"
+        )
+        .then(res => { console.log(res, "Category get");
+        dispatch({ type: FETCHCAT_SUCCESS, payload: res.data})})
+        .catch(err => dispatch({ type: FETCH_FAILURE, payload: err.response }));
+}
+export const fetchClasses = () => dispatch => {
+    dispatch({ type: START_FETCHING });
+    axiosWithAuth()
+        .get(
+            "https://lambda-anywhere-fitness.herokuapp.com/api/classes"
+        )
+        .then(res => { console.log(res, "CLASS get");
+        dispatch({ type: FETCHCLASS_SUCCESS, payload: res.data})})
+        .catch(err => dispatch({ type: FETCH_FAILURE, payload: err.response }));
+}
+export const deleteCategory = id => dispatch => {
+    axiosWithAuth()
+    .delete(`https://lambda-anywhere-fitness.herokuapp.com/api/category/${id.id}`)
+    .then(res => dispatch({type: DELETE_CATEGORY, payload: id}))
+    .catch(err => console.log(err))
 }
 
-export const editCategory = id => {
-    return { type: EDIT_CATEGORY, payload: id }
+export const editCategory = id => dispatch => {
+    axiosWithAuth()
+    .put(`https://lambda-anywhere-fitness.herokuapp.com/api/category/${id.id}`, id)
+    .then(res => dispatch({type: EDIT_CATEGORY, payload: id}))
+    .catch(err => console.log(err));
+    
 }
 
 
@@ -65,4 +102,16 @@ export const editClass = editClass => {
 
 export const logOut = () => {
     return { type: LOGOUT }
+}
+
+export const addStudioClass = newStudioClass => {
+    return { type: ADD_STUDIO_CLASS, payload: newStudioClass }
+}
+
+export const deleteStudioClass = id => {
+    return { type: DELETE_STUDIO_CLASS, payload: id }
+}
+
+export const editStudioClass = editStudioClass => {
+    return { type: EDIT_STUDIO_CLASS, payload: editStudioClass }
 }

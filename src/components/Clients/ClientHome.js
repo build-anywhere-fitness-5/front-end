@@ -4,7 +4,7 @@
 import React, { useEffect, useState } from "react";
 import SearchForm from "./SearchForm";
 import { connect } from "react-redux";
-import { scheduleClass, unscheduleClass } from "../../actions/index";
+import { scheduleClass, unscheduleClass, fetchClasses } from "../../actions/index";
 const ClientHome = props => {
   const [query, setQuery] = useState("");
   const [unScheduledClass, setUnScheduledClass] = useState(props.classes);
@@ -15,6 +15,7 @@ const ClientHome = props => {
   };
   useEffect(() => {
     console.log(filteredClass);
+    props.fetchClasses()
     if (query.length < 1) {
       setFilteredClass(unScheduledClass);
     } else {
@@ -90,6 +91,6 @@ const mapStateToProps = state => {
     scheduledClasses: state.scheduledClasses
   };
 };
-export default connect(mapStateToProps, { scheduleClass, unscheduleClass })(
+export default connect(mapStateToProps, { scheduleClass, unscheduleClass, fetchClasses })(
   ClientHome
 );
