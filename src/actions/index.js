@@ -6,6 +6,7 @@ export const DELETE_CLASS = 'DELETE_CLASS';
 export const ADD_PASS = 'ADD_PASS';
 export const DELETE_PASS = 'DELETE_PASS';
 export const EDIT_PASS = 'EDIT_PASS';
+export const LOGOUT = 'LOGOUT';
 
 
 export const addClass = newClass => {
@@ -21,16 +22,20 @@ export const deleteClass = id => {
     return { type: DELETE_CLASS, payload: id }
 }
 export const addPass = newPass => {
-    return { type: ADD_PASS, payload: newPass}
+    return { type: ADD_PASS, payload: newPass }
 }
 export const deletePass = id => {
-    return { type: DELETE_PASS, payload: id}
+    return { type: DELETE_PASS, payload: id }
 }
 
 export const editPass = id => {
-    return { type: EDIT_PASS, payload: id}
+    return { type: EDIT_PASS, payload: id }
 }
 
 export const editClass = editClass => {
     return { type: EDIT_CLASS, payload: editClass }
+}
+
+export const logOut = () => {
+    return { type: LOGOUT }
 }

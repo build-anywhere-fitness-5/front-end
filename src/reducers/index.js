@@ -7,6 +7,7 @@ import {
   EDIT_PASS,
   DELETE_PASS,
   EDIT_CLASS,
+  LOGOUT
 } from "../actions/index";
 
 const initialState = {
@@ -115,12 +116,12 @@ export const classReducer = (state = initialState, action) => {
         ...state,
         passes: state.passes.map(item => {
           if (item.id === action.payload.id) {
-            return  action.payload
+            return action.payload
           }
           return item
         })
       }
-      case EDIT_CLASS:
+    case EDIT_CLASS:
       // console.log(state, action);
       return {
         ...state,
@@ -130,6 +131,11 @@ export const classReducer = (state = initialState, action) => {
           }
           return item
         })
+      };
+    case LOGOUT:
+      return {
+        ...state,
+        signedIn: false
       }
     default:
       return state;
