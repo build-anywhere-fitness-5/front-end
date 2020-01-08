@@ -1,7 +1,6 @@
 import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { connect } from 'react-redux'
-import { logOut } from '../actions/index';
 
 import './Header.css';
 
@@ -9,8 +8,11 @@ const Header = props => {
 
     const handleLogout = e => {
         e.preventDefault()
-        props.logOut()
+        sessionStorage.removeItem('token');
+        alert('Logged out successfully. Come back soon!');
+        // props.history.push('/');
     }
+
     return (
         <header>
             <nav>
@@ -56,4 +58,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect((mapStateToProps), { logOut })(Header);
+export default connect((mapStateToProps), {})(Header);
