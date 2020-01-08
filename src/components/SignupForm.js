@@ -133,6 +133,8 @@ const SignupForm = props => {
                     axios.post("https://lambda-anywhere-fitness.herokuapp.com/api/auth/login", { username: userInfo.username, password: userInfo.password, roleId: userInfo.roleId })
                         .then(loginResponse => {
                             sessionStorage.setItem("token", loginResponse.data.token);
+                            sessionStorage.setItem("roleId", loginResponse.data.user.roleId);
+
                             props.addUser(loginResponse.data.user);
                             console.log(loginResponse);
 

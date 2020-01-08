@@ -35,7 +35,7 @@ const Header = props => {
                     }
 
                     {/* Only for instructors */}
-                    {props.user.roleId === 1 &&
+                    {localStorage.getItem('token') && props.user.roleId === 1 &&
                         <>
                             <li><NavLink to="/instructor/createpass">Create pass</NavLink></li>
                             <li><NavLink to="/instructor/createclass">Create class</NavLink></li>

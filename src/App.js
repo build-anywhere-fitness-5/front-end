@@ -53,9 +53,9 @@ function App() {
         <SignupForm role="instructor" />
       </Route>
 
-      <PrivateRoute path="/client" component={ClientHome} />
+      <PrivateRoute exact path="/client" component={ClientHome} />
+      <PrivateRoute exact path="/client/schedule" component={ScheduledClasses} />
 
-      <PrivateRoute path="/client/home" component={ClientHome} />
 
       <PrivateRoute exact path='/instructor/classes/:classID' render={props => {
         return <ViewClass {...props} />
@@ -77,6 +77,8 @@ function App() {
       <PrivateRoute exact path="/instructor/createclass" component={CreateClass} />
       <PrivateRoute exact path="/instructor/createstudioclass" component={CreateStudioClass} />
       <PrivateRoute exact path="/instructor/createpass" component={CreatePass} />
+      <PrivateRoute exact path="/instructor/createcategory" component={CreateCategory} />
+
 
     </div>
   );
