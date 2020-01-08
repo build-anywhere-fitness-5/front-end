@@ -2,6 +2,12 @@ import React, {useState, useEffect} from "react";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
 
+import { StyledImgDiv } from "./StyledImgDiv";
+import { StyledLoginSignupContainer } from "./StyledLoginSignupContainer";
+import { StyledFormDiv } from "./StyledFormDiv";
+import { StyledInput } from "./StyledInput";
+import { StyledSignupLoginButton } from "./StyledSignupLoginButton";
+
 const SignupForm = ({role, history}) => {
 
     // store user info in state variables
@@ -115,25 +121,26 @@ const SignupForm = ({role, history}) => {
     const signupWelcomeText = "Sign up as " + ((role === "instructor") ? "an instructor" : "a client");
 
     return (
-        <>
-            <h2>{signupWelcomeText}</h2>
+        <StyledLoginSignupContainer>
+
+            <StyledImgDiv></StyledImgDiv>
+
+            <StyledFormDiv>
+
+            <h1>{signupWelcomeText}</h1>
 
             <form name="login" onSubmit={handleSignup}>
                 
-                <label htmlFor="firstName">First Name:</label>
-                <input name="firstName" type="text" onChange={handleChange} />
+                <StyledInput name="firstName" type="text" placeholder="First name" onChange={handleChange} />
                 <p className="formError" id="firstNameErrors"></p>
 
-                <label htmlFor="lastName">Last Name:</label>
-                <input name="lastName" type="text" onChange={handleChange} />
+                <StyledInput name="lastName" type="text" placeholder="Last name" onChange={handleChange} />
                 <p className="formError" id="lastNameErrors"></p>
 
-                <label htmlFor="Email">Email:</label>
-                <input name="email" type="email" onChange={handleChange} />
+                <StyledInput name="email" type="email" placeholder="Email" onChange={handleChange} />
                 <p className="formError" id="emailErrors"></p>
 
-                <label htmlFor="Password">Password:</label>
-                <input name="password" type="password" onChange={handleChange} />
+                <StyledInput name="password" type="password" placeholder="Password" onChange={handleChange} />
                 <p className="formError" id="passwordErrors"></p>
 
                 {/* Show input for instructor code if user is an instructor */}
@@ -141,17 +148,19 @@ const SignupForm = ({role, history}) => {
                     (role === "instructor") &&
                     (
                         <>
-                            <label htmlFor="instructorCode">Instructor Code:</label>
-                            <input name="instructorCode" type="text" onChange={handleChange} />
+                            <StyledInput name="instructorCode" type="text" placeholder="Instructor code" onChange={handleChange} />
                             <p className="formError" id="instructorCodeErrors"></p>
                         </>
                     )
                 }
 
-                <button type="submit">Sign Up</button>
+                <StyledSignupLoginButton type="submit">Sign Up</StyledSignupLoginButton>
 
             </form>
-        </>
+        
+            </StyledFormDiv>
+        </StyledLoginSignupContainer>
+
     )
 }
 

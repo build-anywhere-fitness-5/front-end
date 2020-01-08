@@ -2,6 +2,12 @@ import React, {useState} from "react";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
 
+import { StyledImgDiv } from "./StyledImgDiv";
+import { StyledLoginSignupContainer } from "./StyledLoginSignupContainer";
+import { StyledFormDiv } from "./StyledFormDiv";
+import { StyledInput } from "./StyledInput";
+import { StyledSignupLoginButton } from "./StyledSignupLoginButton";
+
 const LoginForm = ({ history }) => {
 
     // store user info in state variables
@@ -63,22 +69,28 @@ const LoginForm = ({ history }) => {
 
 
     return (
-        <>
-            <h2>Login</h2>
+        <StyledLoginSignupContainer>
+
+            <StyledImgDiv></StyledImgDiv>
+
+            <StyledFormDiv>
+
+            <h1>Log in</h1>
+
             <form name="login" onSubmit={handleLogin}>
                 
-                <label htmlFor="email">Email:</label>
-                <input name="email" type="email" onChange={handleChange} />
+                <StyledInput name="email" type="email" placeholder="Email" onChange={handleChange} />
                 <p className="formError" id="emailErrors"></p>
 
-                <label htmlFor="password">Password:</label>
-                <input name="password" type="password" onChange={handleChange} />
+                <StyledInput name="password" type="password" placeholder="Password" onChange={handleChange} />
                 <p className="formError" id="passwordErrors"></p>
 
-                <button type="submit">Log In</button>
+                <StyledSignupLoginButton type="submit">Log In</StyledSignupLoginButton>
 
             </form>
-        </>
+        
+            </StyledFormDiv>
+        </StyledLoginSignupContainer>
     )
 }
 
