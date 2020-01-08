@@ -63,7 +63,9 @@ const initialState = {
       id: 2
     }
   ],
-  scheduledClasses: []
+  scheduledClasses: [],
+  instructor: true,
+  signedIn: true,
 };
 
 export const classReducer = (state = initialState, action) => {

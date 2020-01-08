@@ -13,6 +13,7 @@ import { Route } from "react-router-dom";
 import SignupLoginLinks from "./components/SignupLoginLinks";
 import LoginForm from "./components/LoginForm";
 import SignupForm from "./components/SignupForm";
+import Header from "./components/Header";
 
 import "./App.css";
 import CreatePass from "./components/instructor/CreatePass";
@@ -20,8 +21,7 @@ import CreatePass from "./components/instructor/CreatePass";
 function App() {
   return (
     <div className="App">
-      <h1>Anywhere Fitness</h1>
-
+      <Header />
       <Route exact path="/">
         <SignupLoginLinks />
       </Route>
