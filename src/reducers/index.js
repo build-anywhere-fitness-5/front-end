@@ -7,7 +7,7 @@ import {
   EDIT_PASS,
   DELETE_PASS,
   EDIT_CLASS,
-  LOGOUT,
+  REMOVE_USER,
   ADD_STUDIO_CLASS,
   EDIT_STUDIO_CLASS,
   DELETE_STUDIO_CLASS,
@@ -189,10 +189,10 @@ export const classReducer = (state = initialState, action) => {
         ...state,
         user: action.payload
       }
-    case LOGOUT:
+    case REMOVE_USER:
       return {
         ...state,
-        signedIn: false
+        user: ''
       }
     default:
       return state;

@@ -11,6 +11,7 @@ export const ADD_STUDIO_CLASS = 'ADD_STUDIO_CLASS';
 export const EDIT_STUDIO_CLASS = 'EDIT_STUDIO_CLASS';
 export const DELETE_STUDIO_CLASS = 'DELETE_STUDIO_CLASS';
 export const ADD_USER = 'ADD_USER';
+export const REMOVE_USER = 'REMOVE_USER'
 
 export const addClass = newClass => {
     return { type: ADD_CLASS, payload: newClass }
@@ -58,4 +59,8 @@ export const editStudioClass = editStudioClass => {
 
 export const addUser = user => {
     return { type: ADD_USER, payload: user }
+}
+
+export const removeUser = user => {
+    return { type: REMOVE_USER }
 }
