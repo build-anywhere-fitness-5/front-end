@@ -18,8 +18,7 @@ import {
   FETCHCLASS_SUCCESS,
   ADD_STUDIO_CLASS,
   ADD_USER,
-  REMOVE_USER,
-  ADD_STUDIO_CLASS
+  REMOVE_USER
 } from "../actions/index";
 
 const initialState = {
