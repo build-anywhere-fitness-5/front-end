@@ -52,7 +52,11 @@ function App() {
         <SignupForm role="instructor" />
       </Route>
 
+<<<<<<< HEAD
+      <Route path="/client" component={ClientHome} />
+=======
       <PrivateRoute path="/client" component={ClientHome} />
+>>>>>>> c1bc938b85934fe4cb1f5b77d7098cff176d89f7
 
       <PrivateRoute path="/client/home" component={ClientHome} />
 
