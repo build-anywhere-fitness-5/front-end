@@ -1,11 +1,7 @@
-<<<<<<< HEAD
-import React, {useState, useEffect} from "react";
-import { useHistory } from "react-router-dom";
-=======
 import React, { useState, useEffect } from "react";
-import { withRouter } from "react-router-dom";
->>>>>>> c1bc938b85934fe4cb1f5b77d7098cff176d89f7
+import { useHistory } from "react-router-dom";
 import axios from "axios";
+import { connect } from 'react-redux';
 
 import { StyledImgDiv } from "./StyledImgDiv";
 import { StyledLoginSignupContainer } from "./StyledLoginSignupContainer";
@@ -13,7 +9,9 @@ import { StyledFormDiv } from "./StyledFormDiv";
 import { StyledInput } from "./StyledInput";
 import { StyledSignupLoginButton } from "./StyledSignupLoginButton";
 
-const LoginForm = () => {
+import { addUser } from '../actions/index';
+
+const LoginForm = props => {
 
     let history = useHistory();
 
@@ -63,9 +61,13 @@ const LoginForm = () => {
                     // get user roleId (instructor is 1, client is 2) and redirect to either instructor or client dashboard
                     axios.post("https://lambda-anywhere-fitness.herokuapp.com/api/auth/login", { username: userInfo.username, password: userInfo.password })
                         .then(loginResponse => {
-
+                            sessionStorage.setItem("token", loginResponse.data.token);
+                            props.addUser(loginResponse.data.user);
                             console.log(loginResponse);
 
+                            if (props.user.roleId === 1) { history.push("/instructor"); }
+
+                            else if (props.user.roleId === 2) { history.push("/client"); }
                         })
 
                     let roleId = 1;
@@ -124,4 +126,10 @@ const LoginForm = () => {
     )
 }
 
-export default LoginForm;
+const mapStateToProps = state => {
+    return {
+        user: state.user
+    }
+}
+
+export default connect(mapStateToProps, { addUser })(LoginForm);
