@@ -1,5 +1,6 @@
 import React, {useState} from "react";
-
+import { withRouter } from "react-router-dom";
+import axios from "axios";
 
 const LoginForm = () => {
 
@@ -9,7 +10,15 @@ const LoginForm = () => {
             email: "",
             password: ""
         });
-    
+
+    // store error info in state variables
+    const [errorInfo, setErrorInfo] = useState(
+        {
+            emailErrors: [],
+            passwordErrors: []
+        });
+
+
     // update what the user has typed into state upon change
     function handleChange(event) {
         setUserInfo({...userInfo, [event.target.name]: event.target.value});
@@ -21,6 +30,26 @@ const LoginForm = () => {
         event.preventDefault();
 
         console.log("Logging in with", userInfo);
+
+        // if there are no errors, make a POST request to the database
+        if (!inputsHaveErrors)
+        {
+            axios.post("http://www.example.com", userInfo)
+            .then(response => {
+
+                console.log("Login status: Database accessed.");
+
+                history.push("http://www.example.com");
+
+                })
+            .catch(response => {
+                
+                console.log("Login status: Error accessing database.");
+
+                history.push("http://www.example.com");
+                
+                });
+        }
 
     }
 
@@ -45,4 +74,4 @@ const LoginForm = () => {
     )
 }
 
-export default LoginForm;
+export default withRouter(LoginForm);

@@ -112,17 +112,6 @@ const SignupForm = ({role, history}) => {
 
     }
     
-
-    
-    let test = 5;
-
-    let original = [1, 2, 100];
-
-    console.log(...original, test)
-
-    
-
-
     const signupWelcomeText = "Sign up as " + ((role === "instructor") ? "an instructor" : "a client");
 
     return (
@@ -140,7 +129,7 @@ const SignupForm = ({role, history}) => {
                 <p className="formError" id="lastNameErrors"></p>
 
                 <label htmlFor="Email">Email:</label>
-                <input name="email" type="text" onChange={handleChange} />
+                <input name="email" type="email" onChange={handleChange} />
                 <p className="formError" id="emailErrors"></p>
 
                 <label htmlFor="Password">Password:</label>
