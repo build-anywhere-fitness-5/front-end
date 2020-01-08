@@ -5,6 +5,8 @@ import { applyMiddleware, createStore, compose } from 'redux';
 import logger from 'redux-logger';
 import { Provider } from 'react-redux';
 import { classReducer } from './reducers/index'
+import thunk from 'redux-thunk'
+
 
 import './index.css';
 
@@ -13,8 +15,10 @@ import * as serviceWorker from './serviceWorker';
 import 'normalize.css'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
-const store = createStore(classReducer, composeEnhancers(applyMiddleware(logger)));
+const middleware = [
+    thunk, logger
+]
+const store = createStore(classReducer, composeEnhancers(applyMiddleware(...middleware)));
 
 ReactDOM.render(
     <Router>

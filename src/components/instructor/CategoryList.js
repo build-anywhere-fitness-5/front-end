@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { deletePass, editPass } from "../../actions/index";
+import { deleteCategory, editCategory } from "../../actions/index";
 import { Modal } from "@material-ui/core";
 import styled from "styled-components";
 import EditPass from "./EditPass";
@@ -17,7 +17,7 @@ const UserCard = styled.div`
     border-radius: 5px;
 
 `;
-const PassList = props => {
+const CategoryList = props => {
   const [open, setOpen] = React.useState(false);
   const [item, setItem] = React.useState();
 
@@ -32,17 +32,15 @@ const PassList = props => {
   };
   return (
     <StyledFormDiv>
-      {props.passes.map((pass, index) => (
+      {props.categories.map((category, index) => (
         <UserCard key={index}>
-            <h1>Name: {pass.client}</h1>
-            <h2>Class: {pass.className}</h2>
-            <h4>Classes Remaining: {pass.classesRemaining}</h4>
+            <h1>Category: {category.name}</h1>
+            <h2>Description: {category.description}</h2>
           <button
             onClick={e => {
               // console.log('click')
               e.preventDefault();
-              props.deletePass(pass);
-              console.log(pass);
+              props.deleteCategory(category);
             }}
           >
             delete
@@ -58,9 +56,9 @@ const PassList = props => {
               //   {/* <Link to="/EditPost/:postID">Edit Post</Link> */}
               e.preventDefault();
               handleOpen();
-              setItem(pass);
+              setItem(category);
 
-              console.log(pass);
+              console.log(category);
             }}
           >
             Edit
@@ -83,8 +81,8 @@ const PassList = props => {
 
 const mapStateToProps = state => {
   return {
-    passes: state.passes
+    categories: state.categories
   };
 };
 
-export default connect(mapStateToProps, { deletePass, editPass })(PassList);
+export default connect(mapStateToProps, { deleteCategory, editCategory })(CategoryList);

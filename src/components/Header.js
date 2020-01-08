@@ -35,6 +35,13 @@ const Header = props => {
                             <li><NavLink to="/instructor">Dashboard</NavLink></li>
                         </>
                     }
+                    {/*Only for Clients */}
+                     {props.signedIn && /*!props.instructor && */
+                        <>
+                            <li><NavLink to="/client/">Home</NavLink></li>
+                            <li><NavLink to="/client/schedule">Scheduled Classes</NavLink></li>
+                        </>
+                    }
 
                     {/* Only for those signed in */}
                     {props.signedIn &&

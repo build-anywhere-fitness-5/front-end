@@ -7,7 +7,10 @@ import {
   EDIT_PASS,
   DELETE_PASS,
   EDIT_CLASS,
-  LOGOUT
+  LOGOUT,
+  ADD_CATEGORY,
+  DELETE_CATEGORY,
+  EDIT_CATEGORY,
 } from "../actions/index";
 
 const initialState = {
@@ -64,9 +67,18 @@ const initialState = {
       id: 2
     }
   ],
+  categories: [
+    {
+      id: 1,
+      name: "Pilates",
+      description: null,
+      created_at: "2019-10-20T22:59:34.197Z",
+      updated_at: "2019-10-20T22:59:34.197Z"
+    }
+  ],
   scheduledClasses: [],
   instructor: true,
-  signedIn: true,
+  signedIn: true
 };
 
 export const classReducer = (state = initialState, action) => {
@@ -116,27 +128,51 @@ export const classReducer = (state = initialState, action) => {
         ...state,
         passes: state.passes.map(item => {
           if (item.id === action.payload.id) {
-            return action.payload
+            return action.payload;
           }
-          return item
+          return item;
         })
-      }
+      };
+      case ADD_CATEGORY:
+        return {
+          ...state,
+          categories: [...state.categories, action.payload]
+        };
+      case DELETE_CATEGORY:
+        return {
+          ...state,
+          categories: [
+            ...state.categories.filter((item, index) => {
+              return item !== action.payload;
+            })
+          ]
+        };
+      case EDIT_CATEGORY:
+        return {
+          ...state,
+          passes: state.categories.map(item => {
+            if (item.id === action.payload.id) {
+              return action.payload;
+            }
+            return item;
+          })
+        };
     case EDIT_CLASS:
       // console.log(state, action);
       return {
         ...state,
         classes: state.classes.map(item => {
           if (item.id === action.payload.id) {
-            return { ...action.payload }
+            return { ...action.payload };
           }
-          return item
+          return item;
         })
       };
     case LOGOUT:
       return {
         ...state,
         signedIn: false
-      }
+      };
     default:
       return state;
   }

@@ -56,7 +56,7 @@ const EditPass = props => {
   });
 
   useEffect(() => {
-    console.log('PROPS.PASS CONSOLE LOG', props.pass, 'INDEX', props.index);
+    console.log("PROPS.PASS CONSOLE LOG", props.pass, "INDEX", props.index);
     setUpdatePass(props.pass);
   }, []);
 
@@ -73,19 +73,9 @@ const EditPass = props => {
   };
 
   return (
-    <div>
-      <form style={{ backgroundColor: "white" }} onSubmit={submitHandler}>
+    <div style={{ width: '40%', height: '100%' }}>
+      <form style={{ backgroundColor: "white"} } onSubmit={submitHandler}>
         <h1>Update Your Pass</h1>
-        <TextField
-          label="Class"
-          variant="outlined"
-          margin="normal"
-          className={classes.textField}
-          type="text"
-          name="className"
-          value={updatePass.className}
-          onChange={changeHandler}
-        />
         <TextField
           label="Client"
           variant="outlined"
@@ -94,6 +84,16 @@ const EditPass = props => {
           type="text"
           name="client"
           value={updatePass.client}
+          onChange={changeHandler}
+        />
+        <TextField
+          label="Class"
+          variant="outlined"
+          margin="normal"
+          className={classes.textField}
+          type="text"
+          name="className"
+          value={updatePass.className}
           onChange={changeHandler}
         />
 

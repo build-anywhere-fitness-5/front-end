@@ -1,7 +1,8 @@
 import React from "react";
 import { Route } from "react-router-dom";
+import PrivateRoute from "./components/PrivateRoute"
 
-import ClientLogin from "./components/Clients/ClientLogin";
+
 import ClientHome from "./components/Clients/ClientHome";
 
 import InstructorDashboard from "./components/instructor/InstructorDashboard";
@@ -16,6 +17,8 @@ import Header from "./components/Header";
 
 import "./App.css";
 import CreatePass from "./components/instructor/CreatePass";
+import ScheduledClasses from "./components/Clients/ScheduledClasses";
+import CreateCategory from "./components/instructor/CreateCategory";
 
 function App() {
   return (
@@ -41,7 +44,8 @@ function App() {
         <SignupForm role="instructor" />
       </Route>
 
-      <Route path="/client" component={ClientHome} />
+      <Route exact path="/client" component={ClientHome} />
+      <Route path="/client/schedule" component={ScheduledClasses} />
 
       <Route path="/client/home" component={ClientHome} />
       <Route exact path='/instructor/classes/:classID' render={props => {
@@ -53,6 +57,7 @@ function App() {
 
       <Route exact path="/instructor" component={InstructorDashboard} />
       <Route exact path="/instructor/createclass" component={CreateClass} />
+      <Route exact path="/instructor/createcategory" component={CreateCategory} />
       <Route exact path="/instructor/createpass" component={CreatePass} />
 
     </div>
