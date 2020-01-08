@@ -1,5 +1,7 @@
-import React from 'react';
-import { connect } from 'react-redux'
+import React from "react";
+import { connect } from "react-redux";
+import { deleteClass } from "../../actions";
+import { Link } from "react-router-dom";
 
 const ClassList = props => {
     return (
@@ -17,37 +19,35 @@ const ClassList = props => {
                         <th>Open spots</th>
                         <th>Date</th>
                         <th>Instructor</th>
-                        <th></th>
+
+
                     </tr>
                 </thead>
                 <tbody>
-                    {props.classes.map((c, index) => (
-                        <tr key={index}>
-                            <td>{c.className}</td>
+                    {props.classes.map(c => (
+                        <tr key={c.id}>
+                            <td><Link to={`/instructor/classes/${c.id}`}>{c.className}</Link></td>
                             <td>{c.type}</td>
                             <td>{c.startTime}</td>
                             <td>{c.durationMinutes}</td>
                             <td>{c.intensity}</td>
                             <td>{c.location}</td>
                             <td>{c.maxClassSize}</td>
-                            {/* <td>{c.maxClassSize - c.clients.length}</td> */}
-                            <td>{c.maxClassSize}</td>
+                            <td>{c.maxClassSize - c.clients.length}</td>
                             <td>{c.date}</td>
                             <td>{c.instructor}</td>
-                            <td><button>Edit</button></td>
                         </tr>
                     ))}
                 </tbody>
             </table>
-        </div>
+        </div >
     )
-}
+};
 
 const mapStateToProps = state => {
     return {
-        classes: state.classes,
+        classes: state.classes
+    };
+};
 
-    }
-}
-
-export default connect(mapStateToProps, {})(ClassList);
+export default connect(mapStateToProps, { deleteClass })(ClassList);

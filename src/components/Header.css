@@ -1,0 +1,38 @@
+header {
+    margin: 0 6em;
+}
+
+header nav {
+    display: flex;
+}
+
+nav ul {
+    width: 85%;
+    display: flex;
+    justify-content: space-around;
+    list-style-type: none;
+    align-items: center;
+
+}
+
+li a {
+    text-decoration: none;
+    font-size: .9em;
+    color: #303030;
+    font-weight: 500;
+}
+
+.logo {
+    width: 50%;
+    display: flex;
+    align-items: center;
+}
+
+.logo a {
+    text-decoration: none;
+    color: rgb(32, 40, 73);
+    font-weight: 700;
+    font-size: 1.3em;
+    letter-spacing: 1px;
+}
+

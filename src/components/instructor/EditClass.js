@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
+import { editClass } from '../../actions/index'
 
-import { addClass } from '../../actions/index';
+import styled from 'styled-components';
 
 const Form = styled.form`
 display: flex;
@@ -10,9 +10,9 @@ flex-direction: column;
 width: 50%;
 `
 
-const CreateClass = props => {
+const EditClass = props => {
 
-    const [newClass, setNewClass] = useState({
+    const [editClass, setEditClass] = useState({
         className: '',
         classType: '',
         startTime: '',
@@ -24,25 +24,37 @@ const CreateClass = props => {
         clients: []
     });
 
-    console.log(newClass);
+    useEffect(() => {
+        setEditClass(props.classes.find(c => c.id === +props.match.params.classID))
+    }, [props.match.params.classID, props.classes])
+
+    const classEditing = +props.match.params.classID
+
+    console.log(editClass)
 
     const handleChanges = e => {
         console.log(e.target.value)
-        setNewClass({
-            ...newClass,
+        setEditClass({
+            ...editClass,
             [e.target.name]: e.target.type === 'number' ? +e.target.value : e.target.value
         });
     };
 
-    const handleSubmit = e => {
+    const handleSave = e => {
         e.preventDefault()
-        props.addClass(newClass);
-        props.history.push(`/instructor/`);
+        props.editClass(editClass)
+        props.history.push(`/instructor/`)
     }
+
+    const handleCancel = e => {
+        e.preventDefault()
+        props.history.push(`/instructor/`)
+    }
+
+    // console.log(classEditing)
 
     return (
         <div>
-            <h2>Create class</h2>
 
             <Form>
 
@@ -50,15 +62,16 @@ const CreateClass = props => {
                 <input
                     type="text"
                     name="className"
-                    value={newClass.className}
+                    value={editClass.className}
                     id="className"
                     onChange={handleChanges}
+                    placeholder={props.classes.find(c => c.id === classEditing).className}
                 />
 
                 <label htmlFor="classType">Type</label>
                 <input
                     type="text"
-                    value={newClass.classType}
+                    value={editClass.classType}
                     id="classType"
                     name="classType"
                     onChange={handleChanges}
@@ -67,7 +80,7 @@ const CreateClass = props => {
                 <label htmlFor="startTime">Start time</label>
                 <input
                     type="time"
-                    value={newClass.startTime}
+                    value={editClass.startTime}
                     id="startTime"
                     name="startTime"
                     onChange={handleChanges}
@@ -76,7 +89,7 @@ const CreateClass = props => {
                 <label htmlFor="durationMinutes">Duration (minutes)</label>
                 <input
                     type="number"
-                    value={newClass.durationMinutes}
+                    value={editClass.durationMinutes}
                     id="durationMinutes"
                     name="durationMinutes"
                     onChange={handleChanges}
@@ -85,7 +98,7 @@ const CreateClass = props => {
                 <label htmlFor="intensity">Intensity</label>
                 <input
                     type="text"
-                    value={newClass.intensity}
+                    value={editClass.intensity}
                     id="intensity"
                     name="intensity"
                     onChange={handleChanges}
@@ -94,7 +107,7 @@ const CreateClass = props => {
                 <label htmlFor="location">Location</label>
                 <input
                     type="text"
-                    value={newClass.location}
+                    value={editClass.location}
                     id="location"
                     name="location"
                     onChange={handleChanges}
@@ -103,7 +116,7 @@ const CreateClass = props => {
                 <label htmlFor="maxClassSize">Max Class Size</label>
                 <input
                     type="number"
-                    value={newClass.maxClassSize}
+                    value={editClass.maxClassSize}
                     id="maxClassSize"
                     name="maxClassSize"
                     onChange={handleChanges}
@@ -112,22 +125,28 @@ const CreateClass = props => {
                 <label htmlFor="date">Date</label>
                 <input
                     type="date"
-                    value={newClass.date}
+                    value={editClass.date}
                     id="date"
                     name="date"
                     onChange={handleChanges}
                 />
 
-                <button onClick={handleSubmit}>Create class</button>
+                <div>
+                    <button onClick={handleSave}>Save</button>
+                    <button onClick={handleCancel}>Cancel</button>
+                </div>
             </Form>
         </div>
+
+
+
+
     )
 }
 
 const mapStateToProps = state => {
     return {
-        addClass: addClass
+        classes: state.classes
     }
 }
-
-export default connect(mapStateToProps, { addClass })(CreateClass);
+export default connect(mapStateToProps, { editClass })(EditClass);

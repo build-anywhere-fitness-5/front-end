@@ -2,7 +2,6 @@ import React from 'react';
 import ClassList from './ClassList';
 import PassList from './PassList';
 import { Link } from 'react-router-dom';
-import CreateClass from './CreateClass';
 
 const InstructorDashboard = props => {
     return (
@@ -11,9 +10,11 @@ const InstructorDashboard = props => {
             <ClassList />
 
             <h2>Pass list:</h2>
-            <PassList />
+            <PassList/>
 
             <Link to='/instructor/createclass/'> <button>Create class</button></Link>
+            <Link to='/instructor/createpass/'> <button>Create pass</button></Link>
+
         </div>
     )
 }
