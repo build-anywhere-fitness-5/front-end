@@ -2,14 +2,27 @@ import React from "react";
 
 import SignupLoginButton from "./SignupLoginButton";
 
-const SignupLoginLinks = () => {
-    return (
-        <>
-            <SignupLoginButton text="Register as a Client" url="/signup/client"></SignupLoginButton>
-            <SignupLoginButton text="Register as an Instructor" url="/signup/instructor"></SignupLoginButton>
+import { StyledImgDiv } from "./StyledImgDiv";
+import { StyledLoginSignupContainer } from "./StyledLoginSignupContainer";
+import { StyledFormDiv } from "./StyledFormDiv";
 
-            <SignupLoginButton text="Log In" url="/login"></SignupLoginButton>
-        </>
+const SignupLoginLinks = () => { 
+    return (
+        <StyledLoginSignupContainer>
+
+            <StyledImgDiv></StyledImgDiv>
+
+            <StyledFormDiv>
+
+            <h1>Welcome to Anywhere Fitness!</h1>
+
+            <SignupLoginButton text="Sign up as a client" url="/signup/client"></SignupLoginButton>
+            <SignupLoginButton text="Sign up as an instructor" url="/signup/instructor"></SignupLoginButton>
+
+            <SignupLoginButton text="Log in" url="/login"></SignupLoginButton>
+
+            </StyledFormDiv>
+        </StyledLoginSignupContainer>
 
     )
 }

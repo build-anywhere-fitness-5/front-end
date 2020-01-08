@@ -38,9 +38,9 @@ const Header = props => {
 
                     {/* Only for those signed in */}
                     {props.signedIn &&
-                        <>
+                        <div className="logout">
                             <li><button onClick={handleLogout}>Logout</button></li>
-                        </>
+                        </div>
                     }
 
                 </ul>
