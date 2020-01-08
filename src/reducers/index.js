@@ -7,10 +7,28 @@ import {
   EDIT_PASS,
   DELETE_PASS,
   EDIT_CLASS,
-  LOGOUT
+  LOGOUT,
+  ADD_STUDIO_CLASS,
+  EDIT_STUDIO_CLASS,
+  DELETE_STUDIO_CLASS
 } from "../actions/index";
 
 const initialState = {
+  studioTwoClasses: [
+    {
+      id: 1,
+      title: "Yoga",
+      instructorId: 1,
+      categoryId: 1,
+      scheduleTime: '22:45',
+      address: null,
+      city: null,
+      state: null,
+      zipCode: null,
+      created_at: "2019-10-21T12:51:44.173Z",
+      updated_at: "2019-10-21T12:51:44.173Z"
+    }
+  ],
   classes: [
     {
       className: "CrossFit Monday",
@@ -131,6 +149,28 @@ export const classReducer = (state = initialState, action) => {
           }
           return item
         })
+      };
+    case ADD_STUDIO_CLASS:
+      return {
+        ...state,
+        studioTwoClasses: [...state.studioTwoClasses, action.payload]
+      };
+    case EDIT_STUDIO_CLASS:
+      // console.log(state, action);
+      return {
+        ...state,
+        studioTwoClasses: state.studioTwoClasses.map(item => {
+          if (item.id === action.payload.id) {
+            return { ...action.payload }
+          }
+          return item
+        })
+      };
+    case DELETE_STUDIO_CLASS:
+      console.log(state, action);
+      return {
+        ...state,
+        studioTwoClasses: state.studioTwoClasses.filter(c => c.id !== action.payload)
       };
     case LOGOUT:
       return {

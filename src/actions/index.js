@@ -7,11 +7,14 @@ export const ADD_PASS = 'ADD_PASS';
 export const DELETE_PASS = 'DELETE_PASS';
 export const EDIT_PASS = 'EDIT_PASS';
 export const LOGOUT = 'LOGOUT';
-
+export const ADD_STUDIO_CLASS = 'ADD_STUDIO_CLASS';
+export const EDIT_STUDIO_CLASS = 'EDIT_STUDIO_CLASS';
+export const DELETE_STUDIO_CLASS = 'DELETE_STUDIO_CLASS';
 
 export const addClass = newClass => {
     return { type: ADD_CLASS, payload: newClass }
 }
+
 export const scheduleClass = scheduleClass => {
     return { type: SCHEDULE_CLASS, payload: scheduleClass }
 }
@@ -38,4 +41,16 @@ export const editClass = editClass => {
 
 export const logOut = () => {
     return { type: LOGOUT }
+}
+
+export const addStudioClass = newStudioClass => {
+    return { type: ADD_STUDIO_CLASS, payload: newStudioClass }
+}
+
+export const deleteStudioClass = id => {
+    return { type: DELETE_STUDIO_CLASS, payload: id }
+}
+
+export const editStudioClass = editStudioClass => {
+    return { type: EDIT_STUDIO_CLASS, payload: editStudioClass }
 }
