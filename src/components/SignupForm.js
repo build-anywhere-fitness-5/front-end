@@ -60,7 +60,7 @@ const SignupForm = ({role, history}) => {
                 [/.{2,}/, "Last name must be longer than 2 letters."]
             ],
             email: [
-                [/^[\w\.-]+@[\w\.-]+.\w+$/, "Email must be in the format of you@domain.extension"]
+                [/^[\w.-]+@[\w.-]+.\w+$/, "Email must be in the format of you@domain.extension"]
             ],
             password: [
                 [/(?=[0-9])/, "Password must contain a digit."],
