@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import { deleteClass } from "../../actions";
 import { Link } from "react-router-dom";
 
 const ClassList = props => {
@@ -50,4 +49,4 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(mapStateToProps, { deleteClass })(ClassList);
+export default connect(mapStateToProps, {})(ClassList);
