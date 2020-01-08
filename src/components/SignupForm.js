@@ -13,21 +13,25 @@ const SignupForm = ({role, history}) => {
     // store user info in state variables
     const [userInfo, setUserInfo] = useState(
         {
+            username: "",
             firstName: "",
             lastName: "",
             email: "",
             password: "",
             instructorCode: "",
+            roleId: (role === "instructor") ? 1 : 2
         });
     
     // store error info in state variables
     const [errorInfo, setErrorInfo] = useState(
         {
+            usernameErrors: [],
             firstNameErrors: [],
             lastNameErrors: [],
             emailErrors: [],
             passwordErrors: [],
             instructorCodeErrors: [],
+            signupErrors: []
         });
 
 
@@ -43,6 +47,10 @@ const SignupForm = ({role, history}) => {
 
         // set up criteria for valid form input
         const criteria = {
+            username: [
+                [/^[\w]+$/, "Username must only contain alphanumeric characters."],
+                [/.{2,}/, "Username must be longer than 2 letters."]
+            ],
             firstName: [
                 [/^[a-zA-Z]+$/, "First name must consist of letters only."],
                 [/.{2,}/, "First name must be longer than 2 letters."]
@@ -88,6 +96,7 @@ const SignupForm = ({role, history}) => {
             setErrorInfo({...errorInfo, [category]: errorsFound});
         }
 
+        findErrors("username");
         findErrors("firstName");
         findErrors("lastName");
         findErrors("email");
@@ -99,20 +108,34 @@ const SignupForm = ({role, history}) => {
         // if there are no errors, make a POST request to the database
         if (!inputsHaveErrors)
         {
-            axios.post("http://www.example.com", userInfo)
+            axios.post("https://github.com/build-week-apis/anywhere-fitness/api/auth", userInfo)
             .then(response => {
 
-                console.log("User info successfully added to database.");
+                console.log("Signup status: Database accessed.");
+                console.log("Errors received from database: ", response.message);
 
-                history.push("/");
+                if (response.message === "Username is already taken")
+                    {
+                        setErrorInfo({ ...errorInfo, signupErrors: response.message});
+                    }
+                else
+                    {
+                        // get user roleId (instructor is 1, client is 2) and redirect to either instructor or client dashboard
+                        if (userInfo.roleId === 1)
+                            { history.push("/instructor"); }
+
+                        else if (userInfo.roleId === 2)
+                            { history.push("/client"); }
+
+                    }
 
                 })
             .catch(response => {
                 
-                console.log("There was an error adding the user info to the database.");
+                console.log("Couldn't access database.");
 
-                history.push("/");
-                
+                setErrorInfo({ ...errorInfo, signupErrors: "Couldn't access database."});
+
                 });
         }
 
@@ -131,6 +154,9 @@ const SignupForm = ({role, history}) => {
 
             <form name="login" onSubmit={handleSignup}>
                 
+                <StyledInput name="username" type="text" placeholder="Username" onChange={handleChange} />
+                <p className="formError" id="usernameErrors"></p>
+
                 <StyledInput name="firstName" type="text" placeholder="First name" onChange={handleChange} />
                 <p className="formError" id="firstNameErrors"></p>
 

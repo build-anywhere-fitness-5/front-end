@@ -13,15 +13,16 @@ const LoginForm = ({ history }) => {
     // store user info in state variables
     const [userInfo, setUserInfo] = useState(
         {
-            email: "",
+            username: "",
             password: ""
         });
 
     // store error info in state variables
     const [errorInfo, setErrorInfo] = useState(
         {
-            emailErrors: [],
-            passwordErrors: []
+            usernameErrors: [],
+            passwordErrors: [],
+            loginErrors: []
         });
 
 
@@ -35,33 +36,39 @@ const LoginForm = ({ history }) => {
 
         event.preventDefault();
 
-        if (!userInfo.email.match(/^[\w\.-]+@[\w\.-]+.\w+$/))
-        {
-            const errorMessage = "Not a correctly-formatted email address.";
-
-            setErrorInfo({...errorInfo, email: errorMessage});
-
-            document.getElementById("emailErrors").textContent = errorMessage;
-
-        }
-
         // if there are no errors, make a POST request to the database
-        else
+        if (1)
         {
-            axios.post("http://www.example.com", userInfo)
+            axios.post("https://github.com/build-week-apis/anywhere-fitness/api/auth/login", userInfo)
             .then(response => {
 
                 console.log("Login status: Database accessed.");
+                console.log("Errors received from database: ", response.message);
 
-                history.push("/");
+                if (response.message === "Username is not in the system." || response.message === "Incorrect Password")
+                    {
+                        setErrorInfo({ ...errorInfo, loginErrors: response.message});
+                    }
+                else
+                    {
+                        // get user roleId (instructor is 1, client is 2) and redirect to either instructor or client dashboard
+                        let roleId = 1;
+
+                        if (roleId === 1)
+                            { history.push("/instructor"); }
+
+                        else if (roleId === 2)
+                            { history.push("/client"); }
+
+                    }
 
                 })
             .catch(response => {
                 
-                console.log("Login status: Error accessing database.");
+                console.log("Couldn't access database.");
 
-                history.push("/");
-                
+                setErrorInfo({ ...errorInfo, loginErrors: "Couldn't access database."});
+
                 });
         }
 
@@ -79,8 +86,8 @@ const LoginForm = ({ history }) => {
 
             <form name="login" onSubmit={handleLogin}>
                 
-                <StyledInput name="email" type="email" placeholder="Email" onChange={handleChange} />
-                <p className="formError" id="emailErrors"></p>
+                <StyledInput name="username" type="text" placeholder="username" onChange={handleChange} />
+                <p className="formError" id="usernameErrors"></p>
 
                 <StyledInput name="password" type="password" placeholder="Password" onChange={handleChange} />
                 <p className="formError" id="passwordErrors"></p>
