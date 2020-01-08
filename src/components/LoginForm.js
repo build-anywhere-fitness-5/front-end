@@ -69,9 +69,9 @@ const LoginForm = props => {
                             props.addUser(loginResponse.data.user);
                             console.log(loginResponse);
 
-                            if (props.user.roleId === 1) { history.push("/instructor"); }
+                            if (loginResponse.data.user.roleId === 1) { history.push("/instructor"); }
 
-                            else if (props.user.roleId === 2) { history.push("/client"); }
+                            else if (loginResponse.data.user.roleId === 2) { history.push("/client"); }
                         })
 
                     let roleId = 1;
