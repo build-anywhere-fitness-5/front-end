@@ -8,8 +8,6 @@ import CreateClass from "./components/instructor/CreateClass";
 import ViewClass from './components/instructor/ViewClass';
 import EditClass from './components/instructor/EditClass';
 
-import { Route } from "react-router-dom";
-
 import SignupLoginLinks from "./components/SignupLoginLinks";
 import LoginForm from "./components/LoginForm";
 import SignupForm from "./components/SignupForm";
