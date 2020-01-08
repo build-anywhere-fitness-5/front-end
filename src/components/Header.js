@@ -43,7 +43,7 @@ const Header = props => {
                         </>
                     }
                     {/*Only for Clients */}
-                     {props.signedIn && /*!props.instructor && */
+                    {props.user.roleId === 2 &&
                         <>
                             <li><NavLink to="/client/">Home</NavLink></li>
                             <li><NavLink to="/client/schedule">Scheduled Classes</NavLink></li>
