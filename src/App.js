@@ -9,6 +9,9 @@ import InstructorDashboard from "./components/instructor/InstructorDashboard";
 import CreateClass from "./components/instructor/CreateClass";
 import ViewClass from './components/instructor/ViewClass';
 import EditClass from './components/instructor/EditClass';
+import ViewStudioClass from './components/instructor/ViewStudioClass';
+import EditStudioClass from './components/instructor/EditStudioClass';
+import CreateStudioClass from './components/instructor/CreateStudioClass';
 
 import SignupLoginLinks from "./components/SignupLoginLinks";
 import LoginForm from "./components/LoginForm";
@@ -49,6 +52,7 @@ function App() {
       <Route path="/client" component={ClientHome} />
 
       <Route path="/client/home" component={ClientHome} />
+
       <Route exact path='/instructor/classes/:classID' render={props => {
         return <ViewClass {...props} />
       }} />
@@ -56,8 +60,18 @@ function App() {
         return <EditClass {...props} />
       }} />
 
+      <Route exact path='/instructor/studioclasses/:classID' render={props => {
+        return <ViewStudioClass {...props} />
+      }} />
+      <Route path='/instructor/studioclasses/edit/:classID' render={props => {
+        return <EditStudioClass {...props} />
+      }} />
+
+
+
       <Route exact path="/instructor" component={InstructorDashboard} />
       <Route exact path="/instructor/createclass" component={CreateClass} />
+      <Route exact path="/instructor/createstudioclass" component={CreateStudioClass} />
       <Route exact path="/instructor/createpass" component={CreatePass} />
 
     </div>
