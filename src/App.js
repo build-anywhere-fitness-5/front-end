@@ -1,7 +1,8 @@
 import React from "react";
 import { Route } from "react-router-dom";
+import PrivateRoute from "./components/PrivateRoute"
 
-import ClientLogin from "./components/Clients/ClientLogin";
+
 import ClientHome from "./components/Clients/ClientHome";
 
 import InstructorDashboard from "./components/instructor/InstructorDashboard";
@@ -19,8 +20,8 @@ import Header from "./components/Header";
 
 import "./App.css";
 import CreatePass from "./components/instructor/CreatePass";
-
-import PrivateRoute from './components/PrivateRoute';
+import ScheduledClasses from "./components/Clients/ScheduledClasses";
+import CreateCategory from "./components/instructor/CreateCategory";
 
 
 function App() {
@@ -52,9 +53,9 @@ function App() {
         <SignupForm role="instructor" />
       </Route>
 
-      <PrivateRoute path="/client" component={ClientHome} />
+      <PrivateRoute exact path="/client" component={ClientHome} />
+      <PrivateRoute exact path="/client/schedule" component={ScheduledClasses} />
 
-      <PrivateRoute path="/client/home" component={ClientHome} />
 
       <PrivateRoute exact path='/instructor/classes/:classID' render={props => {
         return <ViewClass {...props} />
@@ -76,6 +77,8 @@ function App() {
       <PrivateRoute exact path="/instructor/createclass" component={CreateClass} />
       <PrivateRoute exact path="/instructor/createstudioclass" component={CreateStudioClass} />
       <PrivateRoute exact path="/instructor/createpass" component={CreatePass} />
+      <PrivateRoute exact path="/instructor/createcategory" component={CreateCategory} />
+
 
     </div>
   );
