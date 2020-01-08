@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import { withRouter } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 
 import { StyledImgDiv } from "./StyledImgDiv";
@@ -8,7 +8,9 @@ import { StyledFormDiv } from "./StyledFormDiv";
 import { StyledInput } from "./StyledInput";
 import { StyledSignupLoginButton } from "./StyledSignupLoginButton";
 
-const LoginForm = ({ history }) => {
+const LoginForm = () => {
+
+    let history = useHistory();
 
     // store user info in state variables
     const [userInfo, setUserInfo] = useState(
@@ -122,4 +124,4 @@ const LoginForm = ({ history }) => {
     )
 }
 
-export default withRouter(LoginForm);
+export default LoginForm;

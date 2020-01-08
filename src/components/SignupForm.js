@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import { withRouter } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 
 import { StyledImgDiv } from "./StyledImgDiv";
@@ -8,7 +8,9 @@ import { StyledFormDiv } from "./StyledFormDiv";
 import { StyledInput } from "./StyledInput";
 import { StyledSignupLoginButton } from "./StyledSignupLoginButton";
 
-const SignupForm = ({role, history}) => {
+const SignupForm = ({role}) => {
+
+    let history = useHistory();
 
     const nameList = "Michael Christopher Matthew Joshua Jacob Nicholas Andrew Daniel Tyler Joseph Brandon David James Ryan John Zachary Justin William Anthony Robert Jessica Ashley Emily Sarah Samantha Amanda Brittany Elizabeth Taylor Megan Hannah Kayla Lauren Stephanie Rachel Jennifer Nicole Alexis Victoria Amber".split(" ");
     const randFirstName = nameList[Math.floor(Math.random() * nameList.length)];
@@ -219,4 +221,4 @@ const SignupForm = ({role, history}) => {
     )
 }
 
-export default withRouter(SignupForm);
+export default SignupForm;
