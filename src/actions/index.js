@@ -21,6 +21,8 @@ export const LOGOUT = 'LOGOUT';
 export const ADD_STUDIO_CLASS = 'ADD_STUDIO_CLASS';
 export const EDIT_STUDIO_CLASS = 'EDIT_STUDIO_CLASS';
 export const DELETE_STUDIO_CLASS = 'DELETE_STUDIO_CLASS';
+export const ADD_USER = 'ADD_USER';
+export const REMOVE_USER = 'REMOVE_USER'
 
 //Fetch Data
 export const START_FETCHING = 'START_FETCHING'
@@ -114,4 +116,12 @@ export const deleteStudioClass = id => {
 
 export const editStudioClass = editStudioClass => {
     return { type: EDIT_STUDIO_CLASS, payload: editStudioClass }
+}
+
+export const addUser = user => {
+    return { type: ADD_USER, payload: user }
+}
+
+export const removeUser = user => {
+    return { type: REMOVE_USER }
 }

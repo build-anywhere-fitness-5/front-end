@@ -11,13 +11,15 @@ import {
   ADD_CATEGORY,
   DELETE_CATEGORY,
   EDIT_CATEGORY,
-  ADD_STUDIO_CLASS,
   EDIT_STUDIO_CLASS,
   DELETE_STUDIO_CLASS,
   FETCH_SUCCESS,
   FETCHCAT_SUCCESS,
   FETCH_CLASSES,
   FETCHCLASS_SUCCESS,
+  REMOVE_USER,
+  ADD_STUDIO_CLASS,
+  ADD_USER
 } from "../actions/index";
 
 const initialState = {
@@ -92,7 +94,17 @@ const initialState = {
   categories: [],
   scheduledClasses: [],
   instructor: true,
-  signedIn: true
+  signedIn: true,
+  user: {
+    id: 3,
+    firstName: null,
+    lastName: null,
+    email: null,
+    username: "don",
+    created_at: "2019-10-20T22:59:45.794Z",
+    updated_at: "2019-10-20T22:59:45.794Z",
+    roleId: 1
+  }
 };
 
 export const classReducer = (state = initialState, action) => {
@@ -216,11 +228,17 @@ export const classReducer = (state = initialState, action) => {
         ...state,
         studioTwoClasses: state.studioTwoClasses.filter(c => c.id !== action.payload)
       };
-    case LOGOUT:
+    case ADD_USER:
+      console.log(state, action)
       return {
         ...state,
-        signedIn: false
-      };
+        user: action.payload
+      }
+    case REMOVE_USER:
+      return {
+        ...state,
+        user: ''
+      }
     default:
       return state;
   }
