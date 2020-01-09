@@ -11,8 +11,8 @@ const StudioClassList = props => {
                         <th>Title</th>
                         <th>Instructor ID</th>
                         <th>Category ID</th>
-                        <th>Schedule Time</th>
-                        <th>Zip Code</th>
+                        {/* <th>Schedule Time</th>
+                        <th>Zip Code</th> */}
                     </tr>
                 </thead>
                 <tbody>
@@ -21,8 +21,8 @@ const StudioClassList = props => {
                             <td><Link to={`/instructor/studioclasses/${c.id}`}>{c.title}</Link></td>
                             <td>{c.instructorId}</td>
                             <td>{c.categoryId}</td>
-                            <td>{c.scheduleTime}</td>
-                            <td>{c.zipCode}</td>
+                            {/* <td>{c.scheduleTime}</td>
+                            <td>{c.zipCode}</td> */}
                         </tr>
                     ))}
                 </tbody>
