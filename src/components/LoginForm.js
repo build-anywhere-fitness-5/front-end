@@ -76,12 +76,6 @@ const LoginForm = props => {
                             else if (loginResponse.data.user.roleId === 2) { history.push("/client"); }
                         })
 
-                    let roleId = 1;
-
-                    if (roleId === 1) { history.push("/instructor"); }
-
-                    else if (roleId === 2) { history.push("/client"); }
-
                 }
 
             })

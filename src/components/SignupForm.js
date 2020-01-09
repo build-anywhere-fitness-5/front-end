@@ -87,7 +87,7 @@ const SignupForm = props => {
         }
 
         // keep track of whether errors have occured
-        // let inputsHaveErrors = false;
+        let inputsHaveErrors = false;
 
         // filter errors by checking each input against the specified regex expression
         function findErrors(category) {
@@ -97,7 +97,7 @@ const SignupForm = props => {
             let errorsFound = criteria[category].filter(errorType => !userInfo[category].match(errorType[0])).map(errorType => errorType[1]);
 
             // keep track of error so that no database request is made if there is an error
-            // inputsHaveErrors = true;
+            inputsHaveErrors = true;
 
             // display error messages to user
             document.getElementById(category + "Errors").innerHTML = errorsFound.join("<br>");
@@ -116,7 +116,7 @@ const SignupForm = props => {
 
         // if there are no errors, make a POST request to the database
         // if (!inputsHaveErrors)
-        if (1) {
+        if (1)
             console.log("Attempting to connect to database...");
             console.log("Note: if username is taken, you will get a 400 response code.")
 
@@ -148,7 +148,6 @@ const SignupForm = props => {
 
                         console.log("Username is already taken", response);
                         errorInfo.signup.push("Username is already taken.")
-                        document.getElementById("loginErrors").textContent = "Couldn't access database.";
 
                     }
                     else {
@@ -164,14 +163,11 @@ const SignupForm = props => {
 
                     console.log("Couldn't access database.", response, response.message);
                     errorInfo.signup.push("Couldn't access database. Username may have been taken.")
-                    document.getElementById("signupErrors").textContent = "Couldn't access database. Username may have been taken.";
 
                     console.log(errorInfo.signup);
 
                 });
         }
-
-    }
 
     const signupWelcomeText = "Sign up as " + ((role === "instructor") ? "an instructor" : "a client");
 

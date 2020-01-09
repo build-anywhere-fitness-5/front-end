@@ -16,6 +16,7 @@ import CreateStudioClass from './components/instructor/CreateStudioClass';
 import SignupLoginLinks from "./components/SignupLoginLinks";
 import LoginForm from "./components/LoginForm";
 import SignupForm from "./components/SignupForm";
+import Onboarding from "./components/Onboarding";
 import Header from "./components/Header";
 
 import "./App.css";
@@ -51,6 +52,10 @@ function App() {
 
       <Route exact path="/signup/instructor">
         <SignupForm role="instructor" />
+      </Route>
+
+      <Route exact path="/onboarding">
+        <Onboarding />
       </Route>
 
       <PrivateRoute exact path="/client" component={ClientHome} />
