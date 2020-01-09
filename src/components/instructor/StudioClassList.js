@@ -16,8 +16,8 @@ const StudioClassList = props => {
                     </tr>
                 </thead>
                 <tbody>
-                    {props.studioTwoClasses.map(c => (
-                        <tr key={c.id}>
+                    {props.studioTwoClasses.map((c, index) => (
+                        <tr key={index}>
                             <td><Link to={`/instructor/studioclasses/${c.id}`}>{c.title}</Link></td>
                             <td>{c.instructorId}</td>
                             <td>{c.categoryId}</td>
@@ -27,7 +27,7 @@ const StudioClassList = props => {
                     ))}
                 </tbody>
             </table>
-        </div >
+        </div>
     )
 };
 
