@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 // MaterialUI
-import clsx from "clsx";
+// import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 
 import TextField from "@material-ui/core/TextField";
@@ -56,7 +56,7 @@ const EditCategory = props => {
   useEffect(() => {
     console.log("PROPS.CATEGORY CONSOLE LOG", props.updateCategory, "INDEX", props.index);
     setUpdateCategory(props.category);
-  }, []);
+  }, [props.category, props.index, props.updateCategory]);
 
   const submitHandler = event => {
     event.preventDefault();
@@ -71,7 +71,7 @@ const EditCategory = props => {
 
   return (
     <div style={{ width: '40%', height: '100%' }}>
-      <form style={{ backgroundColor: "white"} } onSubmit={submitHandler}>
+      <form style={{ backgroundColor: "white" }} onSubmit={submitHandler}>
         <h1>Edit This Category</h1>
         <TextField
           label="name"

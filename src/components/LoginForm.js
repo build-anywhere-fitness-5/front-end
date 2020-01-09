@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 import { useHistory } from "react-router-dom";
 import axios from "axios";
@@ -13,81 +13,86 @@ import { StyledSignupLoginButton } from "./StyledSignupLoginButton";
 import { addUser } from "../actions/index";
 
 const LoginForm = props => {
-  let history = useHistory();
 
-  // store user info in state variables
-  const [userInfo, setUserInfo] = useState({
-    username: "",
-    password: ""
-  });
+    let history = useHistory();
 
-  // store error info in an object
-  const errorInfo = {
-    username: [],
-    password: [],
-    login: []
-  };
+    // store user info in state variables
+    const [userInfo, setUserInfo] = useState(
+        {
+            username: "",
+            password: ""
+        });
 
-  // update what the user has typed into state upon change
-  function handleChange(event) {
-    setUserInfo({ ...userInfo, [event.target.name]: event.target.value });
-  }
+    // store error info in an object
+    const errorInfo =
+    {
+        username: [],
+        password: [],
+        login: []
+    };
 
-  // validate form fields and POST information to database
-  function handleLogin(event) {
-    event.preventDefault();
 
-    // make a POST request to the database
+    // update what the user has typed into state upon change
+    function handleChange(event) {
+        setUserInfo({ ...userInfo, [event.target.name]: event.target.value });
+    }
 
-    axios
-      .post(
-        "https://lambda-anywhere-fitness.herokuapp.com/api/auth/login",
-        userInfo
-      )
-      .then(response => {
-        console.log("Login status: Database accessed.");
-        console.log("Errors received from database: ", response);
+    // validate form fields and POST information to database
+    function handleLogin(event) {
 
-        if (response.message === "Username is not in the system.") {
-          errorInfo.loginErrors.push("Username not found.");
-        } else if (response.message === "Incorrect Password") {
-          errorInfo.loginErrors.push("Password is incorrect.");
-        } else {
-          // get authentication token
-          // get user roleId (instructor is 1, client is 2) and redirect to either instructor or client dashboard
-          axios
-            .post(
-              "https://lambda-anywhere-fitness.herokuapp.com/api/auth/login",
-              { username: userInfo.username, password: userInfo.password }
-            )
-            .then(loginResponse => {
-              sessionStorage.setItem("token", loginResponse.data.token);
-              props.addUser(loginResponse.data.user);
-              console.log(loginResponse);
-              sessionStorage.setItem("roleId", loginResponse.data.user.roleId);
+        event.preventDefault();
 
-              if (loginResponse.data.user.roleId === 1) {
-                history.push("/instructor");
-              } else if (loginResponse.data.user.roleId === 2) {
-                history.push("/client");
-              }
+        // make a POST request to the database
+
+        axios.post("https://lambda-anywhere-fitness.herokuapp.com/api/auth/login", userInfo)
+            .then(response => {
+
+                console.log("Login status: Database accessed.");
+                console.log("Errors received from database: ", response);
+
+                if (response.message === "Username is not in the system.") {
+
+                    errorInfo.loginErrors.push("Username not found.")
+
+                }
+                else if (response.message === "Incorrect Password") {
+
+                    errorInfo.loginErrors.push("Password is incorrect.")
+
+                }
+                else {
+                    // get authentication token
+                    // get user roleId (instructor is 1, client is 2) and redirect to either instructor or client dashboard
+                    axios.post("https://lambda-anywhere-fitness.herokuapp.com/api/auth/login", { username: userInfo.username, password: userInfo.password })
+                        .then(loginResponse => {
+                            sessionStorage.setItem("token", loginResponse.data.token);
+                            // console.log(sessionStorage.getItem('token'))
+                            sessionStorage.setItem("roleId", loginResponse.data.user.roleId);
+                            props.addUser(loginResponse.data.user);
+                            // console.log(loginResponse);
+
+                            if (loginResponse.data.user.roleId === 1) { history.push("/instructor"); }
+
+                            else if (loginResponse.data.user.roleId === 2) { history.push("/client"); }
+                        })
+
+                    let roleId = 1;
+
+                    if (roleId === 1) { history.push("/instructor"); }
+
+                    else if (roleId === 2) { history.push("/client"); }
+
+                }
+
+            })
+            .catch(response => {
+
+                console.log("Couldn't access database: ", response);
+                errorInfo.login.push("Couldn't access database.")
+                document.getElementById("loginErrors").textContent = "Couldn't access database.";
+
             });
 
-          let roleId = 1;
-
-          if (roleId === 1) {
-            history.push("/instructor");
-          } else if (roleId === 2) {
-            history.push("/client");
-          }
-        }
-      })
-      .catch(response => {
-        console.log("Couldn't access database: ", response);
-        errorInfo.login.push("Couldn't access database.");
-        document.getElementById("loginErrors").textContent =
-          "Couldn't access database.";
-      });
   }
 
   // format errors for display

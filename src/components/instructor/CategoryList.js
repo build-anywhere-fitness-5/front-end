@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { deleteCategory, editCategory, fetchCategory } from "../../actions/index";
-import { Modal } from "@material-ui/core";
+import { Modal, ListItemSecondaryAction } from "@material-ui/core";
 import styled from "styled-components";
 import EditCategory from "./EditCategory";
 const StyledFormDiv = styled.div`
@@ -21,9 +21,13 @@ const CategoryList = props => {
   const [open, setOpen] = React.useState(false);
   const [item, setItem] = React.useState();
   useEffect(() => {
+    console.log('token is in', sessionStorage.getItem('token'))
+   
       props.fetchCategory()
-  }, [])
-
+    
+   
+  }, [sessionStorage.getItem('token')]
+  );
   // const [openAccount, setOpenAccount] = React.useState(false);
   // const [postTool, setPostTool] = React.useState(false);
 
@@ -37,8 +41,8 @@ const CategoryList = props => {
     <StyledFormDiv>
       {props.categories.map((category, index) => (
         <UserCard key={index}>
-            <h1>Category: {category.name}</h1>
-            <h2>Description: {category.description}</h2>
+          <h1>Category: {category.name}</h1>
+          <h2>Description: {category.description}</h2>
           <button
             onClick={e => {
               // console.log('click')
