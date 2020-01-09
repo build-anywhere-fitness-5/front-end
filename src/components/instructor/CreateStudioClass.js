@@ -4,11 +4,10 @@ import { connect } from 'react-redux';
 
 import { addStudioClass } from '../../actions/index';
 
-const Form = styled.form`
-display: flex;
-flex-direction: column;
-width: 50%;
-`
+import { StyledInput } from "../StyledInput";
+import { StyledSignupLoginButton } from "../StyledSignupLoginButton";
+
+import './CreateFormStyles.css';
 
 const CreateStudioClass = props => {
 
@@ -38,50 +37,54 @@ const CreateStudioClass = props => {
 
     return (
         <div>
-            <h2>Create class</h2>
+            <h1>Create Studio Class</h1>
 
-            <Form>
+            <form className="createForm">
+                <div>
+                    <label htmlFor="title">title</label>
+                    <StyledInput
+                        type="text"
+                        name="title"
+                        value={newClass.title}
+                        id="title"
+                        onChange={handleChanges}
+                    />
+                </div>
+                <div>
 
-                <label htmlFor="title">title</label>
-                <input
-                    type="text"
-                    name="title"
-                    value={newClass.title}
-                    id="title"
-                    onChange={handleChanges}
-                />
-
-                <label htmlFor="classType">instructorId</label>
-                <input
-                    type="number"
-                    value={newClass.instructorId}
-                    id="instructorId"
-                    name="instructorId"
-                    onChange={handleChanges}
-                />
-
-                <label htmlFor="categoryId">categoryId</label>
-                <input
-                    type="number"
-                    value={newClass.categoryId}
-                    id="categoryId"
-                    name="categoryId"
-                    onChange={handleChanges}
-                />
-
-                <label htmlFor="scheduleTime">scheduleTime</label>
-                <input
-                    type="time"
-                    value={newClass.scheduleTime}
-                    id="scheduleTime"
-                    name="scheduleTime"
-                    onChange={handleChanges}
-                />
+                    <label htmlFor="classType">instructorId</label>
+                    <StyledInput
+                        type="number"
+                        value={newClass.instructorId}
+                        id="instructorId"
+                        name="instructorId"
+                        onChange={handleChanges}
+                    />
+                </div>
+                <div>
+                    <label htmlFor="categoryId">categoryId</label>
+                    <StyledInput
+                        type="number"
+                        value={newClass.categoryId}
+                        id="categoryId"
+                        name="categoryId"
+                        onChange={handleChanges}
+                    />
+                </div>
+                <div>
+                    <label htmlFor="scheduleTime">scheduleTime</label>
+                    <StyledInput
+                        type="time"
+                        value={newClass.scheduleTime}
+                        id="scheduleTime"
+                        name="scheduleTime"
+                        onChange={handleChanges}
+                    />
+                </div>
 
 
-
-                <button onClick={handleSubmit}>Create class</button>
-            </Form>
+                <StyledSignupLoginButton onClick={handleSubmit}>Create class</StyledSignupLoginButton>
+            </form>
         </div>
     )
 }

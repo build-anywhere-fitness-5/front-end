@@ -6,56 +6,7 @@ import styled from "styled-components";
 import { StyledInput } from "../StyledInput";
 import { StyledSignupLoginButton } from "../StyledSignupLoginButton";
 
-const Form = styled.form`
-    width: 40vw;
-    margin: 0 auto;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-    label {
-
-        font-size: 1.5rem;
-        line-height: 4rem;
-
-        margin-right: 2rem;
-    }
-
-    @media (max-width: 1280px)
-    {
-        max-width: 70vw;
-
-        input, label {
-
-            font-size: 1rem;
-
-            line-height: 2rem;
-
-        }    
-
-    }
-
-    @media (max-width: 1024px)
-    {
-        max-width: 90vw;
-
-    }
-
-`
-
-const FlexRow = styled.div`
-
-    width: 100%;
-
-    display: flex;
-    justify-content: flex-end;
-
-    margin: 0.5rem;
-
-`;
-
+import './CreateFormStyles.css';
 
 const CreatePass = props => {
   const [newPass, setNewPass] = useState({
@@ -82,8 +33,8 @@ const CreatePass = props => {
 
       <h1>Create Pass</h1>
 
-      <Form>
-        <FlexRow>
+      <form className="createForm">
+        <div>
           <label htmlFor="className">Pass Name</label>
           <StyledInput
             type="text"
@@ -92,8 +43,8 @@ const CreatePass = props => {
             id="className"
             onChange={handleChanges}
         />
-        </FlexRow>
-        <FlexRow>
+        </div>
+        <div>
           <label htmlFor="instructor">Instructor</label>
           <StyledInput
             type="text"
@@ -102,8 +53,8 @@ const CreatePass = props => {
             id="instructor"
             onChange={handleChanges}
           />
-        </FlexRow>
-        <FlexRow>
+        </div>
+        <div>
           <label htmlFor="client">Client</label>
           <StyledInput
             type="text"
@@ -112,8 +63,8 @@ const CreatePass = props => {
             id="client"
             onChange={handleChanges}
           />
-        </FlexRow>
-        <FlexRow>
+        </div>
+        <div>
           <label htmlFor="classesRemaining">Classes Remaining</label>
           <StyledInput
             type="number"
@@ -122,10 +73,10 @@ const CreatePass = props => {
             id="classesRemaining"
             onChange={handleChanges}
           />
-        </FlexRow>
+        </div>
 
         <StyledSignupLoginButton onClick={handleSubmit}>Create Pass</StyledSignupLoginButton>
-      </Form>
+      </form>
     </div>
   );
 };

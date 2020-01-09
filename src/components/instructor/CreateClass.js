@@ -7,57 +7,7 @@ import { addClass } from '../../actions/index';
 import { StyledInput } from "../StyledInput";
 import { StyledSignupLoginButton } from "../StyledSignupLoginButton";
 
-const Form = styled.form`
-    width: 40vw;
-    margin: 0 auto;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-    label {
-
-        font-size: 1.5rem;
-        line-height: 4rem;
-
-        margin-right: 2rem;
-    }
-
-    @media (max-width: 1280px)
-    {
-        max-width: 70vw;
-
-        input, label {
-
-            font-size: 1rem;
-
-            line-height: 2rem;
-
-        }    
-
-    }
-
-    @media (max-width: 1024px)
-    {
-        max-width: 90vw;
-
-    }
-
-`
-
-const FlexRow = styled.div`
-
-    width: 100%;
-
-    display: flex;
-    justify-content: flex-end;
-
-    margin: 0.5rem;
-
-`;
-
-
+import './CreateFormStyles.css';
 
 const CreateClass = props => {
 
@@ -91,11 +41,11 @@ const CreateClass = props => {
 
     return (
         <div>
-            <h1>Create class</h1>
+            <h1>Create Class</h1>
 
-            <Form>
+            <form className="createForm">
 
-                <FlexRow>
+                <div>
                     <label htmlFor="className">Class Name</label>
                     <StyledInput
                         type="text"
@@ -104,8 +54,8 @@ const CreateClass = props => {
                         id="className"
                         onChange={handleChanges}
                     />
-                </FlexRow>
-                <FlexRow>
+                </div>
+                <div>
                     <label htmlFor="classType">Type</label>
                     <StyledInput
                         type="text"
@@ -114,8 +64,8 @@ const CreateClass = props => {
                         name="classType"
                         onChange={handleChanges}
                     />
-                </FlexRow>
-                <FlexRow>
+                </div>
+                <div>
                     <label htmlFor="startTime">Start time</label>
                     <StyledInput
                         type="time"
@@ -124,8 +74,8 @@ const CreateClass = props => {
                         name="startTime"
                         onChange={handleChanges}
                     />
-                </FlexRow>
-                <FlexRow>
+                </div>
+                <div>
                     <label htmlFor="durationMinutes">Duration (minutes)</label>
                     <StyledInput
                         type="number"
@@ -134,8 +84,8 @@ const CreateClass = props => {
                         name="durationMinutes"
                         onChange={handleChanges}
                     />
-                </FlexRow>
-                <FlexRow>
+                </div>
+                <div>
                 <label htmlFor="intensity">Intensity</label>
                     <StyledInput
                         type="text"
@@ -144,8 +94,8 @@ const CreateClass = props => {
                         name="intensity"
                         onChange={handleChanges}
                     />
-                </FlexRow>
-                <FlexRow>
+                </div>
+                <div>
                     <label htmlFor="location">Location</label>
                     <StyledInput
                         type="text"
@@ -154,8 +104,8 @@ const CreateClass = props => {
                         name="location"
                         onChange={handleChanges}
                     />
-                </FlexRow>
-                <FlexRow>
+                </div>
+                <div>
                     <label htmlFor="maxClassSize">Max Class Size</label>
                     <StyledInput
                         type="number"
@@ -164,8 +114,8 @@ const CreateClass = props => {
                         name="maxClassSize"
                         onChange={handleChanges}
                     />
-                </FlexRow>
-                <FlexRow>
+                </div>
+                <div>
                     <label htmlFor="date">Date</label>
                     <StyledInput
                         type="date"
@@ -174,9 +124,9 @@ const CreateClass = props => {
                         name="date"
                         onChange={handleChanges}
                     />
-                </FlexRow>
-                <StyledSignupLoginButton onClick={handleSubmit}>Create class</StyledSignupLoginButton>
-            </Form>
+                </div>
+                <StyledSignupLoginButton onClick={handleSubmit}>Create Class</StyledSignupLoginButton>
+            </form>
         </div>
     )
 }
