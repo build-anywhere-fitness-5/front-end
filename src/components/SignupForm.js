@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { connect } from 'react-redux';
@@ -87,7 +87,7 @@ const SignupForm = props => {
         }
 
         // keep track of whether errors have occured
-        let inputsHaveErrors = false;
+        // let inputsHaveErrors = false;
 
         // filter errors by checking each input against the specified regex expression
         function findErrors(category) {
@@ -97,7 +97,7 @@ const SignupForm = props => {
             let errorsFound = criteria[category].filter(errorType => !userInfo[category].match(errorType[0])).map(errorType => errorType[1]);
 
             // keep track of error so that no database request is made if there is an error
-            inputsHaveErrors = true;
+            // inputsHaveErrors = true;
 
             // display error messages to user
             document.getElementById(category + "Errors").innerHTML = errorsFound.join("<br>");
