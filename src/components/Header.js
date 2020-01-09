@@ -13,7 +13,8 @@ const Header = props => {
     const handleLogout = e => {
         e.preventDefault()
         sessionStorage.removeItem('token');
-        props.removeUser(1);
+        sessionStorage.removeItem('roleId');
+        props.removeUser();
         // alert('Logged out successfully. Come back soon!');
         history.push('/');
     }
