@@ -12,7 +12,7 @@ const InstructorDashboard = props => {
 
     useEffect(() => {
         props.getStudioClasses()
-    }, [props.getStudioClasses])
+    }, [props.getStudioClasses, props])
 
     return (
         <div>
