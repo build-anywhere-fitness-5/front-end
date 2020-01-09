@@ -206,10 +206,6 @@ const SignupForm = props => {
 
                     <StyledSignupLoginButton type="submit">Sign Up</StyledSignupLoginButton>
 
-                    <p>
-                        Default password is "password".
-                    </p>
-
                     <p className="signupErrors" id="signupErrors"></p>
 
                 </form>
