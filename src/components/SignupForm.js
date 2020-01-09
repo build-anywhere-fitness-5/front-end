@@ -16,20 +16,14 @@ const SignupForm = props => {
     let history = useHistory();
     const role = props.role
 
-    const nameList = "Michael Christopher Matthew Joshua Jacob Nicholas Andrew Daniel Tyler Joseph Brandon David James Ryan John Zachary Justin William Anthony Robert Jessica Ashley Emily Sarah Samantha Amanda Brittany Elizabeth Taylor Megan Hannah Kayla Lauren Stephanie Rachel Jennifer Nicole Alexis Victoria Amber".split(" ");
-    const randFirstName = nameList[Math.floor(Math.random() * nameList.length)];
-
-    const letters = "ABCDEEFGHIJKLMNOPQRSTUVWXYZ";
-    const randLastName = letters[Math.floor(Math.random() * letters.length)] + ".";
-
     // store user info in state variables
     const [userInfo, setUserInfo] = useState(
         {
-            username: role + (Math.floor(Math.random() * 100)),
-            firstName: randFirstName,
-            lastName: randLastName,
-            email: (role === "instructor") ? randFirstName.toLowerCase() + "@fitnessanywhere.com" : randFirstName.toLowerCase() + "." + randLastName[0].toLowerCase() + "@gmail.com",
-            password: "password",
+            username: "",
+            firstName: "",
+            lastName: "",
+            email: "",
+            password: "",
             instructorCode: "123",
             roleId: (role === "instructor") ? 1 : 2
         });
