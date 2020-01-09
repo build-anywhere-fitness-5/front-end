@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { connect } from 'react-redux';
@@ -97,7 +97,8 @@ const SignupForm = props => {
             let errorsFound = criteria[category].filter(errorType => !userInfo[category].match(errorType[0])).map(errorType => errorType[1]);
 
             // keep track of error so that no database request is made if there is an error
-            inputsHaveErrors = true;
+            if (errorsFound.length > 0)
+                { inputsHaveErrors = true; }
 
             // display error messages to user
             document.getElementById(category + "Errors").innerHTML = errorsFound.join("<br>");
@@ -115,8 +116,8 @@ const SignupForm = props => {
         if (role === "instructor") { findErrors("instructorCode"); }
 
         // if there are no errors, make a POST request to the database
-        // if (!inputsHaveErrors)
-        if (1)
+        if (!inputsHaveErrors)
+        {
             console.log("Attempting to connect to database...");
             console.log("Note: if username is taken, you will get a 400 response code.")
 
@@ -168,6 +169,7 @@ const SignupForm = props => {
 
                 });
         }
+    }
 
     const signupWelcomeText = "Sign up as " + ((role === "instructor") ? "an instructor" : "a client");
 
