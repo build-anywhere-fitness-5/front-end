@@ -17,9 +17,7 @@ const EditStudioClass = props => {
     const [editClass, setEditClass] = useState({
         title: '',
         instructorId: 0,
-        categoryId: 0,
-        scheduleTime: '',
-        id: '',
+        categoryId: 0
     });
 
     useEffect(() => {
@@ -81,15 +79,6 @@ const EditStudioClass = props => {
                     value={editClass.categoryId}
                     id="categoryId"
                     name="categoryId"
-                    onChange={handleChanges}
-                />
-
-                <label htmlFor="scheduleTime">scheduleTime</label>
-                <input
-                    type="time"
-                    value={editClass.scheduleTime}
-                    id="scheduleTime"
-                    name="scheduleTime"
                     onChange={handleChanges}
                 />
 
