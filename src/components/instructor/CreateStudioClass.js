@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
+// import styled from 'styled-components';
 import { connect } from 'react-redux';
 
 import { addStudioClass } from '../../actions/index';
@@ -15,8 +15,6 @@ const CreateStudioClass = props => {
         title: '',
         instructorId: 0,
         categoryId: 0,
-        scheduleTime: '',
-        id: '',
     });
 
     console.log(newClass);
@@ -71,16 +69,7 @@ const CreateStudioClass = props => {
                         onChange={handleChanges}
                     />
                 </div>
-                <div>
-                    <label htmlFor="scheduleTime">scheduleTime</label>
-                    <StyledInput
-                        type="time"
-                        value={newClass.scheduleTime}
-                        id="scheduleTime"
-                        name="scheduleTime"
-                        onChange={handleChanges}
-                    />
-                </div>
+
 
 
                 <StyledSignupLoginButton onClick={handleSubmit}>Create class</StyledSignupLoginButton>

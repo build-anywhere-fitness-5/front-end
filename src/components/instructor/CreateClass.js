@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
+// import styled from 'styled-components';
 import { connect } from 'react-redux';
 
 import { addClass } from '../../actions/index';
@@ -86,7 +86,7 @@ const CreateClass = props => {
                     />
                 </div>
                 <div>
-                <label htmlFor="intensity">Intensity</label>
+                    <label htmlFor="intensity">Intensity</label>
                     <StyledInput
                         type="text"
                         value={newClass.intensity}
