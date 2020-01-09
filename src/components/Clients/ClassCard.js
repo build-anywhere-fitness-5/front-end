@@ -59,9 +59,6 @@ const IntensityDescription = styled.p`
 
     margin-left: 10%;
 
-    // @media (max-width: 1280px) {
-    //     font-size: 0.75rem;
-    // }
 `;
 
 const StyledHr = styled.hr`
