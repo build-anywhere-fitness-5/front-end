@@ -83,7 +83,7 @@ export const fetchCategory = () => dispatch => {
     dispatch({ type: START_FETCHING });
     axiosWithAuth()
         .get(
-            "https://lambda-anywhere-fitness.herokuapp.com/api/category"
+            "category"
         )
         .then(res => {
             console.log(res, "Category get");
@@ -95,7 +95,7 @@ export const fetchClasses = () => dispatch => {
     dispatch({ type: START_FETCHING });
     axiosWithAuth()
         .get(
-            "https://lambda-anywhere-fitness.herokuapp.com/api/classes"
+            "classes"
         )
         .then(res => {
             console.log(res, "CLASS get");
@@ -105,14 +105,14 @@ export const fetchClasses = () => dispatch => {
 }
 export const deleteCategory = id => dispatch => {
     axiosWithAuth()
-        .delete(`https://lambda-anywhere-fitness.herokuapp.com/api/category/${id.id}`)
+        .delete(`category/${id.id}`)
         .then(res => dispatch({ type: DELETE_CATEGORY, payload: id }))
         .catch(err => console.log(err))
 }
 
 export const editCategory = id => dispatch => {
     axiosWithAuth()
-        .put(`https://lambda-anywhere-fitness.herokuapp.com/api/category/${id.id}`, id)
+        .put(`category/${id.id}`, id)
         .then(res => dispatch({ type: EDIT_CATEGORY, payload: id }))
         .catch(err => console.log(err));
 
@@ -130,7 +130,7 @@ export const logOut = () => {
 export const getStudioClasses = () => dispatch => {
     dispatch({ type: GET_STUDIOCLASSES_START });
     axiosWithAuth()
-        .get(`https://lambda-anywhere-fitness.herokuapp.com/api/classes`)
+        .get(`classes`)
         .then(res => {
             // (console.log(`getStudioClasses:`, res))
             dispatch({ type: GET_STUDIOCLASSES_SUCCESS, payload: res.data })
@@ -144,7 +144,7 @@ export const getStudioClasses = () => dispatch => {
 export const addStudioClass = newStudioClass => dispatch => {
     dispatch({ type: ADD_STUDIOCLASS_START })
     axiosWithAuth()
-        .post('https://lambda-anywhere-fitness.herokuapp.com/api/classes', newStudioClass)
+        .post('classes', newStudioClass)
         .then(res => {
             dispatch({ type: ADD_STUDIOCLASS_SUCCESS, payload: res.data })
         })
@@ -156,7 +156,7 @@ export const addStudioClass = newStudioClass => dispatch => {
 export const deleteStudioClass = id => dispatch => {
     dispatch({ type: DELETE_STUDIOCLASS_START });
     axiosWithAuth()
-        .delete(`https://lambda-anywhere-fitness.herokuapp.com/api/classes/${id}`)
+        .delete(`classes/${id}`)
         .then(res => {
             // console.log(`Delete studioClasses:`, res)
             dispatch({ type: DELETE_STUDIOCLASS_SUCCESS, payload: id })
@@ -170,7 +170,7 @@ export const deleteStudioClass = id => dispatch => {
 export const editStudioClass = editStudioClass => dispatch => {
     dispatch({ type: EDIT_STUDIOCLASS_START });
     axiosWithAuth()
-        .put(`https://lambda-anywhere-fitness.herokuapp.com/api/classes/${editStudioClass.id}`, editStudioClass)
+        .put(`classes/${editStudioClass.id}`, editStudioClass)
         .then(res => {
             dispatch({ type: EDIT_STUDIOCLASS_SUCCESS, payload: res.data })
         })

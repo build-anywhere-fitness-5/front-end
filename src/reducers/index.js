@@ -99,18 +99,18 @@ const initialState = {
 export const classReducer = (state = initialState, action) => {
   // console.log(state, action);
   switch (action.type) {
-    // case FETCHCAT_SUCCESS:
-    //   return {
-    //     ...state,
-    //     categories: action.payload
+    case FETCHCAT_SUCCESS:
+      return {
+        ...state,
+        categories: action.payload
 
-    //   }
-    // case FETCHCLASS_SUCCESS:
-    //   return {
-    //     ...state,
-    //     classes: action.payload
+      }
+    case FETCHCLASS_SUCCESS:
+      return {
+        ...state,
+        classes: action.payload
 
-    //   }
+      }
     case ADD_CLASS:
       return {
         ...state,
