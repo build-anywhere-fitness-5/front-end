@@ -22,7 +22,7 @@ const ClassStatus = () => {
         .then(
             response => {
 
-                console.log("Here is the response for categories:", response, response.data.length);
+                console.log("Database response:", response);
                 setTotalCategories(response.data.length);
             }
         )

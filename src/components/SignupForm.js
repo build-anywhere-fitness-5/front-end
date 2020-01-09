@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { connect } from 'react-redux';
@@ -16,20 +16,14 @@ const SignupForm = props => {
     let history = useHistory();
     const role = props.role
 
-    const nameList = "Michael Christopher Matthew Joshua Jacob Nicholas Andrew Daniel Tyler Joseph Brandon David James Ryan John Zachary Justin William Anthony Robert Jessica Ashley Emily Sarah Samantha Amanda Brittany Elizabeth Taylor Megan Hannah Kayla Lauren Stephanie Rachel Jennifer Nicole Alexis Victoria Amber".split(" ");
-    const randFirstName = nameList[Math.floor(Math.random() * nameList.length)];
-
-    const letters = "ABCDEEFGHIJKLMNOPQRSTUVWXYZ";
-    const randLastName = letters[Math.floor(Math.random() * letters.length)] + ".";
-
     // store user info in state variables
     const [userInfo, setUserInfo] = useState(
         {
-            username: role + (Math.floor(Math.random() * 100)),
-            firstName: randFirstName,
-            lastName: randLastName,
-            email: (role === "instructor") ? randFirstName.toLowerCase() + "@fitnessanywhere.com" : randFirstName.toLowerCase() + "." + randLastName[0].toLowerCase() + "@gmail.com",
-            password: "password",
+            username: "",
+            firstName: "",
+            lastName: "",
+            email: "",
+            password: "",
             instructorCode: "123",
             roleId: (role === "instructor") ? 1 : 2
         });
@@ -97,7 +91,8 @@ const SignupForm = props => {
             let errorsFound = criteria[category].filter(errorType => !userInfo[category].match(errorType[0])).map(errorType => errorType[1]);
 
             // keep track of error so that no database request is made if there is an error
-            inputsHaveErrors = true;
+            if (errorsFound.length > 0)
+                { inputsHaveErrors = true; }
 
             // display error messages to user
             document.getElementById(category + "Errors").innerHTML = errorsFound.join("<br>");
@@ -115,8 +110,8 @@ const SignupForm = props => {
         if (role === "instructor") { findErrors("instructorCode"); }
 
         // if there are no errors, make a POST request to the database
-        // if (!inputsHaveErrors)
-        if (1)
+        if (!inputsHaveErrors)
+        {
             console.log("Attempting to connect to database...");
             console.log("Note: if username is taken, you will get a 400 response code.")
 
@@ -168,6 +163,7 @@ const SignupForm = props => {
 
                 });
         }
+    }
 
     const signupWelcomeText = "Sign up as " + ((role === "instructor") ? "an instructor" : "a client");
 
