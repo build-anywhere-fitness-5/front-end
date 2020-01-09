@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import styled from "styled-components";
 import axios from "axios";
@@ -13,7 +13,7 @@ const StyledIntroText = styled.p`
 // gets a list of all classes from the database
 const ClassStatus = () => {
 
-    let totalCategories = undefined;
+    const [totalCategories, setTotalCategories] = useState(undefined);
 
     useEffect(() => {
 
@@ -22,38 +22,22 @@ const ClassStatus = () => {
         .then(
             response => {
 
-                totalCategories = response.data.length;
-
-                console.log("connected to database", response, totalCategories);
+                console.log("Here is the response for categories:", response, response.data.length);
+                setTotalCategories(response.data.length);
             }
-
         )
         .catch(
-            response => {
-
-                console.log("database connection error", response);
-
-            }
+            response => { console.log("Couldn't get the total number of classes from the database.", response); }
         )
 
     }, []);
 
-    let totalClasses = undefined;
-
     if (totalCategories === undefined)
         {
-            return (
-
-                <StyledIntroText>Searching for classes...</StyledIntroText>
-            )
+            return (<StyledIntroText>{"Searching for classes..."}</StyledIntroText>);
         }
-    
 
-    return (
-
-        <StyledIntroText>We have {totalCategories} types of classes to choose from. Sign up today!</StyledIntroText>
-
-    )
+    return (<StyledIntroText>{"We have " + totalCategories + " types of classes available."}</StyledIntroText>);
 
 }
 
