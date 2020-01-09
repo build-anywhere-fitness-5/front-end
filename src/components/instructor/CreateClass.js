@@ -4,11 +4,10 @@ import { connect } from 'react-redux';
 
 import { addClass } from '../../actions/index';
 
-const Form = styled.form`
-display: flex;
-flex-direction: column;
-width: 50%;
-`
+import { StyledInput } from "../StyledInput";
+import { StyledSignupLoginButton } from "../StyledSignupLoginButton";
+
+import './CreateFormStyles.css';
 
 const CreateClass = props => {
 
@@ -42,84 +41,92 @@ const CreateClass = props => {
 
     return (
         <div>
-            <h2>Create class</h2>
+            <h1>Create Class</h1>
 
-            <Form>
+            <form className="createForm">
 
-                <label htmlFor="className">Class Name</label>
-                <input
-                    type="text"
-                    name="className"
-                    value={newClass.className}
-                    id="className"
-                    onChange={handleChanges}
-                />
-
-                <label htmlFor="classType">Type</label>
-                <input
-                    type="text"
-                    value={newClass.classType}
-                    id="classType"
-                    name="classType"
-                    onChange={handleChanges}
-                />
-
-                <label htmlFor="startTime">Start time</label>
-                <input
-                    type="time"
-                    value={newClass.startTime}
-                    id="startTime"
-                    name="startTime"
-                    onChange={handleChanges}
-                />
-
-                <label htmlFor="durationMinutes">Duration (minutes)</label>
-                <input
-                    type="number"
-                    value={newClass.durationMinutes}
-                    id="durationMinutes"
-                    name="durationMinutes"
-                    onChange={handleChanges}
-                />
-
+                <div>
+                    <label htmlFor="className">Class Name</label>
+                    <StyledInput
+                        type="text"
+                        name="className"
+                        value={newClass.className}
+                        id="className"
+                        onChange={handleChanges}
+                    />
+                </div>
+                <div>
+                    <label htmlFor="classType">Type</label>
+                    <StyledInput
+                        type="text"
+                        value={newClass.classType}
+                        id="classType"
+                        name="classType"
+                        onChange={handleChanges}
+                    />
+                </div>
+                <div>
+                    <label htmlFor="startTime">Start time</label>
+                    <StyledInput
+                        type="time"
+                        value={newClass.startTime}
+                        id="startTime"
+                        name="startTime"
+                        onChange={handleChanges}
+                    />
+                </div>
+                <div>
+                    <label htmlFor="durationMinutes">Duration (minutes)</label>
+                    <StyledInput
+                        type="number"
+                        value={newClass.durationMinutes}
+                        id="durationMinutes"
+                        name="durationMinutes"
+                        onChange={handleChanges}
+                    />
+                </div>
+                <div>
                 <label htmlFor="intensity">Intensity</label>
-                <input
-                    type="text"
-                    value={newClass.intensity}
-                    id="intensity"
-                    name="intensity"
-                    onChange={handleChanges}
-                />
-
-                <label htmlFor="location">Location</label>
-                <input
-                    type="text"
-                    value={newClass.location}
-                    id="location"
-                    name="location"
-                    onChange={handleChanges}
-                />
-
-                <label htmlFor="maxClassSize">Max Class Size</label>
-                <input
-                    type="number"
-                    value={newClass.maxClassSize}
-                    id="maxClassSize"
-                    name="maxClassSize"
-                    onChange={handleChanges}
-                />
-
-                <label htmlFor="date">Date</label>
-                <input
-                    type="date"
-                    value={newClass.date}
-                    id="date"
-                    name="date"
-                    onChange={handleChanges}
-                />
-
-                <button onClick={handleSubmit}>Create class</button>
-            </Form>
+                    <StyledInput
+                        type="text"
+                        value={newClass.intensity}
+                        id="intensity"
+                        name="intensity"
+                        onChange={handleChanges}
+                    />
+                </div>
+                <div>
+                    <label htmlFor="location">Location</label>
+                    <StyledInput
+                        type="text"
+                        value={newClass.location}
+                        id="location"
+                        name="location"
+                        onChange={handleChanges}
+                    />
+                </div>
+                <div>
+                    <label htmlFor="maxClassSize">Max Class Size</label>
+                    <StyledInput
+                        type="number"
+                        value={newClass.maxClassSize}
+                        id="maxClassSize"
+                        name="maxClassSize"
+                        onChange={handleChanges}
+                    />
+                </div>
+                <div>
+                    <label htmlFor="date">Date</label>
+                    <StyledInput
+                        type="date"
+                        value={newClass.date}
+                        id="date"
+                        name="date"
+                        onChange={handleChanges}
+                    />
+                </div>
+                <StyledSignupLoginButton onClick={handleSubmit}>Create Class</StyledSignupLoginButton>
+            </form>
         </div>
     )
 }

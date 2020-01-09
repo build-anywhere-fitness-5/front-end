@@ -2,6 +2,11 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { addCategory } from "../../actions/index";
 
+import { StyledInput } from "../StyledInput";
+import { StyledSignupLoginButton } from "../StyledSignupLoginButton";
+
+import './CreateFormStyles.css';
+
 const CreateCategory = props => {
   const [newCategory, setNewCategory] = useState({
     name: "",
@@ -22,25 +27,32 @@ const CreateCategory = props => {
   };
   return (
     <div>
-      <form>
+
+      <h1>Create Category</h1>
+
+      <form className="createForm">
+        <div>
         <label htmlFor="name">Category Name</label>
-        <input
-          type="text"
-          name="name"
-          value={newCategory.name}
-          id="name"
-          onChange={handleChanges}
-        />
-        <label htmlFor="description">Category Description</label>
-        <input
-          type="text"
-          name="description"
-          value={newCategory.description}
-          id="description"
-          onChange={handleChanges}
-        />
+          <StyledInput
+            type="text"
+            name="name"
+            value={newCategory.name}
+            id="name"
+            onChange={handleChanges}
+          />
+        </div>
+        <div>
+          <label htmlFor="description">Category Description</label>
+          <StyledInput
+            type="text"
+            name="description"
+            value={newCategory.description}
+            id="description"
+            onChange={handleChanges}
+          />
+        </div>
     
-        <button onClick={handleSubmit}>Create Category</button>
+        <StyledSignupLoginButton onClick={handleSubmit}>Create Category</StyledSignupLoginButton>
       </form>
     </div>
   );

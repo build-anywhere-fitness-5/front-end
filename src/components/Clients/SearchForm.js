@@ -1,12 +1,12 @@
-  
 import React from "react";
+import { StyledInput } from "../StyledInput";
 
 export default function SearchForm(props) {
   return (
     <section className="search-form">
       <div className="characters">
         <form className="search">
-          <input
+          <StyledInput
             type="text"
             onChange={props.handleInputChange}
             value={props.query}

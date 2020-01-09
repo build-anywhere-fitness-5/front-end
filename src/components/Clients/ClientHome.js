@@ -5,6 +5,8 @@ import React, { useEffect, useState } from "react";
 import SearchForm from "./SearchForm";
 import { connect } from "react-redux";
 import { scheduleClass, unscheduleClass, fetchClasses } from "../../actions/index";
+import ClassCard from "./ClassCard";
+
 const ClientHome = props => {
   const [query, setQuery] = useState("");
   const [unScheduledClass, setUnScheduledClass] = useState(props.classes);
@@ -46,40 +48,13 @@ const ClientHome = props => {
     flexWrap: "wrap",
     justifyContent: "center"
   };
-  const divStyle2 = {
-    width: "25%"
-  };
 
   return (
     <div>
       <SearchForm handleInputChange={handleInputChange} query={query} />
       <div style={divStyle}>
         {filteredClass.map((item, index) => (
-          <div key={index} style={divStyle2}>
-            <h1>Name: {item.className}</h1>
-            <h1>Date: {item.date}</h1>
-            <h1>Start: {item.startTime}</h1>
-            <h1>Duration: {item.durationMinutes} Minutes</h1>
-            <h1>Type: {item.classType}</h1>
-            <h1>Intensity: {item.intensity}</h1>
-            <h1>Attending: {item.clients.length}</h1>
-            <h1>Max Participants: {item.maxClassSize}</h1>
-            <h1>Location: {item.location}</h1>
-            <h1>Instructor: {item.instructor}</h1>
-            <button
-              onClick={() => {
-                props.scheduleClass(item);
-                setUnScheduledClass(filteredClass =>
-                  filteredClass.filter((item, i) => i !== index)
-                );
-                setFilteredClass(filteredClass =>
-                  filteredClass.filter((item, i) => i !== index)
-                );
-              }}
-            >
-              Schedule Class
-            </button>
-          </div>
+          <ClassCard item={item} index={index} scheduleClass={props.scheduleClass} setUnScheduledClass={setUnScheduledClass} setFilteredClass={setFilteredClass} />
         ))}
       </div>
     </div>

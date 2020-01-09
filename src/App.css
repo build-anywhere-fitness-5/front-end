@@ -38,18 +38,30 @@
 }
 
 a {
-  color: orange;
+  color: #FF6900;
   text-decoration: none;
 }
 
 button {
-  color: #fff;
+  color: white;
   padding: .75em 1em;
   font-weight: 500;
   border-radius: .25em;
-  background-color: #3a8bce;
+  background-color: #333333;
   cursor: pointer;
   border: 0;
   font-size: .9em;
   text-decoration: none;
+}
+
+button:hover, button:active {
+  background-color: #FF6900;
+}
+
+button.gray {
+  background-color: #BDBDBD;
+}
+
+button.gray:hover {
+  background-color: #FF6900;
 }
