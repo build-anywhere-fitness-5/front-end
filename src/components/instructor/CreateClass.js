@@ -4,11 +4,60 @@ import { connect } from 'react-redux';
 
 import { addClass } from '../../actions/index';
 
+import { StyledInput } from "../StyledInput";
+import { StyledSignupLoginButton } from "../StyledSignupLoginButton";
+
 const Form = styled.form`
-display: flex;
-flex-direction: column;
-width: 50%;
+    width: 40vw;
+    margin: 0 auto;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    label {
+
+        font-size: 1.5rem;
+        line-height: 4rem;
+
+        margin-right: 2rem;
+    }
+
+    @media (max-width: 1280px)
+    {
+        max-width: 70vw;
+
+        input, label {
+
+            font-size: 1rem;
+
+            line-height: 2rem;
+
+        }    
+
+    }
+
+    @media (max-width: 1024px)
+    {
+        max-width: 90vw;
+
+    }
+
 `
+
+const FlexRow = styled.div`
+
+    width: 100%;
+
+    display: flex;
+    justify-content: flex-end;
+
+    margin: 0.5rem;
+
+`;
+
+
 
 const CreateClass = props => {
 
@@ -42,83 +91,91 @@ const CreateClass = props => {
 
     return (
         <div>
-            <h2>Create class</h2>
+            <h1>Create class</h1>
 
             <Form>
 
-                <label htmlFor="className">Class Name</label>
-                <input
-                    type="text"
-                    name="className"
-                    value={newClass.className}
-                    id="className"
-                    onChange={handleChanges}
-                />
-
-                <label htmlFor="classType">Type</label>
-                <input
-                    type="text"
-                    value={newClass.classType}
-                    id="classType"
-                    name="classType"
-                    onChange={handleChanges}
-                />
-
-                <label htmlFor="startTime">Start time</label>
-                <input
-                    type="time"
-                    value={newClass.startTime}
-                    id="startTime"
-                    name="startTime"
-                    onChange={handleChanges}
-                />
-
-                <label htmlFor="durationMinutes">Duration (minutes)</label>
-                <input
-                    type="number"
-                    value={newClass.durationMinutes}
-                    id="durationMinutes"
-                    name="durationMinutes"
-                    onChange={handleChanges}
-                />
-
+                <FlexRow>
+                    <label htmlFor="className">Class Name</label>
+                    <StyledInput
+                        type="text"
+                        name="className"
+                        value={newClass.className}
+                        id="className"
+                        onChange={handleChanges}
+                    />
+                </FlexRow>
+                <FlexRow>
+                    <label htmlFor="classType">Type</label>
+                    <StyledInput
+                        type="text"
+                        value={newClass.classType}
+                        id="classType"
+                        name="classType"
+                        onChange={handleChanges}
+                    />
+                </FlexRow>
+                <FlexRow>
+                    <label htmlFor="startTime">Start time</label>
+                    <StyledInput
+                        type="time"
+                        value={newClass.startTime}
+                        id="startTime"
+                        name="startTime"
+                        onChange={handleChanges}
+                    />
+                </FlexRow>
+                <FlexRow>
+                    <label htmlFor="durationMinutes">Duration (minutes)</label>
+                    <StyledInput
+                        type="number"
+                        value={newClass.durationMinutes}
+                        id="durationMinutes"
+                        name="durationMinutes"
+                        onChange={handleChanges}
+                    />
+                </FlexRow>
+                <FlexRow>
                 <label htmlFor="intensity">Intensity</label>
-                <input
-                    type="text"
-                    value={newClass.intensity}
-                    id="intensity"
-                    name="intensity"
-                    onChange={handleChanges}
-                />
-
-                <label htmlFor="location">Location</label>
-                <input
-                    type="text"
-                    value={newClass.location}
-                    id="location"
-                    name="location"
-                    onChange={handleChanges}
-                />
-
-                <label htmlFor="maxClassSize">Max Class Size</label>
-                <input
-                    type="number"
-                    value={newClass.maxClassSize}
-                    id="maxClassSize"
-                    name="maxClassSize"
-                    onChange={handleChanges}
-                />
-
-                <label htmlFor="date">Date</label>
-                <input
-                    type="date"
-                    value={newClass.date}
-                    id="date"
-                    name="date"
-                    onChange={handleChanges}
-                />
-
-                <button onClick={handleSubmit}>Create class</button>
+                    <StyledInput
+                        type="text"
+                        value={newClass.intensity}
+                        id="intensity"
+                        name="intensity"
+                        onChange={handleChanges}
+                    />
+                </FlexRow>
+                <FlexRow>
+                    <label htmlFor="location">Location</label>
+                    <StyledInput
+                        type="text"
+                        value={newClass.location}
+                        id="location"
+                        name="location"
+                        onChange={handleChanges}
+                    />
+                </FlexRow>
+                <FlexRow>
+                    <label htmlFor="maxClassSize">Max Class Size</label>
+                    <StyledInput
+                        type="number"
+                        value={newClass.maxClassSize}
+                        id="maxClassSize"
+                        name="maxClassSize"
+                        onChange={handleChanges}
+                    />
+                </FlexRow>
+                <FlexRow>
+                    <label htmlFor="date">Date</label>
+                    <StyledInput
+                        type="date"
+                        value={newClass.date}
+                        id="date"
+                        name="date"
+                        onChange={handleChanges}
+                    />
+                </FlexRow>
+                <StyledSignupLoginButton onClick={handleSubmit}>Create class</StyledSignupLoginButton>
             </Form>
         </div>
     )
