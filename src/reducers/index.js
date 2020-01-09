@@ -11,31 +11,30 @@ import {
   DELETE_CATEGORY,
   EDIT_CATEGORY,
   EDIT_STUDIO_CLASS,
-  DELETE_STUDIO_CLASS,
-  FETCH_SUCCESS,
-  FETCHCAT_SUCCESS,
-  FETCH_CLASSES,
-  FETCHCLASS_SUCCESS,
+  DELETE_STUDIOCLASS_FAILURE,
+  DELETE_STUDIOCLASS_SUCCESS,
+  DELETE_STUDIOCLASS_START,
+  ADD_STUDIOCLASS_FAILURE,
+  ADD_STUDIOCLASS_SUCCESS,
+  ADD_STUDIOCLASS_START,
+  EDIT_STUDIOCLASS_FAILURE,
+  EDIT_STUDIOCLASS_SUCCESS,
+  EDIT_STUDIOCLASS_START,
+  // FETCH_SUCCESS,
+  // FETCHCAT_SUCCESS,
+  // FETCH_CLASSES,
+  // FETCHCLASS_SUCCESS,
   ADD_STUDIO_CLASS,
   ADD_USER,
-  REMOVE_USER
+  REMOVE_USER,
+  GET_STUDIOCLASSES_START,
+  GET_STUDIOCLASSES_SUCCESS,
+  GET_STUDIOCLASSES_FAILURE,
 } from "../actions/index";
 
 const initialState = {
   studioTwoClasses: [
-    {
-      id: 1,
-      title: "Yoga",
-      instructorId: 1,
-      categoryId: 1,
-      scheduleTime: '22:45',
-      address: null,
-      city: null,
-      state: null,
-      zipCode: null,
-      created_at: "2019-10-21T12:51:44.173Z",
-      updated_at: "2019-10-21T12:51:44.173Z"
-    }
+    {}
   ],
   classes: [
     {
@@ -92,24 +91,28 @@ const initialState = {
   ],
   categories: [],
   scheduledClasses: [],
-  user: ''
+  user: '',
+  isFetching: false,
+  error: '',
+  isPosting: false,
+  isEditing: false
 };
 
 export const classReducer = (state = initialState, action) => {
   // console.log(state, action);
   switch (action.type) {
-    case FETCHCAT_SUCCESS:
-      return {
-        ...state,
-        categories: action.payload
+    // case FETCHCAT_SUCCESS:
+    //   return {
+    //     ...state,
+    //     categories: action.payload
 
-      }
-    case FETCHCLASS_SUCCESS:
-      return {
-        ...state,
-        classes: action.payload
+    //   }
+    // case FETCHCLASS_SUCCESS:
+    //   return {
+    //     ...state,
+    //     classes: action.payload
 
-      }
+    //   }
     case ADD_CLASS:
       return {
         ...state,
@@ -193,15 +196,36 @@ export const classReducer = (state = initialState, action) => {
           return item;
         })
       };
-    case ADD_STUDIO_CLASS:
+    case ADD_STUDIOCLASS_START:
       return {
         ...state,
+        isPosting: true
+      };
+    case ADD_STUDIOCLASS_SUCCESS:
+      return {
+        ...state,
+        isPosting: false,
+        error: '',
         studioTwoClasses: [...state.studioTwoClasses, action.payload]
       };
-    case EDIT_STUDIO_CLASS:
+    case ADD_STUDIOCLASS_FAILURE:
+      return {
+        ...state,
+        isPosting: false,
+        error: action.payload.data.Error
+      };
+    case EDIT_STUDIOCLASS_START:
       // console.log(state, action);
       return {
         ...state,
+        isEditing: true
+      }
+    case EDIT_STUDIOCLASS_SUCCESS:
+      // console.log(state, action);
+      return {
+        ...state,
+        isEditing: false,
+        error: '',
         studioTwoClasses: state.studioTwoClasses.map(item => {
           if (item.id === action.payload.id) {
             return { ...action.payload }
@@ -209,10 +233,51 @@ export const classReducer = (state = initialState, action) => {
           return item
         })
       };
-    case DELETE_STUDIO_CLASS:
+    case EDIT_STUDIOCLASS_FAILURE:
+      // console.log(state, action);
       return {
         ...state,
+        isEditing: false,
+        error: action.payload
+      };
+    case DELETE_STUDIOCLASS_START:
+      return {
+        ...state,
+        isPosting: true
+      };
+    case DELETE_STUDIOCLASS_SUCCESS:
+      console.log(state, action, action.payload)
+      return {
+        ...state,
+        isPosting: false,
+        error: '',
         studioTwoClasses: state.studioTwoClasses.filter(c => c.id !== action.payload)
+      };
+    case DELETE_STUDIOCLASS_FAILURE:
+      return {
+        ...state,
+        isPosting: false,
+        error: action.payload.data.Error
+      };
+
+    case GET_STUDIOCLASSES_START:
+      return {
+        ...state,
+        isFetching: true
+      };
+    case GET_STUDIOCLASSES_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        error: '',
+        studioTwoClasses:
+          action.payload
+      };
+    case GET_STUDIOCLASSES_FAILURE:
+      return {
+        ...state,
+        isFetching: false,
+        error: action.payload
       };
     case ADD_USER:
       return {
@@ -228,3 +293,4 @@ export const classReducer = (state = initialState, action) => {
       return state;
   }
 };
+
