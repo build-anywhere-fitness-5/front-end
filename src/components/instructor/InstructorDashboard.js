@@ -17,7 +17,10 @@ const InstructorDashboard = props => {
             <h2>Pass list:</h2>
             <PassList/>
             <h2>Category List:</h2>
-            <CategoryList/>
+            {sessionStorage.getItem('token') ? (
+                <CategoryList/>
+            ): (<></>)}
+            
 
             <Link to='/instructor/createclass/'> <button>Create class</button></Link>
             <Link to='/instructor/createstudioclass/'> <button>Create studio class</button></Link>

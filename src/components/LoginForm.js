@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import { useHistory } from "react-router-dom";
 import axios from "axios";
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 
 import { StyledImgDiv } from "./StyledImgDiv";
 import { StyledLoginSignupContainer } from "./StyledLoginSignupContainer";
@@ -10,7 +10,7 @@ import { StyledFormDiv } from "./StyledFormDiv";
 import { StyledInput } from "./StyledInput";
 import { StyledSignupLoginButton } from "./StyledSignupLoginButton";
 
-import { addUser } from '../actions/index';
+import { addUser } from "../actions/index";
 
 const LoginForm = props => {
 
@@ -66,6 +66,7 @@ const LoginForm = props => {
                     axios.post("https://lambda-anywhere-fitness.herokuapp.com/api/auth/login", { username: userInfo.username, password: userInfo.password })
                         .then(loginResponse => {
                             sessionStorage.setItem("token", loginResponse.data.token);
+                            // console.log(sessionStorage.getItem('token'))
                             sessionStorage.setItem("roleId", loginResponse.data.user.roleId);
                             props.addUser(loginResponse.data.user);
                             // console.log(loginResponse);
@@ -92,44 +93,54 @@ const LoginForm = props => {
 
             });
 
-    }
+  }
 
+  // format errors for display
+  const formattedErrors = errorInfo.login.join("<br>");
 
-    // format errors for display
-    const formattedErrors = errorInfo.login.join("<br>");
+  return (
+    <StyledLoginSignupContainer>
+      <StyledImgDiv></StyledImgDiv>
 
-    return (
-        <StyledLoginSignupContainer>
+      <StyledFormDiv>
+        <h1>Log in</h1>
 
-            <StyledImgDiv></StyledImgDiv>
+        <form name="login" onSubmit={handleLogin}>
+          <StyledInput
+            name="username"
+            type="text"
+            placeholder="Username"
+            value={userInfo.username}
+            onChange={handleChange}
+          />
+          <p className="formError" id="usernameErrors"></p>
 
-            <StyledFormDiv>
+          <StyledInput
+            name="password"
+            type="password"
+            placeholder="Password"
+            value={userInfo.password}
+            onChange={handleChange}
+          />
+          <p className="formError" id="passwordErrors"></p>
 
-                <h1>Log in</h1>
+          <StyledSignupLoginButton type="submit">
+            Log In
+          </StyledSignupLoginButton>
+        </form>
 
-                <form name="login" onSubmit={handleLogin}>
-
-                    <StyledInput name="username" type="text" placeholder="Username" value={userInfo.username} onChange={handleChange} />
-                    <p className="formError" id="usernameErrors"></p>
-
-                    <StyledInput name="password" type="password" placeholder="Password" value={userInfo.password} onChange={handleChange} />
-                    <p className="formError" id="passwordErrors"></p>
-
-                    <StyledSignupLoginButton type="submit">Log In</StyledSignupLoginButton>
-
-                </form>
-
-                <p className="loginErrors" id="loginErrors">{formattedErrors}</p>
-
-            </StyledFormDiv>
-        </StyledLoginSignupContainer>
-    )
-}
+        <p className="loginErrors" id="loginErrors">
+          {formattedErrors}
+        </p>
+      </StyledFormDiv>
+    </StyledLoginSignupContainer>
+  );
+};
 
 const mapStateToProps = state => {
-    return {
-        user: state.user
-    }
-}
+  return {
+    user: state.user
+  };
+};
 
 export default connect(mapStateToProps, { addUser })(LoginForm);

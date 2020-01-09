@@ -30,7 +30,7 @@ const PassList = props => {
   return (
     <StyledFormDiv>
       {props.passes.map((pass, index) => (
-        <UserCard key={index} pass={pass} deletePass={deletePass} handleOpen={handleOpen} setItem={setItem} />
+        <UserCard key={index} pass={pass} deletePass={props.deletePass} handleOpen={handleOpen} setItem={setItem} />
       ))}
       <Modal
         aria-labelledby="simple-modal-title"

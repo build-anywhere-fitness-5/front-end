@@ -69,7 +69,13 @@ const EditPass = props => {
   };
 
   const changeHandler = event => {
-    setUpdatePass({ ...updatePass, [event.target.name]: event.target.value });
+
+    let value = event.target.value;
+
+    if (event.target.name === "classesRemaining")
+      { value = parseInt(value); }
+
+    setUpdatePass({ ...updatePass, [event.target.name]: value });
   };
 
   return (
