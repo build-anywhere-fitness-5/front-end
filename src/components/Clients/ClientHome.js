@@ -17,7 +17,6 @@ const ClientHome = props => {
   };
   useEffect(() => {
     console.log(filteredClass);
-    props.fetchClasses()
     if (query.length < 1) {
       setFilteredClass(unScheduledClass);
     } else {
@@ -37,6 +36,11 @@ const ClientHome = props => {
       console.log(filteredClass);
     }
   }, [query, filteredClass, props, unScheduledClass]);
+
+  useEffect(() => {
+    props.fetchClasses()
+    setFilteredClass(props.classes)
+  }, [unScheduledClass])
 
   console.log(query);
   console.log(filteredClass);
