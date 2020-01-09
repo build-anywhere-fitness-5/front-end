@@ -57,19 +57,11 @@ function App() {
       <PrivateRoute exact path="/client/schedule" component={ScheduledClasses} />
 
 
-      <PrivateRoute exact path='/instructor/classes/:classID' render={props => {
-        return <ViewClass {...props} />
-      }} />
-      <PrivateRoute path='/instructor/classes/edit/:classID' render={props => {
-        return <EditClass {...props} />
-      }} />
+      <PrivateRoute exact path='/instructor/classes/:classID' component={ViewClass} />
+      <PrivateRoute path='/instructor/classes/edit/:classID' component={EditClass} />
 
-      <PrivateRoute exact path='/instructor/studioclasses/:classID' render={props => {
-        return <ViewStudioClass {...props} />
-      }} />
-      <PrivateRoute path='/instructor/studioclasses/edit/:classID' render={props => {
-        return <EditStudioClass {...props} />
-      }} />
+      <PrivateRoute exact path='/instructor/studioclasses/:classID' component={ViewStudioClass} />
+      <PrivateRoute path='/instructor/studioclasses/edit/:classID' component={EditStudioClass} />
 
       {/* <Route exact path='/logout' render={props => <LogOut {...props} />} /> */}
 
