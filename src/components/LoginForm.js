@@ -24,12 +24,12 @@ const LoginForm = props => {
         });
 
     // store error info in an object
-    const errorInfo = 
-        {
-            username: [],
-            password: [],
-            login: []
-        };
+    const errorInfo =
+    {
+        username: [],
+        password: [],
+        login: []
+    };
 
 
     // update what the user has typed into state upon change
@@ -66,6 +66,7 @@ const LoginForm = props => {
                     axios.post("https://lambda-anywhere-fitness.herokuapp.com/api/auth/login", { username: userInfo.username, password: userInfo.password })
                         .then(loginResponse => {
                             sessionStorage.setItem("token", loginResponse.data.token);
+                            sessionStorage.setItem("roleId", loginResponse.data.user.roleId);
                             props.addUser(loginResponse.data.user);
                             console.log(loginResponse);
 

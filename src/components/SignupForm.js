@@ -36,15 +36,15 @@ const SignupForm = props => {
 
     // store error info in an object
     const errorInfo =
-        {
-            username: [],
-            firstName: [],
-            lastName: [],
-            email: [],
-            password: [],
-            instructorCode: [],
-            signup: []
-        };
+    {
+        username: [],
+        firstName: [],
+        lastName: [],
+        email: [],
+        password: [],
+        instructorCode: [],
+        signup: []
+    };
 
 
     // update what the user has typed into state upon change
@@ -130,7 +130,7 @@ const SignupForm = props => {
                             sessionStorage.setItem("roleId", loginResponse.data.user.roleId);
 
                             props.addUser(loginResponse.data.user);
-                            console.log(loginResponse);
+                            // console.log(loginResponse);
 
 
                             if (loginResponse.data.user.roleId === 1) { history.push("/instructor"); }
@@ -149,7 +149,7 @@ const SignupForm = props => {
                         console.log("Username is already taken", response);
                         errorInfo.signup.push("Username is already taken.")
                         document.getElementById("loginErrors").textContent = "Couldn't access database.";
-                        
+
                     }
                     else {
                         // get user roleId (instructor is 1, client is 2) and redirect to either instructor or client dashboard
@@ -165,7 +165,7 @@ const SignupForm = props => {
                     console.log("Couldn't access database.", response, response.message);
                     errorInfo.signup.push("Couldn't access database. Username may have been taken.")
                     document.getElementById("signupErrors").textContent = "Couldn't access database. Username may have been taken.";
-                    
+
                     console.log(errorInfo.signup);
 
                 });
