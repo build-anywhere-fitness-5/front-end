@@ -130,7 +130,6 @@ export const classReducer = (state = initialState, action) => {
         ]
       };
     case DELETE_CLASS:
-      console.log(state, action);
       return {
         ...state,
         classes: state.classes.filter(c => c.id !== action.payload)
@@ -211,13 +210,11 @@ export const classReducer = (state = initialState, action) => {
         })
       };
     case DELETE_STUDIO_CLASS:
-      console.log(state, action);
       return {
         ...state,
         studioTwoClasses: state.studioTwoClasses.filter(c => c.id !== action.payload)
       };
     case ADD_USER:
-      console.log(state, action)
       return {
         ...state,
         user: action.payload
