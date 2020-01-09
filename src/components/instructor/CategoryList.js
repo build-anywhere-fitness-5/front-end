@@ -21,8 +21,8 @@ const CategoryList = props => {
   const [open, setOpen] = React.useState(false);
   const [item, setItem] = React.useState();
   useEffect(() => {
-      props.fetchCategory()
-  }, [])
+    props.fetchCategory()
+  }, [props])
 
   // const [openAccount, setOpenAccount] = React.useState(false);
   // const [postTool, setPostTool] = React.useState(false);
@@ -37,8 +37,8 @@ const CategoryList = props => {
     <StyledFormDiv>
       {props.categories.map((category, index) => (
         <UserCard key={index}>
-            <h1>Category: {category.name}</h1>
-            <h2>Description: {category.description}</h2>
+          <h1>Category: {category.name}</h1>
+          <h2>Description: {category.description}</h2>
           <button
             onClick={e => {
               // console.log('click')

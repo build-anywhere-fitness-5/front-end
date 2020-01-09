@@ -96,7 +96,7 @@ const initialState = {
 };
 
 export const classReducer = (state = initialState, action) => {
-  console.log(state, action);
+  // console.log(state, action);
   switch (action.type) {
     case FETCHCAT_SUCCESS:
       return {

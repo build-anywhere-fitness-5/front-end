@@ -29,11 +29,12 @@ const ClientHome = props => {
           c.location.toLowerCase().includes(query.toLowerCase())
         );
       });
-   
-    setFilteredClass(filterClasses);
-    console.log(filterClasses);
-    console.log(filteredClass);
-  } }, [query]);
+
+      setFilteredClass(filterClasses);
+      console.log(filterClasses);
+      console.log(filteredClass);
+    }
+  }, [query, filteredClass, props, unScheduledClass]);
 
   console.log(query);
   console.log(filteredClass);

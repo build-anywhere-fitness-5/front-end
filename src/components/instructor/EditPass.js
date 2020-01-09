@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 // MaterialUI
-import clsx from "clsx";
+// import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 
 import TextField from "@material-ui/core/TextField";
@@ -58,7 +58,7 @@ const EditPass = props => {
   useEffect(() => {
     console.log("PROPS.PASS CONSOLE LOG", props.pass, "INDEX", props.index);
     setUpdatePass(props.pass);
-  }, []);
+  }, [props.index, props.pass]);
 
   const submitHandler = event => {
     event.preventDefault();
@@ -74,7 +74,7 @@ const EditPass = props => {
 
   return (
     <div style={{ width: '40%', height: '100%' }}>
-      <form style={{ backgroundColor: "white"} } onSubmit={submitHandler}>
+      <form style={{ backgroundColor: "white" }} onSubmit={submitHandler}>
         <h1>Update Your Pass</h1>
         <TextField
           label="Client"

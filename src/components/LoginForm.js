@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 import { useHistory } from "react-router-dom";
 import axios from "axios";
@@ -68,7 +68,7 @@ const LoginForm = props => {
                             sessionStorage.setItem("token", loginResponse.data.token);
                             sessionStorage.setItem("roleId", loginResponse.data.user.roleId);
                             props.addUser(loginResponse.data.user);
-                            console.log(loginResponse);
+                            // console.log(loginResponse);
 
                             if (loginResponse.data.user.roleId === 1) { history.push("/instructor"); }
 
