@@ -22,7 +22,7 @@ const ClientHome = props => {
       {props.scheduledClasses.length !== 0 ? (
         <div>
           {props.scheduledClasses.map((item, index) => (
-          <ClassCard key={index} item={item} index={index} scheduleClass={props.unscheduleClass}  setUnScheduledClass={unscheduleClass} setFilteredClass={setFilteredClass} />
+          <ClassCard key={index} item={item} index={index} unscheduleClass={props.unscheduleClass}  setUnScheduledClass={unscheduleClass} setFilteredClass={setFilteredClass} />
         ))}
         </div>
       ) : (
