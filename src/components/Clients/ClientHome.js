@@ -6,6 +6,16 @@ import SearchForm from "./SearchForm";
 import { connect } from "react-redux";
 import ClassCard from './ClassCard'
 import { scheduleClass, unscheduleClass, fetchClasses } from "../../actions/index";
+
+import styled from "styled-components";
+
+const WelcomeText = styled.p`
+
+  font-weight: bold;
+  font-size: 1.5rem;
+
+`;
+
 const ClientHome = props => {
   const [query, setQuery] = useState("");
   const [unScheduledClass, setUnScheduledClass] = useState(props.classes);
@@ -46,6 +56,7 @@ const ClientHome = props => {
 
   return (
     <div>
+      <WelcomeText>Browse the classes below, or search to narrow down your selection.</WelcomeText>
       <SearchForm handleInputChange={handleInputChange} query={query} />
       <div style={divStyle}>
         {filteredClass.map((item, index) => (
