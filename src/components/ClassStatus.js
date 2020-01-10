@@ -5,7 +5,7 @@ import { axiosWithAuth } from "../utils/axiosWithAuth";
 
 const StyledIntroText = styled.p`
 
-    font-size: 1.5rem;
+    font-weight: bold;
 
 `;
 
@@ -36,7 +36,7 @@ const ClassStatus = () => {
             return (<StyledIntroText>{"Searching for classes..."}</StyledIntroText>);
         }
 
-    return (<StyledIntroText>{"We have " + totalCategories + " types of classes available."}</StyledIntroText>);
+    return (<StyledIntroText>{"Browse all the classes from " + totalCategories + " different categories, or search to narrow down your selection."}</StyledIntroText>);
 
 }
 

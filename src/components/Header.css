@@ -6,6 +6,7 @@
 header {
     margin: 0;
     background-color: #FF6900;
+    min-height: 50px;
     height: 5vh;
 }
 

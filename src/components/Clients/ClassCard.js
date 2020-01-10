@@ -115,7 +115,9 @@ const ClassCard = function ({ item, index, scheduleClass, unscheduleClass, setUn
     endTimeObj.setHours(hour);
     endTimeObj.setMinutes(minutes + duration);
 
-    let endTimeString = endTimeObj.getHours() + ":" + endTimeObj.getMinutes();
+    endTimeObj.getMinutes()
+
+    let endTimeString = endTimeObj.getHours() + ":" + (parseInt(endTimeObj.getMinutes()) < 10 ? "0" : "") + endTimeObj.getMinutes();
 
     // create gradient to specify intensity level of class
     let gradientColors = "to top, #FF6900";

@@ -82,6 +82,8 @@ const InstructorDashboard = props => {
                         </div>
                         
                         <StudioClassList />
+
+                        
                     </div>
                 </div>
             </section>
