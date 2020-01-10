@@ -11,7 +11,7 @@ const UserCard = ({ pass, deletePass, handleOpen, setItem}) => {
         display: flex;
         flex-direction: column;
 
-        margin: 0 1rem;
+        margin: 5% 1rem 0 1rem;
     `;
 
     const StyledUserCard = styled.div`
@@ -171,7 +171,7 @@ const UserCard = ({ pass, deletePass, handleOpen, setItem}) => {
 
                         <FlexColumn>
                             <ClassName>{pass.className}</ClassName>
-                            <ClassesRemainingText>classes remaining</ClassesRemainingText>
+                            <ClassesRemainingText>class{pass.classesRemaining === 1 ? "" : "es"} remaining</ClassesRemainingText>
                         </FlexColumn>
 
                     </FlexRow>
@@ -212,7 +212,7 @@ const UserCard = ({ pass, deletePass, handleOpen, setItem}) => {
                     console.log(pass);
                     }}
                 >
-                    Edit
+                    edit
                 </button>
             </EditDeleteButtons>
         </UserCardContainer>
