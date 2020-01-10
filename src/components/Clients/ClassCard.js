@@ -90,8 +90,8 @@ const Attendees = styled.p`
 
 
 
-const ClassCard = function ({ item, index, scheduleClass, setUnScheduledClass, setFilteredClass }) {
-
+const ClassCard = function ({ item, index, scheduleClass, unscheduleClass, setUnScheduledClass, setFilteredClass }) {
+    console.log("item", item, "index", index, scheduleClass )
     let [year, month, day] = item.date.split("-");
 
     let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -168,8 +168,7 @@ const ClassCard = function ({ item, index, scheduleClass, setUnScheduledClass, s
 
                 <FlexboxCol>
                     <Attendees>Attending: {item.clients.length} / {item.maxClassSize}</Attendees>
-
-                    <button
+                    {scheduleClass ? (<button
                         onClick={() => {
                         scheduleClass(item);
                         setUnScheduledClass(filteredClass =>
@@ -181,7 +180,20 @@ const ClassCard = function ({ item, index, scheduleClass, setUnScheduledClass, s
                         }}
                     >
                         Schedule Class
-                    </button>
+                    </button>): (<button
+                        onClick={() => {
+                        unscheduleClass(item);
+                        setUnScheduledClass(filteredClass =>
+                            filteredClass.filter((item, i) => i !== index)
+                        );
+                        setFilteredClass(filteredClass =>
+                            filteredClass.filter((item, i) => i !== index)
+                        );
+                        }}
+                    >
+                        Unschedule Class
+                    </button>)}
+                    
                 </FlexboxCol>
 
                 

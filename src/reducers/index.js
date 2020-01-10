@@ -19,9 +19,7 @@ import {
   EDIT_STUDIOCLASS_FAILURE,
   EDIT_STUDIOCLASS_SUCCESS,
   EDIT_STUDIOCLASS_START,
-  FETCH_SUCCESS,
   FETCHCAT_SUCCESS,
-  FETCH_CLASSES,
   FETCHCLASS_SUCCESS,
   ADD_USER,
   REMOVE_USER,
@@ -119,7 +117,10 @@ export const classReducer = (state = initialState, action) => {
     case SCHEDULE_CLASS:
       return {
         ...state,
-        scheduledClasses: [...state.scheduledClasses, action.payload]
+        scheduledClasses: [...state.scheduledClasses, action.payload],
+        classes: [...state.classes.filter((item, index) => {
+          return item !== action.payload;
+        })]
       };
     case UNSCHEDULE_CLASS:
       return {
@@ -128,7 +129,8 @@ export const classReducer = (state = initialState, action) => {
           ...state.scheduledClasses.filter((item, index) => {
             return item !== action.payload;
           })
-        ]
+        ],
+        classes: [...state.classes, action.payload]
       };
     case DELETE_CLASS:
       return {
@@ -269,7 +271,7 @@ export const classReducer = (state = initialState, action) => {
         isFetching: false,
         error: '',
         studioTwoClasses:
-          action.payload
+          action.payload.sort((a, b) => a.id - b.id)
       };
     case GET_STUDIOCLASSES_FAILURE:
       return {

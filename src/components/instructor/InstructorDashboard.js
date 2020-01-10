@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import StudioClassList from './StudioClassList';
 import { connect } from "react-redux";
 
-import { getStudioClasses } from '../../actions/index';
+import { getStudioClasses, fetchCategory } from '../../actions/index';
 
 import CategoryListTable from "./CategoryListTable";
 
@@ -14,8 +14,12 @@ import "./dashboard.css";
 const InstructorDashboard = props => {
 
     useEffect(() => {
-        props.getStudioClasses()
+        props.getStudioClasses();
+        props.fetchCategory();
     }, [props.getStudioClasses, props])
+    useEffect(() => {
+        props.fetchCategory();
+    }, [ props.fetchCategory, props])
 
     console.log(props);
 
@@ -92,4 +96,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, { getStudioClasses })(InstructorDashboard);
+export default connect(mapStateToProps, { getStudioClasses, fetchCategory })(InstructorDashboard);
