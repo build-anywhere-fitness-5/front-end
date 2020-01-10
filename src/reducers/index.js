@@ -117,7 +117,10 @@ export const classReducer = (state = initialState, action) => {
     case SCHEDULE_CLASS:
       return {
         ...state,
-        scheduledClasses: [...state.scheduledClasses, action.payload]
+        scheduledClasses: [...state.scheduledClasses, action.payload],
+        classes: [...state.classes.filter((item, index) => {
+          return item !== action.payload;
+        })]
       };
     case UNSCHEDULE_CLASS:
       return {
@@ -126,7 +129,8 @@ export const classReducer = (state = initialState, action) => {
           ...state.scheduledClasses.filter((item, index) => {
             return item !== action.payload;
           })
-        ]
+        ],
+        classes: [...state.classes, action.payload]
       };
     case DELETE_CLASS:
       return {
