@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
-import { deleteCategory, editCategory, fetchCategory } from "../../actions/index";
-import { Modal, ListItemSecondaryAction } from "@material-ui/core";
+import { deleteCategory, editCategory } from "../../actions/index";
+import { Modal} from "@material-ui/core";
 import styled from "styled-components";
 import EditCategory from "./EditCategory";
 const StyledFormDiv = styled.div`
@@ -18,18 +18,9 @@ const UserCard = styled.div`
 
 `;
 const CategoryList = props => {
+  console.log(props)
   const [open, setOpen] = React.useState(false);
-  const [item, setItem] = React.useState();
-  useEffect(() => {
-    console.log('token is in', sessionStorage.getItem('token'))
-   
-      props.fetchCategory()
-    
-   
-  }, [sessionStorage.getItem('token')]
-  );
-  // const [openAccount, setOpenAccount] = React.useState(false);
-  // const [postTool, setPostTool] = React.useState(false);
+  const [item, setItem] = React.useState();  
 
   const handleOpen = () => {
     setOpen(true);
@@ -85,4 +76,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { deleteCategory, editCategory, fetchCategory })(CategoryList);
+export default connect(mapStateToProps, { deleteCategory, editCategory })(CategoryList);

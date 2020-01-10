@@ -1,7 +1,5 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import ClientHome from '../components/Clients/ClientHome'
-
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
     return (
