@@ -11,7 +11,7 @@ const UserCard = ({key, pass, deletePass, handleOpen, setItem}) => {
         display: flex;
         flex-direction: column;
 
-        margin: 0 1rem;
+        margin: 5% 1rem 0 1rem;
     `;
 
     const StyledUserCard = styled.div`
