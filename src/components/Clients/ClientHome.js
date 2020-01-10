@@ -4,10 +4,8 @@
 import React, { useEffect, useState } from "react";
 import SearchForm from "./SearchForm";
 import { connect } from "react-redux";
+import ClassCard from './ClassCard'
 import { scheduleClass, unscheduleClass, fetchClasses } from "../../actions/index";
-import ClassCard from "./ClassCard";
-import ClassStatus from "../ClassStatus";
-
 const ClientHome = props => {
   const [query, setQuery] = useState("");
   const [unScheduledClass, setUnScheduledClass] = useState(props.classes);
@@ -18,6 +16,7 @@ const ClientHome = props => {
   };
   useEffect(() => {
     console.log(filteredClass);
+    // props.fetchClasses()
     if (query.length < 1) {
       setFilteredClass(unScheduledClass);
     } else {
@@ -31,17 +30,11 @@ const ClientHome = props => {
           c.location.toLowerCase().includes(query.toLowerCase())
         );
       });
-
-      setFilteredClass(filterClasses);
-      console.log(filterClasses);
-      console.log(filteredClass);
-    }
-  }, [query, filteredClass, props, unScheduledClass]);
-
-  useEffect(() => {
-    props.fetchClasses()
-    setFilteredClass(props.classes)
-  }, [unScheduledClass])
+   
+    setFilteredClass(filterClasses);
+    console.log(filterClasses);
+    console.log(filteredClass);
+  } }, [query]);
 
   console.log(query);
   console.log(filteredClass);
@@ -53,14 +46,16 @@ const ClientHome = props => {
     flexWrap: "wrap",
     justifyContent: "center"
   };
+  const divStyle2 = {
+    width: "25%"
+  };
 
   return (
     <div>
-      <ClassStatus />
       <SearchForm handleInputChange={handleInputChange} query={query} />
       <div style={divStyle}>
         {filteredClass.map((item, index) => (
-          <ClassCard item={item} index={index} scheduleClass={props.scheduleClass} setUnScheduledClass={setUnScheduledClass} setFilteredClass={setFilteredClass} />
+          <ClassCard key={index} item={item} index={index} scheduleClass={props.scheduleClass} setUnScheduledClass={setUnScheduledClass} setFilteredClass={setFilteredClass} />
         ))}
       </div>
     </div>

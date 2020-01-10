@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { addPass } from "../../actions/index";
-
-import styled from "styled-components";
 import { StyledInput } from "../StyledInput";
 import { StyledSignupLoginButton } from "../StyledSignupLoginButton";
 

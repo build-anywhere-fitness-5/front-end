@@ -117,7 +117,6 @@ const EditPass = props => {
         <Button
           className={classes.button}
           variant="outlined"
-          color="black"
           type="submit"
         >
           Update your Pass

@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 import personIcon from "../../images/person_icon.png"
 
-const UserCard = ({key, pass, deletePass, handleOpen, setItem}) => {
+const UserCard = ({ pass, deletePass, handleOpen, setItem}) => {
 
     const UserCardContainer = styled.div`
 
@@ -128,8 +128,6 @@ const UserCard = ({key, pass, deletePass, handleOpen, setItem}) => {
         if (classesRemaining < 0) { classesRemaining = 0 }
         if (classesRemaining > 10) { classesRemaining = 10 }
 
-        let arrayIcons = [];
-
         return [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ].map((item, index) => {
 
             // create punched-out circles to show used classes
@@ -143,13 +141,13 @@ const UserCard = ({key, pass, deletePass, handleOpen, setItem}) => {
                     if (Math.floor(Math.random() * 2) === 1) { offsetX *= -1; }
                     if (Math.floor(Math.random() * 2) === 1) { offsetY *= -1; }
 
-                    return <UnpunchedCircle>
+                    return <UnpunchedCircle key={index}>
                     <PunchedCircle style={{left: `${offsetX}px`, top: `${offsetY}px`}}></PunchedCircle>
                     </UnpunchedCircle>
                 }
             
             // create unpunched circles for unused classes
-            return <UnpunchedCircle></UnpunchedCircle>
+            return <UnpunchedCircle key={index}></UnpunchedCircle>
         });
 
     }
@@ -159,7 +157,7 @@ const UserCard = ({key, pass, deletePass, handleOpen, setItem}) => {
             <StyledUserCard>
 
                 <FlexColumn>
-                    <img src={personIcon} />
+                    <img src={personIcon} alt={"generic person icon"} />
                     <ClientName>{pass.client}</ClientName>
                 </FlexColumn>
 

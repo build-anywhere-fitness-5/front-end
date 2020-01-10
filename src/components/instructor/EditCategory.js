@@ -49,9 +49,10 @@ const useStyles = makeStyles(theme => ({
 const EditCategory = props => {
   const classes = useStyles();
   const [updateCategory, setUpdateCategory] = useState({
-    name: '',
-    category: '',
+    name: "",
+    description: "",
   });
+  
 
   useEffect(() => {
     console.log("PROPS.CATEGORY CONSOLE LOG", props.updateCategory, "INDEX", props.index);
@@ -97,7 +98,6 @@ const EditCategory = props => {
         <Button
           className={classes.button}
           variant="outlined"
-          color="black"
           type="submit"
         >
           Edit Category

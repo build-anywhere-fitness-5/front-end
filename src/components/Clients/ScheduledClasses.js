@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { scheduleClass, unscheduleClass } from "../../actions/index";
+import ClassCard from './ClassCard'
 const ClientHome = props => {
   const [filteredClass, setFilteredClass] = useState(props.classes);
 
@@ -21,33 +22,8 @@ const ClientHome = props => {
       {props.scheduledClasses.length !== 0 ? (
         <div>
           {props.scheduledClasses.map((item, index) => (
-            <div key={index} style={divStyle2}>
-              <h1>Name: {item.className}</h1>
-              <h1>Date: {item.date}</h1>
-              <h1>Start: {item.startTime}</h1>
-              <h1>Duration: {item.durationMinutes} Minutes</h1>
-              <h1>Type: {item.classType}</h1>
-              <h1>Intensity: {item.intensity}</h1>
-              <h1>Attending: {item.clients.length}</h1>
-              <h1>Max Participants: {item.maxClassSize}</h1>
-              <h1>Location: {item.location}</h1>
-              <h1>Instructor: {item.instructor}</h1>{" "}
-              {console.log(props.scheduledClasses)}
-              <button
-                onClick={() => {
-                  // setFilteredClass(
-                  //   filteredClass.filter(filtered => {
-                  //     return !filtered.scheduled;
-                  //   })
-
-                  props.unscheduleClass(item);
-                  setFilteredClass([...filteredClass, item]);
-                }}
-              >
-                Unschedule Class{" "}
-              </button>
-            </div>
-          ))}
+          <ClassCard key={index} item={item} index={index} scheduleClass={props.unscheduleClass}  setUnScheduledClass={props.unscheduleClass} setFilteredClass={setFilteredClass} />
+        ))}
         </div>
       ) : (
           <h1>Schedule Some Classes</h1>
