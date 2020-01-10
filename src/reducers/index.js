@@ -269,7 +269,7 @@ export const classReducer = (state = initialState, action) => {
         isFetching: false,
         error: '',
         studioTwoClasses:
-          action.payload
+          action.payload.sort((a, b) => a.id - b.id)
       };
     case GET_STUDIOCLASSES_FAILURE:
       return {
