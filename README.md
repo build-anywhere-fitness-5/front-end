@@ -1,6 +1,6 @@
 # Build Week: Anywhere Fitness
 
-URL: [fitnessanywhere.netlify.com](fitnessanywhere.netlify.com)
+URL: [fitnessanywhere.netlify.com](https://fitnessanywhere.netlify.com)
 
 Dependencies used: 
 1. Create React App
