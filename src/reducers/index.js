@@ -235,6 +235,7 @@ const initialState = {
 
 export const classReducer = (state = initialState, action) => {
   // console.log(state, action);
+  console.log(state.user)
   switch (action.type) {
     case FETCHCAT_SUCCESS:
       return {
@@ -254,7 +255,10 @@ export const classReducer = (state = initialState, action) => {
         classes: [...state.classes, action.payload]
       };
     case SCHEDULE_CLASS:
+      action.payload.clients= [...action.payload.clients,  state.user.username]
+      console.log(action.payload)
       return {
+        
         ...state,
         scheduledClasses: [...state.scheduledClasses, action.payload],
         classes: [...state.classes.filter((item, index) => {
@@ -262,6 +266,12 @@ export const classReducer = (state = initialState, action) => {
         })]
       };
     case UNSCHEDULE_CLASS:
+      console.log(action.payload)
+      action.payload.clients= [action.payload.clients.filter((item, index) => {
+        return item !== state.user.username
+        
+      })]
+    
       return {
         ...state,
         scheduledClasses: [
@@ -269,7 +279,8 @@ export const classReducer = (state = initialState, action) => {
             return item !== action.payload;
           })
         ],
-        classes: [...state.classes, action.payload]
+        classes: [...state.classes, action.payload],
+        
       };
     case DELETE_CLASS:
       return {

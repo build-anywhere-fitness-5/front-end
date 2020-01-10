@@ -75,7 +75,7 @@ export const addCategory = id => dispatch => {
     //id = the id of the rental item you want to rent
     // renter_id = who is renting the item
     axiosWithAuth()
-        .post(`https://lambda-anywhere-fitness.herokuapp.com/api/category`, id)
+        .post(`category`, id)
         .then(res => dispatch({ type: ADD_CATEGORY, payload: id }) & console.log(res, "addCategory"))
         .catch(res => dispatch({ type: ADD_CATEGORY, payload: id }))
 }
