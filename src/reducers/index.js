@@ -42,7 +42,7 @@ const initialState = {
       location: "The Crossworks",
       maxClassSize: 10,
       clients: ["Roy"],
-      date: "2020-1-9",
+      date: "2020-1-13",
       instructor: "Logan K.",
       id: 1
       // id is a placeholder for now, I assume the API will generate that for us
@@ -56,7 +56,7 @@ const initialState = {
       location: "Studio Los Feliz",
       maxClassSize: 5,
       clients: ["Stephen", "Mark", "Tristan", "Jordan"],
-      date: "2020-1-13",
+      date: "2020-1-14",
       instructor: "Anabella S.",
       id: 2
     },

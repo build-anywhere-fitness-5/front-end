@@ -36,7 +36,7 @@ const ClassStatus = () => {
             return (<StyledIntroText>{"Searching for classes..."}</StyledIntroText>);
         }
 
-    return (<StyledIntroText>{"You are teaching " + totalCategories + " types of classes."}</StyledIntroText>);
+    return (<StyledIntroText>{"Browse all the classes from " + totalCategories + " different categories, or search to narrow down your selection."}</StyledIntroText>);
 
 }
 
