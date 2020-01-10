@@ -15,12 +15,11 @@ const ClientHome = props => {
     console.log(event);
   };
   useEffect(() => {
-    console.log(filteredClass);
     // props.fetchClasses()
     if (query.length < 1) {
-      setFilteredClass(unScheduledClass);
+      setFilteredClass(unScheduledClass)
     } else {
-      let filterClasses = filteredClass.filter(c => {
+      let filterClasses = unScheduledClass.filter(c => {
         return (
           c.className.toLowerCase().includes(query.toLowerCase()) ||
           c.classType.toLowerCase().includes(query.toLowerCase()) ||
@@ -32,9 +31,7 @@ const ClientHome = props => {
       });
    
     setFilteredClass(filterClasses);
-    console.log(filterClasses);
-    console.log(filteredClass);
-  } }, [query]);
+  } }, [query, unScheduledClass]);
 
   console.log(query);
   console.log(filteredClass);
@@ -46,16 +43,13 @@ const ClientHome = props => {
     flexWrap: "wrap",
     justifyContent: "center"
   };
-  const divStyle2 = {
-    width: "25%"
-  };
 
   return (
     <div>
       <SearchForm handleInputChange={handleInputChange} query={query} />
       <div style={divStyle}>
         {filteredClass.map((item, index) => (
-          <ClassCard key={index} item={item} index={index} scheduleClass={props.scheduleClass} setUnScheduledClass={setUnScheduledClass} setFilteredClass={setFilteredClass} />
+          <ClassCard key={index}item={item} index={index} scheduleClass={props.scheduleClass} setUnScheduledClass={setUnScheduledClass} setFilteredClass={setFilteredClass} />
         ))}
       </div>
     </div>

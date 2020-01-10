@@ -18,7 +18,7 @@ const ClientHome = props => {
   };
 
   return (
-    <div>
+    <div style={divStyle2}>
       {props.scheduledClasses.length !== 0 ? (
         <div>
           {props.scheduledClasses.map((item, index) => (
