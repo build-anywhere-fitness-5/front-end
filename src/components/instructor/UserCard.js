@@ -171,7 +171,7 @@ const UserCard = ({ pass, deletePass, handleOpen, setItem}) => {
 
                         <FlexColumn>
                             <ClassName>{pass.className}</ClassName>
-                            <ClassesRemainingText>classes remaining</ClassesRemainingText>
+                            <ClassesRemainingText>class{pass.classesRemaining === 1 ? "" : "es"} remaining</ClassesRemainingText>
                         </FlexColumn>
 
                     </FlexRow>
@@ -212,7 +212,7 @@ const UserCard = ({ pass, deletePass, handleOpen, setItem}) => {
                     console.log(pass);
                     }}
                 >
-                    Edit
+                    edit
                 </button>
             </EditDeleteButtons>
         </UserCardContainer>
