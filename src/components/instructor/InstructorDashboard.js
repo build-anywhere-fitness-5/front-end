@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import StudioClassList from './StudioClassList';
 import { connect } from "react-redux";
 
+import ClassStatus from "../ClassStatus";
+
 import { getStudioClasses, fetchCategory } from '../../actions/index';
 
 import CategoryListTable from "./CategoryListTable";
@@ -72,6 +74,7 @@ const InstructorDashboard = props => {
                         </div>
                         
                         <CategoryListTable />
+                        <ClassStatus />
                     </div>
 
                     <div className="categories-boxes studio2">
@@ -82,6 +85,8 @@ const InstructorDashboard = props => {
                         </div>
                         
                         <StudioClassList />
+
+                        
                     </div>
                 </div>
             </section>
