@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import SearchForm from "./SearchForm";
 import { connect } from "react-redux";
 import ClassCard from './ClassCard'
+import ClassStatus from '../ClassStatus'
 import { scheduleClass, unscheduleClass, fetchClasses } from "../../actions/index";
 const ClientHome = props => {
   const [query, setQuery] = useState("");
@@ -46,6 +47,7 @@ const ClientHome = props => {
 
   return (
     <div>
+      <ClassStatus />
       <SearchForm handleInputChange={handleInputChange} query={query} />
       <div style={divStyle}>
         {filteredClass.map((item, index) => (
