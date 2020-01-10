@@ -7,6 +7,8 @@ import { connect } from "react-redux";
 import ClassCard from './ClassCard'
 import { scheduleClass, unscheduleClass, fetchClasses } from "../../actions/index";
 
+import ClassStatus from "../ClassStatus";
+
 import styled from "styled-components";
 
 const WelcomeText = styled.p`
@@ -56,7 +58,8 @@ const ClientHome = props => {
 
   return (
     <div>
-      <WelcomeText>Browse the classes below, or search to narrow down your selection.</WelcomeText>
+      <ClassStatus />
+      
       <SearchForm handleInputChange={handleInputChange} query={query} />
       <div style={divStyle}>
         {filteredClass.map((item, index) => (
