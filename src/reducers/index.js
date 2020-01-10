@@ -129,7 +129,7 @@ export const classReducer = (state = initialState, action) => {
     case UNSCHEDULE_CLASS:
       console.log(action.payload)
       action.payload.clients= [action.payload.clients.filter((item, index) => {
-        return item != state.user.username
+        return item !== state.user.username
         
       })]
     

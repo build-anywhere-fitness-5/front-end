@@ -12,7 +12,7 @@ const StyledFormDiv = styled.div`
     align-items: center;
 `;
 const UserCard = styled.div`
-    background-color: #FF6900;
+    background-color: #FF9966;
     border: 2px solid black;
     border-radius: 5px;
 
